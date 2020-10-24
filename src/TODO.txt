@@ -1,0 +1,61 @@
+// TODO
+
+// directional arrows gamepad and fix gamepad so it opens on gamepad use
+
+// Change drawHUD so that static words are printed on a canvas and only changed
+//      as they change.  Same with calculating which image to show, only need to
+//      do that on start, then check if they changed every lap.. or not even that,
+//      could call for changes once they happen.
+
+arrows in race
+
+add information to loading screen and graphic of race with planets and moons
+labeled.
+
+option to turn on names of bodies in race
+
+ pluto protoplanets(could make a level with a bunch
+// of pictures of each one) asteroid belts unlocked after beating some level,
+or getting a certain amount of points
+
+add point total that is just the amount of credits obtained
+
+// add third difficulty? make expert & extreme(?) unlock after beating prior levels
+
+// Set of easy levels and set of hard levels
+Easy version of mercury could be basically the same as the current version, but
+instead of helmet spikes it's just round but with the upper planet bisecting 
+the outer circle.
+Could make the hard version like the original but with more narrow corridors
+
+// New ship graphic, and blocks
+
+// make type of block for long lines that don't jank when moving fast
+
+// create bounding box for line of blocks
+
+// make ellipse bounding box for celestial bodies that has more realistic
+// bounce
+
+// fix margin on game-list-wrapper in Menu.js - doesn't change on window resize,
+// leaves the course icons in weird places - style.marginLeft
+
+// add player name to ..all? screens  Probably just Menu screens
+
+// Credits page on options crediting NASA and whoever they want credited, and sounds
+
+// How to play on the options Menu, 
+tell the controls, hit esc on any menu
+tips on faster times,
+// gem and star tiers, how to proceed through levels ie bronze to get to next level 
+// and emerald on all levels to open the difficult levels
+
+Make empty star for when the player hasn't earned one yet
+
+// Remove bounce upgrade.. maybe boost upgrade
+
+// should I change the thruster color as you get to max boost instead of ring
+// around ship
+
+When the gamepad is connected the in game options menu doesn't appear, though
+it does work
