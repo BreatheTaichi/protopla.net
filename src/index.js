@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./protopla.css";
+import "./sass/protopla.css";
 import Main from "./Main.js";
 import * as serviceWorker from "./serviceWorker";
 

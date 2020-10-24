@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../sass/options.css";
 import GamepadForm from "./GamepadForm2.js";
 import DeletePlayer from "./DeletePlayer.js";
 import Sound from "./Sound.js";

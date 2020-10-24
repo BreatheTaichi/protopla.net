@@ -1,6 +1,6 @@
 {
     "short_name": "ProtoPla.net",
-    "name": "Create React App Sample",
+    "name": "Build a ship as you race through the solar system.",
     "icons": [{
         "src": "favicon.ico",
         "sizes": "64x64 32x32 24x24 16x16",
