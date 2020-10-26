@@ -33,10 +33,27 @@ export default function StartMenu(props) {
         }
     };
 
-    const handleDifficultyChange = (event) => {
-        setDifficulty(event.target.value);
-        console.log(difficulty);
+    const handleDifficultyChange = (e, difficulty, id) => {
+        e.preventDefault();
+        setDifficulty(difficulty);
+        setFocused(id);
+        // document.getElementById(difficulty).classList.add("unselected");
     };
+
+    var difficultyButtonArray = [
+        {
+            id: "1",
+            difficulty: "Normal",
+        },
+        {
+            id: "2",
+            difficulty: "Expert",
+        },
+        {
+            id: "3",
+            difficulty: "Test",
+        },
+    ];
 
     const handleKeyDown = (event) => {
         var itemToFocus;
@@ -92,16 +109,11 @@ export default function StartMenu(props) {
         document.getElementById(focused).focus();
     });
 
-    const ImgWithFallback = ({
-        src,
-        fallback,
-        type = "image/webp",
-        ...delegated
-    }) => {
+    const ImgWithFallback = ({ src, fallback, type = "image/webp" }) => {
         return (
             <picture>
                 <source srcSet={src} type={type} />
-                <img src={fallback} {...delegated} alt="sun" />
+                <img src={fallback} alt="sun" />
             </picture>
         );
     };
@@ -197,51 +209,35 @@ export default function StartMenu(props) {
                 >
                     Create
                 </button>
-                <div className="player-menu-radio-group">
-                    <div className="player-menu-radio">
-                        <label>
-                            <input
-                                id="1"
-                                type="radio"
-                                checked={difficulty === "Normal"}
-                                onClick={() => setDifficulty("Normal")}
-                                value="Normal"
-                                onChange={handleDifficultyChange}
-                            />
-                            Normal
-                        </label>
-                    </div>
-                    <div className="player-menu-radio">
-                        <label>
-                            <input
-                                id="2"
-                                type="radio"
-                                checked={difficulty === "Expert"}
-                                onClick={() => setDifficulty("Expert")}
-                                value="Expert"
-                                onChange={handleDifficultyChange}
-                            />
-                            Expert
-                        </label>
-                    </div>
-                    <div className="player-menu-radio">
-                        <label>
-                            <input
-                                id="3"
-                                type="radio"
-                                checked={difficulty === "Test"}
-                                onClick={() => setDifficulty("Test")}
-                                value="Test"
-                                onChange={handleDifficultyChange}
-                            />
-                            Test
-                        </label>
-                    </div>
+                <div className="player-menu-button-group">
+                    {difficultyButtonArray.map((obj) => {
+                        let selected =
+                            difficulty === obj.difficulty
+                                ? "selected"
+                                : "unselected";
+                        return (
+                            <button
+                                className={"player-menu-difficulty " + selected}
+                                key={obj.id}
+                                id={obj.id}
+                                onClick={(e) =>
+                                    handleDifficultyChange(
+                                        e,
+                                        obj.difficulty,
+                                        obj.id
+                                    )
+                                }
+                            >
+                                {obj.difficulty}
+                            </button>
+                        );
+                    })}
                 </div>
                 <button
-                    className="player-menu-create-new-player-cancel-button"
+                    className="player-menu-button"
                     id="5"
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.preventDefault();
                         setNewPlayer(false);
                         setDifficulty("Normal");
                         setPlayerName("");

@@ -199,7 +199,7 @@ export default function Menu(props) {
 
     function addCourses() {
         return (
-            <div className="game-list-wrapper" id="course-wrapper">
+            <div id="course-wrapper" className="game-list-wrapper">
                 {props.state.showGamepadToast && (
                     <div className="gamepad-toast">Gamepad Connected</div>
                 )}

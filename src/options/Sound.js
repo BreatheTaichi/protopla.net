@@ -74,7 +74,7 @@ export default function Sound(props) {
     return (
         <>
             <form className="sound-wrapper">
-                <div className="no-select text-shadow sound-title">Volume</div>
+                <div className="no-select  sound-title">Volume</div>
                 <label className="sound-item">
                     <span className="no-select ">Effects</span>
                     <input

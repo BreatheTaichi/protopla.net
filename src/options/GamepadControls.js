@@ -341,9 +341,9 @@ export default function GamepadForm(props) {
         <>
             {props.state.gamepadConnected ? (
                 <form className="gamepad-wrapper">
-                    <div className="text-shadow gamepad-title">Gamepad</div>
+                    <div className=" gamepad-title">Gamepad</div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="left">
+                        <label className="" htmlFor="left">
                             Left:{" "}
                         </label>
                         <input
@@ -366,7 +366,7 @@ export default function GamepadForm(props) {
                         </button>
                     </div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="right">
+                        <label className="" htmlFor="right">
                             Right:{" "}
                         </label>
                         <input
@@ -389,7 +389,7 @@ export default function GamepadForm(props) {
                         </button>
                     </div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="forward">
+                        <label className="" htmlFor="forward">
                             Forward:{" "}
                         </label>
                         <input
@@ -412,7 +412,7 @@ export default function GamepadForm(props) {
                         </button>
                     </div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="reverse">
+                        <label className="" htmlFor="reverse">
                             Reverse:{" "}
                         </label>
                         <input
@@ -435,7 +435,7 @@ export default function GamepadForm(props) {
                         </button>
                     </div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="start">
+                        <label className="" htmlFor="start">
                             Start:{" "}
                         </label>
                         <input
@@ -458,7 +458,7 @@ export default function GamepadForm(props) {
                         </button>
                     </div>
                     <div className="gamepad-button">
-                        <label className="text-shadow" htmlFor="select">
+                        <label className="" htmlFor="select">
                             Select:{" "}
                         </label>
                         <input
@@ -480,15 +480,12 @@ export default function GamepadForm(props) {
                             <img src={arrow} alt="arrow" />
                         </button>
                     </div>
-                    <div
-                        className="text-shadow gamepad-instruction"
-                        id="gamepad-message"
-                    >
+                    <div className=" gamepad-instruction" id="gamepad-message">
                         Click an arrow to change a button.
                     </div>
                 </form>
             ) : (
-                <div className="no-select text-shadow no-gamepad-detected">
+                <div className="no-select  no-gamepad-detected">
                     To use a gamepad connect it and press any button.
                 </div>
             )}

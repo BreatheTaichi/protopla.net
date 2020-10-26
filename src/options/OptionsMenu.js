@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../sass/options.css";
-import GamepadForm from "./GamepadForm2.js";
+import GamepadForm from "./GamepadControls.js";
 import DeletePlayer from "./DeletePlayer.js";
 import Sound from "./Sound.js";
 import Store from "./Store.js";
@@ -182,8 +182,8 @@ export default function OptionsMenu(props) {
             case "GamepadForm":
                 return (
                     <GamepadForm
-                        dispatch={props.dispatch}
                         state={props.state}
+                        dispatch={props.dispatch}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );
@@ -191,6 +191,7 @@ export default function OptionsMenu(props) {
                 return (
                     <Store
                         state={props.state}
+                        setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );

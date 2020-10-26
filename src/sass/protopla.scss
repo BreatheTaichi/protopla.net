@@ -61,12 +61,6 @@ input {
     background-color: rgb(255, 255, 255);
 }
 
-.bottom-padding {
-    position: relative;
-    height: 100px;
-    text-align: center;
-}
-
 .continue-button {
     z-index: 100;
     right: 10px;
@@ -77,9 +71,6 @@ input {
     animation-timing-function: ease-in-out;
     animation-duration: 3s;
 }
-.delete-button {
-    display: inline;
-}
 
 .delete-player-wrapper {
     display: grid;
@@ -87,7 +78,9 @@ input {
     grid-template-rows: 55px 55px 55px;
     width: 300px;
     margin: 40px auto 0 auto;
+
     @extend %dark-background;
+
     button,
     p {
         margin: 5px;
@@ -95,28 +88,130 @@ input {
         justify-self: center;
         align-self: center;
     }
+
+    .delete-button {
+        display: inline;
+    }
 }
 
-.foot-wrapper {
-    clear: both;
-    text-align: center;
-    width: 100%;
-    height: 50px;
-    bottom: 0;
-}
+.game-list-wrapper {
+    margin-top: 40px;
+    position: absolute;
+    transition: margin 0.6s;
 
-.gamepad-toast {
-    position: fixed;
-    bottom: 40px;
-    right: 0px;
-    font-size: 1.4em;
-    width: 260px;
-    margin: auto;
+    .game-list {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
 
-    animation-name: gamepad-toast-animation;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    animation-duration: 3.5s;
+        .icon-wrapper {
+            width: 200px;
+            button:focus {
+                outline: 4px solid rgba(109, 138, 232, 0.4);
+            }
+
+            .sol {
+                width: 150px;
+            }
+
+            .mercury {
+                width: 60px;
+            }
+
+            .venus {
+                width: 70px;
+            }
+
+            .earth {
+                width: 80px;
+            }
+
+            .mars {
+                width: 70px;
+            }
+
+            .jupiter {
+                width: 100px;
+            }
+
+            .saturn {
+                width: 140px;
+            }
+
+            .uranus {
+                width: 90px;
+            }
+
+            .neptune {
+                width: 95px;
+            }
+
+            .icon {
+                height: 300px;
+                margin: 0 20px 20px 20px;
+                flex-direction: row;
+                background: none;
+                border: none;
+                transition: width 0.6s, height 0.6s;
+
+                img:first-child {
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .icon:focus {
+                width: 200px;
+                height: 200px;
+                transform: translateY(64px);
+            }
+
+            .icon-best-lap {
+                color: white;
+                width: 194px;
+                margin-left: 14px;
+                font-size: 1.4em;
+                border-left: 10px ridge rgb(25, 25, 53);
+                border-right: 10px ridge rgb(25, 25, 53);
+                border-bottom: 10px ridge rgb(25, 25, 53);
+                @extend %dark-background-opacity;
+                img {
+                    transform: translateY(0px);
+                }
+            }
+
+            .icon-text {
+                margin-top: 49px;
+                margin-right: auto;
+                width: 194px;
+                margin-left: 14px;
+                font-size: 2.5em;
+                color: white;
+                @extend %dark-background-opacity;
+                border-left: 10px ridge rgb(25, 25, 53);
+                border-right: 10px ridge rgb(25, 25, 53);
+                border-top: 10px ridge rgb(25, 25, 53);
+            }
+        }
+    }
+
+    .gamepad-toast {
+        position: fixed;
+        bottom: 40px;
+        right: 0px;
+        font-size: 1.4em;
+        width: 260px;
+        margin: auto;
+
+        animation-name: gamepad-toast-animation;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-duration: 3.5s;
+    }
 }
 
 .no-gamepad-detected {
@@ -124,129 +219,27 @@ input {
     text-align: center;
     font-size: 2em;
 }
-.icon {
-    height: 300px;
-    margin: 0 20px 20px 20px;
-    flex-direction: row;
-    background: none;
-    border: none;
-    transition: width 0.6s, height 0.6s;
-}
-
-.icon-best-lap {
-    color: white;
-    width: 194px;
-    margin-left: 14px;
-    font-size: 1.4em;
-    border-left: 10px ridge rgb(25, 25, 53);
-    border-right: 10px ridge rgb(25, 25, 53);
-    border-bottom: 10px ridge rgb(25, 25, 53);
-    @extend %dark-background-opacity;
-    img {
-        transform: translateY(0px);
-    }
-}
-
-.icon:focus {
-    width: 200px;
-    height: 200px;
-    transform: translateY(64px);
-}
-
-.icon img:first-child {
-    width: 100%;
-    object-fit: cover;
-}
-
-.icon-text {
-    margin-top: 49px;
-    margin-right: auto;
-    width: 194px;
-    margin-left: 14px;
-    font-size: 2.5em;
-    color: white;
-    @extend %dark-background-opacity;
-    border-left: 10px ridge rgb(25, 25, 53);
-    border-right: 10px ridge rgb(25, 25, 53);
-    border-top: 10px ridge rgb(25, 25, 53);
-}
-
-.icon-wrapper {
-    width: 200px;
-    button:focus {
-        outline: 4px solid rgba(109, 138, 232, 0.4);
-    }
-
-    .sol {
-        width: 150px;
-    }
-
-    .mercury {
-        width: 60px;
-    }
-
-    .venus {
-        width: 70px;
-    }
-
-    .earth {
-        width: 80px;
-    }
-
-    .mars {
-        width: 70px;
-    }
-
-    .jupiter {
-        width: 100px;
-    }
-
-    .saturn {
-        width: 140px;
-    }
-
-    .uranus {
-        width: 90px;
-    }
-
-    .neptune {
-        width: 95px;
-    }
-}
-
-.loading {
-    font-size: max(12px, 18px);
-    color: rgba(204, 245, 255, 0.9);
-
-    text-align: center;
-    width: 70px;
-    width: 25vw;
-    min-width: 90px;
-    height: 4vw;
-    min-height: 25px;
-    margin: 10px auto 0;
-}
-
-.loading-image {
-    width: fit-content;
-    margin: auto;
-    border: 4px solid rgb(34, 34, 34);
-}
-
-.loading-text {
-    border-radius: 10px;
-    font-size: 1.4rem;
-    margin: 30px 50px;
-    padding: 10px;
-    background-color: rgba(83, 35, 35, 0.7);
-
-    p {
-        margin: 10px 0;
-    }
-}
 
 .loading-wrapper {
     display: grid;
+
+    .loading-image {
+        width: fit-content;
+        margin: auto;
+        border: 4px solid rgb(34, 34, 34);
+    }
+
+    .loading-text {
+        border-radius: 10px;
+        font-size: 1.4rem;
+        margin: 30px 50px;
+        padding: 10px;
+        background-color: rgba(83, 35, 35, 0.7);
+
+        p {
+            margin: 10px 0;
+        }
+    }
 }
 
 .lower-right {
@@ -261,15 +254,20 @@ input {
     grid-template-columns: 100px auto 100px;
     padding: 8px;
     @extend %dark-background;
-}
 
-.menu-button {
-    justify-self: center;
-    width: 100%;
-    font-size: 1.6em;
-    @extend %dark-background;
-    border: none;
-    color: white;
+    .menu-button {
+        justify-self: center;
+        width: 100%;
+        font-size: 1.6em;
+        @extend %dark-background;
+        border: none;
+        color: white;
+    }
+
+    #store-id {
+        justify-self: center;
+        width: 200px;
+    }
 }
 
 .no-select {
@@ -283,29 +281,6 @@ input {
     transition: none !important;
 }
 
-.player-menu {
-    width: fit-content;
-    margin: 50px auto;
-}
-
-.player-menu-button {
-    float: left;
-    transform: translateY(-1px);
-    font-size: 1.3em;
-    height: 35px;
-    align-self: center;
-}
-
-.player-menu-button-difficulty {
-    float: right;
-    padding-right: 5px;
-}
-
-.player-menu-button-name {
-    float: left;
-    padding-left: 5px;
-}
-
 .player-menu-choose {
     position: relative;
     width: 500px;
@@ -315,33 +290,46 @@ input {
     text-align: center;
     margin: 50px auto;
     z-index: 2;
-}
 
-.player-menu-choose-button {
-    width: 494px;
-    height: 35px;
-    margin: 2px;
-    font-size: clamp(1.05em, 1.2vw, 1.25em);
-    padding: 0px 0px;
-}
+    .player-menu-title-name {
+        float: left;
+        font-size: 1.2em;
+        height: 35px;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
 
-.player-menu-choose-title {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    text-align: center;
-    font-size: 1.4em;
-}
+    .player-menu-title-difficulty {
+        float: right;
+        font-size: 1.2em;
+        height: 35px;
+        margin-right: 20px;
+        margin-top: 10px;
+    }
 
-.player-menu-create-new-player-button {
-    float: right;
-    font-size: 1.2em;
-    margin-top: 20px;
-}
+    .player-menu-choose-button {
+        width: 494px;
+        height: 35px;
+        margin: 2px;
+        font-size: clamp(1.05em, 1.2vw, 1.25em);
+        padding: 0px 0px;
 
-.player-menu-create-new-player-cancel-button {
-    float: left;
-    font-size: 1.2em;
-    height: 35px;
+        .player-menu-button-difficulty {
+            float: right;
+            padding-right: 5px;
+        }
+
+        .player-menu-button-name {
+            float: left;
+            padding-left: 5px;
+        }
+    }
+
+    .player-menu-create-new-player-button {
+        float: right;
+        font-size: 1.2em;
+        margin-top: 20px;
+    }
 }
 
 .player-menu-input {
@@ -354,52 +342,56 @@ input {
     @extend %dark-background;
     border: 10px ridge rgb(25, 25, 53);
     z-index: 2;
-}
 
-.player-menu-radio {
-    font-size: 1.3em;
-    input {
-        margin: 0px 10px;
-        height: 18px;
+    .player-menu-choose-title {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        text-align: center;
+        font-size: 1.4em;
     }
-}
 
-.player-menu-radio-group {
-    margin-left: 10px;
-}
+    .player-new-input {
+        font-size: 1.3em;
+        margin: 5px;
+        justify-self: center;
+    }
 
-.player-new-input {
-    font-size: 1.3em;
-    margin: 5px;
-    justify-self: center;
-}
+    .player-menu-button-group {
+        display: grid;
+        grid-template-columns: 150px;
+        grid-template-rows: 40px 40px 40px;
+        gap: 5px;
+        margin: 0 0 20px 20px;
 
-.player-menu-title-name {
-    float: left;
-    font-size: 1.2em;
-    height: 35px;
-    margin-left: 20px;
-    margin-top: 10px;
-}
+        .player-menu-difficulty {
+            font-size: 1.3em;
+        }
 
-.player-menu-title-difficulty {
-    float: right;
-    font-size: 1.2em;
-    height: 35px;
-    margin-right: 20px;
-    margin-top: 10px;
-}
+        .selected {
+            background: radial-gradient(
+                circle,
+                rgb(35, 42, 224) 0%,
+                rgb(224, 35, 35) 80%,
+                rgb(167, 27, 179) 100%
+            );
+            border: none;
+            border-radius: 14px;
+            color: white;
+        }
 
-.text-shadow {
-    text-shadow: 4px 0px 4px #000000, 0px 4px 4px #000000, 4px 4px 4px #000000,
-        4px -4px 4px #000000, -4px -4px 4px #000000, -4px 4px 4px #000000;
-}
+        .unselected {
+            background: rgb(35, 42, 224);
+            border: none;
+            border-radius: 14px;
+            color: white;
+        }
+    }
 
-.race-title {
-    font-size: clamp(1em, 1.1em, 1.2em);
-    padding: 20px 10px;
-    color: white;
-    text-align: center;
+    .player-menu-button {
+        font-size: 1.3em;
+        height: 35px;
+        align-self: start;
+    }
 }
 
 .save-button {

@@ -65,7 +65,7 @@ export default function DeletePlayer(props) {
                     <p>Do you want to delete current player?</p>
                     <button
                         id="1"
-                        className="delete-player-button"
+                        className="delete-button"
                         onClick={() => setShowDelete(true)}
                     >
                         Delete
