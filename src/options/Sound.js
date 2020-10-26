@@ -43,17 +43,6 @@ export default function Sound(props) {
             );
         }
     }, [props.state.player.name]);
-    // const handleKeyDown = (value, e) => {
-    //     switch (e.code) {
-    //         case "ArrowLeft":
-    //             if (currentFocus === "effectsVolume") {
-    //             }
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // };
-    // useWindowListener("keydown", handleKeyDown.bind(this, true));
 
     function save() {
         localStorage.setItem(
@@ -64,7 +53,8 @@ export default function Sound(props) {
             props.state.player.name + "musicVolume",
             musicVolume / 100
         );
-        props.dispatch({ type: "menu" });
+        props.setOnMenu(true);
+        props.setCurrentButton("options-menu-back");
     }
 
     useEffect(() => {
@@ -76,7 +66,7 @@ export default function Sound(props) {
             <form className="sound-wrapper">
                 <div className="no-select  sound-title">Volume</div>
                 <label className="sound-item">
-                    <span className="no-select ">Effects</span>
+                    <span className="no-select title">Effects</span>
                     <input
                         id="1"
                         type="text"
@@ -86,24 +76,20 @@ export default function Sound(props) {
                         value={effectsVolume}
                         onChange={(e) => handleNumberInput(e, setEffectsVolume)}
                     />
-                    <span className="no-select volume-percent">
-                        {effectsVolume}%
-                    </span>
+                    <span>%</span>
                 </label>
                 <label className="sound-item">
-                    <span className="no-select ">Music</span>
+                    <span className="no-select title">Music</span>
                     <input
                         id="2"
                         type="text"
                         min="0"
                         max="100"
                         name="musicVolume"
-                        value={musicVolume + ""}
+                        value={musicVolume}
                         onChange={(e) => handleNumberInput(e, setMusicVolume)}
                     />
-                    <span className="no-select volume-percent">
-                        {musicVolume}%
-                    </span>
+                    <span>%</span>
                 </label>
             </form>
             <button

@@ -168,6 +168,7 @@ export default function OptionsMenu(props) {
                 return (
                     <Sound
                         state={props.state}
+                        setOnMenu={setOnMenu}
                         setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
@@ -175,7 +176,9 @@ export default function OptionsMenu(props) {
             case "DeletePlayer":
                 return (
                     <DeletePlayer
+                        state={props.state}
                         dispatch={props.dispatch}
+                        setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );
@@ -183,7 +186,9 @@ export default function OptionsMenu(props) {
                 return (
                     <GamepadForm
                         state={props.state}
+                        setOnMenu={setOnMenu}
                         dispatch={props.dispatch}
+                        setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );

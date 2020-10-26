@@ -74,7 +74,7 @@ export default function DeletePlayer(props) {
             )}
             {showDelete && (
                 <div className="delete-player-wrapper">
-                    <p>Delete player?</p>
+                    <p>Deletion cannot be undone.</p>
                     <button
                         id="1"
                         className="delete-button"

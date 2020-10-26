@@ -1,13 +1,5 @@
 @import "./protopla.scss";
 
-input:focus {
-    outline-width: 4px;
-    animation-name: gamepad-input-focus-animation;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    animation-duration: 1s;
-}
-
 .course-instructions-wrapper {
     position: fixed;
     bottom: 0px;
@@ -25,6 +17,30 @@ input:focus {
         @extend %dark-background;
         text-align: center;
         padding: 2px 0;
+    }
+}
+
+.delete-player-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: fit-content 55px 55px;
+    width: 300px;
+    margin: 40px auto 0 auto;
+    padding: 20px;
+
+    @extend %dark-background;
+
+    button,
+    p {
+        margin: 5px;
+        font-size: 1.2em;
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+    }
+
+    .delete-button {
+        display: inline;
     }
 }
 
@@ -73,6 +89,14 @@ input:focus {
     .gamepad-title {
         font-size: 2em;
         padding-bottom: 5px;
+    }
+
+    input:focus {
+        outline-width: 4px;
+        animation-name: gamepad-input-focus-animation;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-duration: 1s;
     }
 }
 
@@ -251,27 +275,43 @@ input:focus {
 }
 
 .sound-wrapper {
-    width: 140px;
-    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 275px;
+    margin: 40px auto;
+    padding: 20px 0;
     text-align: center;
+    justify-items: center;
+    background: rgb(34, 34, 34);
 
     .sound-item {
-        display: inline-block;
         font-size: 1.5em;
         margin: 15px 0;
-        width: 110px;
+        width: 120px;
 
         input {
-            margin-bottom: 0;
-            height: 20px;
-            width: 40px;
-            text-align: center;
+            color: white;
+            background: rgb(34, 34, 34);
+            height: 30px;
+            width: 43px;
+            text-align: right;
+            font-size: 1em;
+            border: none;
+            margin-right: 0;
         }
 
-        .volume-percent {
-            display: inline-block;
-            width: 100px;
+        input:focus {
+            @extend %outline-border;
+        }
+
+        .percent-wrapper {
+            width: 250px;
+        }
+
+        .title {
             text-align: center;
+            display: block;
+            width: 120px;
         }
     }
 
@@ -287,13 +327,13 @@ input:focus {
     gap: 10px;
     width: 455px;
     margin: 5vh auto 0 auto;
-    padding: 5px;
+    padding: 28px 15px;
     @extend %dark-background;
 
     .store-credits {
         grid-column-start: 1;
         grid-column-end: 4;
-        margin: 10px 0px;
+        margin-bottom: 10px;
         font-size: 1.5em;
         align-self: center;
         justify-self: center;
