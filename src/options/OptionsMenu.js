@@ -5,6 +5,7 @@ import DeletePlayer from "./DeletePlayer.js";
 import Sound from "./Sound.js";
 import Store from "./Store.js";
 import HowToPlay from "./HowToPlay.js";
+import Credits from "./Credits.js";
 import useWindowListener from "../hooks/useWindowListener.js";
 
 export default function OptionsMenu(props) {
@@ -47,8 +48,11 @@ export default function OptionsMenu(props) {
                         case "options-menu-gamepad":
                             setCurrentButton("options-menu-delete");
                             break;
-                        case "options-menu-back":
+                        case "options-menu-credits":
                             setCurrentButton("options-menu-gamepad");
+                            break;
+                        case "options-menu-back":
+                            setCurrentButton("options-menu-credits");
                             break;
                         default:
                             break;
@@ -79,6 +83,9 @@ export default function OptionsMenu(props) {
                             setCurrentButton("options-menu-gamepad");
                             break;
                         case "options-menu-gamepad":
+                            setCurrentButton("options-menu-credits");
+                            break;
+                        case "options-menu-credits":
                             setCurrentButton("options-menu-back");
                             break;
                         case "options-menu-back":
@@ -138,6 +145,11 @@ export default function OptionsMenu(props) {
             click: "GamepadForm",
             text: "Gamepad",
         },
+        {
+            id: "options-menu-credits",
+            click: "Credits",
+            text: "Credits",
+        },
     ];
 
     useWindowListener("keydown", handleKeyDown.bind(this, true));
@@ -148,7 +160,6 @@ export default function OptionsMenu(props) {
                 return (
                     <HowToPlay
                         state={props.state}
-                        dispatch={props.dispatch}
                         setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
@@ -157,7 +168,6 @@ export default function OptionsMenu(props) {
                 return (
                     <Sound
                         state={props.state}
-                        dispatch={props.dispatch}
                         setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
@@ -166,8 +176,6 @@ export default function OptionsMenu(props) {
                 return (
                     <DeletePlayer
                         dispatch={props.dispatch}
-                        state={props.state}
-                        setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );
@@ -176,15 +184,19 @@ export default function OptionsMenu(props) {
                     <GamepadForm
                         dispatch={props.dispatch}
                         state={props.state}
-                        setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );
             case "Store":
                 return (
                     <Store
-                        dispatch={props.dispatch}
                         state={props.state}
+                        setSubmenuNumberOfItems={setSubmenuNumberOfItems}
+                    />
+                );
+            case "Credits":
+                return (
+                    <Credits
                         setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />

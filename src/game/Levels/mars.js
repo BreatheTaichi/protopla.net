@@ -6,12 +6,12 @@ import {
     verticalLine,
 } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import deimosPNG from "../images/mars/deimos.png";
-import phobosPNG from "../images/mars/phobos.png";
-import marsPNG from "../images/mars/mars.png";
-import backgroundPic from "../images/background/cygnusLoopNebula2.jpg";
-import alienShipPNG from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import deimosPNG from "../images/mars/deimos.webp";
+import phobosPNG from "../images/mars/phobos.webp";
+import marsPNG from "../images/mars/mars.webp";
+import backgroundPic from "../images/background/cygnusLoopNebula2.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/mars.jpg";
 
 export default function mars(arena) {

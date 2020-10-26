@@ -2,8 +2,8 @@ import { circle } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import sunPNG from "../images/sun/sun.webp";
 import backgroundPic from "../images/background/M81-82.webp";
-import alienShip from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import alienShip from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/sol.jpg";
 
 export default function Sun(arena) {

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import useWindowListener from "./hooks/useWindowListener.js";
-import menuSun from "./game/images/icons/menuSun2.png";
+import menuSun from "./game/images/icons/menuSun2.webp";
+import menuSunJPG from "./game/images/icons/menuSun2.png";
 
 export default function StartMenu(props) {
     // Get last used player for focus, or focus first element if none exists
@@ -90,6 +91,20 @@ export default function StartMenu(props) {
     useEffect(() => {
         document.getElementById(focused).focus();
     });
+
+    const ImgWithFallback = ({
+        src,
+        fallback,
+        type = "image/webp",
+        ...delegated
+    }) => {
+        return (
+            <picture>
+                <source srcSet={src} type={type} />
+                <img src={fallback} {...delegated} alt="sun" />
+            </picture>
+        );
+    };
 
     const playerList = () => {
         return (
@@ -249,7 +264,11 @@ export default function StartMenu(props) {
             {!newPlayer && playerList()}
             {newPlayer && newPlayerForm()}
             <div className="course-instructions-wrapper">
-                <img src={menuSun} alt="Sun" />
+                <ImgWithFallback
+                    src={menuSun}
+                    fallback={menuSunJPG}
+                    alt="Sun"
+                />
             </div>
         </>
     );

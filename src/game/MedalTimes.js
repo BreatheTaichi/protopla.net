@@ -1,11 +1,11 @@
 import React from "react";
-import goldMedal from "./images/medals/ruby.png";
-import silverMedal from "./images/medals/amythest.png";
-import bronzeMedal from "./images/medals/emerald.png";
-import goldStar from "./images/medals/goldStar.png";
-import silverStar from "./images/medals/silverStar.png";
-import bronzeStar from "./images/medals/bronzeStar.png";
-import none from "./images/medals/none.png";
+import goldMedal from "./images/medals/ruby.webp";
+import silverMedal from "./images/medals/amythest.webp";
+import bronzeMedal from "./images/medals/emerald.webp";
+import goldStar from "./images/medals/goldStar.webp";
+import silverStar from "./images/medals/silverStar.webp";
+import bronzeStar from "./images/medals/bronzeStar.webp";
+import none from "./images/medals/none.webp";
 
 export default function MedalTimes(difficulty, player) {
     var medalTimes = [];

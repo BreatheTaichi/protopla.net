@@ -242,7 +242,7 @@ input:focus {
 .options-menu-button-wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 60px 60px 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px 60px 60px 60px 60px;
     gap: 5px;
     border: 4px solid rgb(34, 34, 34);
     @extend %dark-background;
@@ -272,9 +272,13 @@ input:focus {
     grid-row-start: 5;
     grid-row-end: 6;
 }
-#options-menu-back {
+#options-menu-credits {
     grid-row-start: 6;
     grid-row-end: 7;
+}
+#options-menu-back {
+    grid-row-start: 7;
+    grid-row-end: 8;
 }
 
 .options-menu-quit-button {

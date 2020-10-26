@@ -1,14 +1,14 @@
 import { arc, circle, diagonalLeft, horizontalLine } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import uranusPNG from "../images/uranus/uranus.png";
-import arielPNG from "../images/uranus/ariel.png";
-import oberonPNG from "../images/uranus/oberon.png";
-import puckPNG from "../images/uranus/puck.png";
-import titaniaPNG from "../images/uranus/titania.png";
-import umbrielPNG from "../images/uranus/umbriel.png";
-import backgroundPic from "../images/background/m106_colombari_3568.jpg";
-import alienShip from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import uranusPNG from "../images/uranus/uranus.webp";
+import arielPNG from "../images/uranus/ariel.webp";
+import oberonPNG from "../images/uranus/oberon.webp";
+import puckPNG from "../images/uranus/puck.webp";
+import titaniaPNG from "../images/uranus/titania.webp";
+import umbrielPNG from "../images/uranus/umbriel.webp";
+import backgroundPic from "../images/background/m106_colombari_3568.webp";
+import alienShip from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/uranus.jpg";
 
 export default function Sun(arena) {

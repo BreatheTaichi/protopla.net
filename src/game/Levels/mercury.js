@@ -1,16 +1,16 @@
 import { circle, arc, diagonalRight, diagonalLeft } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import mercuryPNG from "../images/mercury/mercury.png";
-import mercuryBWPNG from "../images/mercury/mercuryBW.png";
-import backgroundPic from "../images/background/Vargas.jpg";
-import alienShipPNG from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import mercuryPNG from "../images/mercury/mercury.webp";
+import mercuryBWPNG from "../images/mercury/mercuryBW.webp";
+import backgroundPic from "../images/background/NGC2525.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/mercury.jpg";
 
 export default function mercury(arena) {
     var mercury = loadImageToCanvas(2040, 2040, mercuryPNG, arena);
     var mercuryBW = loadImageToCanvas(1640, 1640, mercuryBWPNG, arena);
-    var background = loadImageToCanvas(4039, 4039, backgroundPic, arena);
+    var background = loadImageToCanvas(3730, 4000, backgroundPic, arena);
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
     arena.images.push({ img: arrow, xStart: 56, yStart: 37 });
@@ -27,7 +27,7 @@ export default function mercury(arena) {
         "Both images on this map are of Mercury.  The top is a natural color, " +
             "and the bottom is a color map that highlights impact craters and " +
             "volcanic eruptions.",
-        "This is set before beautiful expanding gas clouds of the NGC 5189 nebula.",
+        "This is set before spiral galaxy NGC 2525 where a supernova was spotted.",
     ];
     arena.links = [
         {
@@ -39,11 +39,9 @@ export default function mercury(arena) {
             link: "https://photojournal.jpl.nasa.gov/catalog/PIA16850",
         },
         {
-            text:
-                "The artist responsible for the background picture is " +
-                "Jesús M. Vargas. For more information on " +
-                "NCG 5189 and a link to more of Jesús M. Vargas's work go to ",
-            link: "https://apod.nasa.gov/apod/ap200814.html",
+            text: "Check out more on the Astronomy Picture of the Day: ",
+            link:
+                "https://apod.nasa.gov/apod/image/2010/STScI_NGC2525_1865x2000.jpg",
         },
     ];
     arena.ship.img = alienShip;

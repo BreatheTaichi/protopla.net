@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import controller from "./game/Gamepad.js";
-import arrow from "./game/images/icons/whiteArrowLeft.png";
+import arrow from "./game/images/icons/whiteArrowLeft.webp";
 
 var userGamepad = controller();
 export default function GamepadForm(props) {

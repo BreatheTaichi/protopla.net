@@ -11,7 +11,7 @@ import saturn from "./game/Levels/saturn.js";
 import uranus from "./game/Levels/uranus.js";
 import neptune from "./game/Levels/neptune.js";
 import Arena from "./game/Arena.js";
-import Loading from "./Loading.js";
+import Loading from "./game/Loading.js";
 import Store from "./options/Store.js";
 import OptionsMenu from "./options/OptionsMenu.js";
 import StartMenu from "./StartMenu.js";

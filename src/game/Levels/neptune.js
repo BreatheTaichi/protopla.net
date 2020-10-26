@@ -1,12 +1,12 @@
 import { circle, arc, diagonalLeft } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import neptunePNG from "../images/neptune/neptune.png";
-import larissaPNG from "../images/neptune/larissa.png";
-import tritonPNG from "../images/neptune/triton.png";
-import proteusPNG from "../images/neptune/proteus.png";
-import backgroundPic from "../images/background/lagoonNebula.png";
-import alienShipPNG from "../images/ships/alienShip.png";
-// import arrowPNG from "../images/icons/courseArrow.png";
+import neptunePNG from "../images/neptune/neptune.webp";
+import larissaPNG from "../images/neptune/larissa.webp";
+import tritonPNG from "../images/neptune/triton.webp";
+import proteusPNG from "../images/neptune/proteus.webp";
+import backgroundPic from "../images/background/lagoonNebula.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+// import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/neptune.jpg";
 
 export default function mercury(arena) {

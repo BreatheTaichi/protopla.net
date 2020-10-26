@@ -6,20 +6,20 @@ import {
     ellipse,
 } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import saturnPNG from "../images/saturn/Saturn.png";
-import enceladusPNG from "../images/saturn/enceladus.png";
-import epimetheusPNG from "../images/saturn/epimetheus.png";
-import helenePNG from "../images/saturn/helene.png";
-import hyperionPNG from "../images/saturn/hyperion.png";
-import iapetusPNG from "../images/saturn/iapetus.png";
-import janusPNG from "../images/saturn/janus.png";
-import panPNG from "../images/saturn/pan.png";
-import pandoraPNG from "../images/saturn/pandora.png";
-import phoebePNG from "../images/saturn/phoebe.png";
-import prometheusPNG from "../images/saturn/prometheus.png";
-import backgroundPic from "../images/background/SoulNebula.jpg";
-import alienShip from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import saturnPNG from "../images/saturn/Saturn.webp";
+import enceladusPNG from "../images/saturn/enceladus.webp";
+import epimetheusPNG from "../images/saturn/epimetheus.webp";
+import helenePNG from "../images/saturn/helene.webp";
+import hyperionPNG from "../images/saturn/hyperion.webp";
+import iapetusPNG from "../images/saturn/iapetus.webp";
+import janusPNG from "../images/saturn/janus.webp";
+import panPNG from "../images/saturn/pan.webp";
+import pandoraPNG from "../images/saturn/pandora.webp";
+import phoebePNG from "../images/saturn/phoebe.webp";
+import prometheusPNG from "../images/saturn/prometheus.webp";
+import backgroundPic from "../images/background/SoulNebula.webp";
+import alienShip from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/saturn.jpg";
 
 export default function Sun(arena) {

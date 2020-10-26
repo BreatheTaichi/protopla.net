@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import thrustForward from "../game/images/howtoplay/thrustForward.png";
-import thrustReverse from "../game/images/howtoplay/thrustReverse.png";
-import turnClockwise from "../game/images/howtoplay/turnClockwise2.jpg";
-import turnCounterclockwise from "../game/images/howtoplay/turnCounterclockwise2.jpg";
-import amythest from "../game/images/medals/amythest.png";
-import bronzeStar from "../game/images/medals/bronzeStar.png";
-import emerald from "../game/images/medals/emerald.png";
-import goldStar from "../game/images/medals/goldStar.png";
-import ruby from "../game/images/medals/ruby.png";
-import silverStar from "../game/images/medals/silverStar.png";
+import thrustForward from "../game/images/howtoplay/thrustForward.webp";
+import thrustReverse from "../game/images/howtoplay/thrustReverse.webp";
+import turnClockwise from "../game/images/howtoplay/turnClockwise2.webp";
+import turnCounterclockwise from "../game/images/howtoplay/turnCounterclockwise2.webp";
+import amythest from "../game/images/medals/amythest.webp";
+import bronzeStar from "../game/images/medals/bronzeStar.webp";
+import emerald from "../game/images/medals/emerald.webp";
+import goldStar from "../game/images/medals/goldStar.webp";
+import ruby from "../game/images/medals/ruby.webp";
+import silverStar from "../game/images/medals/silverStar.webp";
 import lapTimes from "../game/MedalTimes.js";
 import dateFormat from "../game/dateFormat.js";
 

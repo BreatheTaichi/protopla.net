@@ -1,9 +1,9 @@
 import { circle, arc, verticalLine, horizontalLine } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import venusPNG from "../images/venus/venus.png";
-import backgroundPic from "../images/background/GrandDesign.jpg";
-import alienShipPNG from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import venusPNG from "../images/venus/venus.webp";
+import backgroundPic from "../images/background/GrandDesign.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/venus.jpg";
 
 export default function venus(arena) {

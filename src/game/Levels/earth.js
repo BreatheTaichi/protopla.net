@@ -1,10 +1,10 @@
 import { verticalLine, horizontalLine } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import lunaPNG from "../images/earth/luna.png";
-import earthPNG from "../images/earth/earth.png";
-import backgroundPic from "../images/background/dragons.jpg";
-import alienShipPNG from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import lunaPNG from "../images/earth/luna.webp";
+import earthPNG from "../images/earth/earth.webp";
+import backgroundPic from "../images/background/dragons.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/earth.jpg";
 
 export default function earth(arena) {

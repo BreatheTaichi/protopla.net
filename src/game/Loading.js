@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useWindowListener from "./hooks/useWindowListener.js";
+import useWindowListener from "../hooks/useWindowListener.js";
 
 export default function Loading(props) {
     var currentButton;

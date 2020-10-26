@@ -7,14 +7,14 @@ import {
     verticalLine,
 } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
-import jupiterPNG from "../images/jupiter/jupiterAurora.png";
-import callistoPNG from "../images/jupiter/callisto.png";
-import ioPNG from "../images/jupiter/io.png";
-import ganymedePNG from "../images/jupiter/ganymede.png";
-import europaPNG from "../images/jupiter/europa.png";
-import backgroundPic from "../images/background/NGC7331.jpg";
-import alienShipPNG from "../images/ships/alienShip.png";
-import arrowPNG from "../images/icons/courseArrow.png";
+import jupiterPNG from "../images/jupiter/jupiterAurora.webp";
+import callistoPNG from "../images/jupiter/callisto.webp";
+import ioPNG from "../images/jupiter/io.webp";
+import ganymedePNG from "../images/jupiter/ganymede.webp";
+import europaPNG from "../images/jupiter/europa.webp";
+import backgroundPic from "../images/background/NGC7331.webp";
+import alienShipPNG from "../images/ships/alienShip.webp";
+import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/jupiter.jpg";
 
 export default function jupiter(arena) {
