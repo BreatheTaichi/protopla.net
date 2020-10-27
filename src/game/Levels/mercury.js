@@ -6,8 +6,17 @@ import backgroundPic from "../images/background/NGC2525.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/mercury.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function mercury(arena) {
+    arena.finishImg = { x: 67, y: 82, len: 15 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
+
     var mercury = loadImageToCanvas(2040, 2040, mercuryPNG, arena);
     var mercuryBW = loadImageToCanvas(1640, 1640, mercuryBWPNG, arena);
     var background = loadImageToCanvas(3730, 4000, backgroundPic, arena);
@@ -48,8 +57,6 @@ export default function mercury(arena) {
     arena.background = background;
     arena.images.push({ img: mercury, xStart: 17, yStart: 55 });
     arena.images.push({ img: mercuryBW, xStart: 22, yStart: 0.5 });
-
-    arena.finishImg = { x: 67, y: 82, len: 16 };
 
     // Arc outside bottom of mercury
     arc(42, 82, 310, 591, 40, "metal", arena);

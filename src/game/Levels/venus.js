@@ -5,8 +5,16 @@ import backgroundPic from "../images/background/GrandDesign.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/venus.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function venus(arena) {
+    arena.finishImg = { x: 2, y: 82, len: 14 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var venus = loadImageToCanvas(2200, 2160, venusPNG, arena);
     var background = loadImageToCanvas(3970, 3970, backgroundPic, arena);
@@ -39,8 +47,6 @@ export default function venus(arena) {
     arena.ship.img = alienShip;
     arena.background = background;
     arena.images.push({ img: venus, xStart: 15, yStart: 55 });
-
-    arena.finishImg = { x: 2, y: 82, len: 14 };
 
     // Venus
     circle(42.5, 82, 26, "invisible", arena);

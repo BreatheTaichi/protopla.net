@@ -169,7 +169,7 @@ export default function Engine(props) {
     // Start the main loop
     useEffect(() => {
         arena.context = canvasRef.current.getContext("2d");
-        arena.inGame = true;
+        // arena.inGame = true;
         animationRef.current = raf(main);
         return () => {
             raf.cancel(animationRef.current);

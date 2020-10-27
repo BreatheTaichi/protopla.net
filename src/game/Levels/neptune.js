@@ -8,8 +8,16 @@ import backgroundPic from "../images/background/lagoonNebula.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 // import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/neptune.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function mercury(arena) {
+    arena.finishImg = { x: 67, y: 124, len: 10 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
     var neptune = loadImageToCanvas(1600, 1600, neptunePNG, arena);
     var triton = loadImageToCanvas(712, 712, tritonPNG, arena);
     var proteus = loadImageToCanvas(557, 627, proteusPNG, arena);
@@ -53,8 +61,6 @@ export default function mercury(arena) {
     circle(58.8, 123.8, 7.8, "invisible", arena);
     arena.images.push({ img: proteus, xStart: 26.7, yStart: 109 });
     arena.images.push({ img: larissa, xStart: 70, yStart: 93 });
-
-    arena.finishImg = { x: 68, y: 126, len: 9 };
 
     // first ring outside of neptune
     arc(55, 70, 122, 440, 27, "metal", arena);

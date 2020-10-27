@@ -16,8 +16,17 @@ import backgroundPic from "../images/background/NGC7331.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/jupiter.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function jupiter(arena) {
+    arena.finishImg = { x: 113, y: 118, len: 20 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
+
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var jupiter = loadImageToCanvas(2960, 3000, jupiterPNG, arena);
     var callisto = loadImageToCanvas(800, 800, callistoPNG, arena);
@@ -79,8 +88,6 @@ export default function jupiter(arena) {
 
     arena.images.push({ img: jupiter, xStart: 40, yStart: 80 });
     circle(77, 118.5, 34.7, "invisible", arena);
-
-    arena.finishImg = { x: 113, y: 118, len: 21 };
 
     // Around Jupiter
     arc(77, 118, -90, 183, 56, "metal", arena);

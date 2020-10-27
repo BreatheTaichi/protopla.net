@@ -6,8 +6,16 @@ import backgroundPic from "../images/background/dragons.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/earth.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function earth(arena) {
+    arena.finishImg = { x: 46, y: 22, len: 9 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var luna = loadImageToCanvas(1520, 1520, lunaPNG, arena);
     var earth = loadImageToCanvas(1800, 1800, earthPNG, arena);
@@ -68,8 +76,6 @@ export default function earth(arena) {
         width: luna.width,
         height: luna.height,
     });
-
-    arena.finishImg = { x: 46, y: 22, len: 9 };
 
     // Outer Box
     var lunaBlocks = [

@@ -1,12 +1,21 @@
-import { circle } from "../shapes.js";
+import { circle, horizontalLine } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import sunPNG from "../images/sun/sun.webp";
 import backgroundPic from "../images/background/M81-82.webp";
 import alienShip from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/sol.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function Sun(arena) {
+    arena.finishImg = { x: 1, y: 37, len: 12 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
+
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
     var sun = loadImageToCanvas(2600, 2600, sunPNG, arena);
     var background = loadImageToCanvas(3945, 2630, backgroundPic, arena);
@@ -16,8 +25,6 @@ export default function Sun(arena) {
     arena.background = background;
     arena.images.push({ img: arrow, xStart: 67, yStart: 36 });
     arena.images.push({ img: sun, xStart: 4.8, yStart: 5 });
-
-    arena.finishImg = { x: 1, y: 37, len: 12 };
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [

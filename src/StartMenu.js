@@ -170,15 +170,18 @@ export default function StartMenu(props) {
     const newPlayerForm = () => {
         return (
             <form className="player-menu-input">
-                <div className="player-menu-choose-title no-select">
+                <label className="player-menu-choose-title no-select">
                     <em>Create New Player</em>
-                </div>
+                </label>
                 <input
                     onChange={handleNameInput}
                     className="player-new-input"
                     id="0"
                     maxLength="20"
                     value={playerName}
+                    onClick={() => {
+                        setFocused("0");
+                    }}
                 ></input>
                 <button
                     className="player-menu-button"

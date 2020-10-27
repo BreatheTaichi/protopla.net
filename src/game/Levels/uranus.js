@@ -10,8 +10,16 @@ import backgroundPic from "../images/background/m106_colombari_3568.webp";
 import alienShip from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/uranus.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function Sun(arena) {
+    arena.finishImg = { x: 69, y: 37, len: 11 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
     var uranus = loadImageToCanvas(2600, 2600, uranusPNG, arena);
     var titania = loadImageToCanvas(489, 489, titaniaPNG, arena);
@@ -42,8 +50,6 @@ export default function Sun(arena) {
     arena.images.push({ img: umbriel, xStart: 60, yStart: 80 });
     circle(64.4, 84.4, 3.5, "invisible", arena);
     arena.images.push({ img: puck, xStart: 34, yStart: 85 });
-
-    arena.finishImg = { x: 70, y: 37, len: 11 };
 
     // outside uranus
     arc(37, 37, 0, 85, 43, "metal", arena);

@@ -129,7 +129,7 @@ function reducer(state, action) {
                 99,
                 84,
                 -123,
-                -119,
+                -120,
                 40,
                 0,
                 state.player.name,

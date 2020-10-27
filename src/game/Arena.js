@@ -2,9 +2,7 @@ import putBrick from "./putBrick.js";
 import { drawBody, finishLineCH } from "./shapes.js";
 import Ship from "./Ship.js";
 
-function rads(x) {
-    return (Math.PI * x) / 180;
-}
+var circ = (Math.PI * 360) / 180;
 
 export default function Arena(
     nameOfMap,
@@ -33,7 +31,6 @@ export default function Arena(
         effectsVolume: 1,
         musicVolume: 1,
 
-        // ship: new Ship(shipAngle, 20, 3, 0.71, 0.001, 0.19, 0.97, 0.5),
         ship: new Ship(shipAngle, 20, player),
 
         mapName: nameOfMap,
@@ -41,7 +38,7 @@ export default function Arena(
         finishLine: false,
         checkLine: false,
         checkPoint: false,
-        inGame: false,
+        inGame: true,
 
         // brick size
         halfSize: size / 2,
@@ -83,12 +80,6 @@ export default function Arena(
         currentLap: 0,
         recordLap: 0,
         sessionBest: 0,
-        // lastLap: new Date(),
-        // lapStart: new Date(Date.now()),
-        // lapEnd: new Date(),
-        // currentLap: new Date(0),
-        // recordLap: new Date(),
-        // sessionBest: new Date(),
 
         // Player beat their record time by:
         beatTimeBy: 0,
@@ -141,7 +132,7 @@ export default function Arena(
                     item.y,
                     10 + 10 * item.time,
                     0,
-                    rads(360)
+                    6.28319
                 );
                 var gradient = arena.context.createRadialGradient(
                     item.x,
@@ -156,8 +147,9 @@ export default function Arena(
                     0.7,
                     `rgba(150, 200, ${thrustColor}, .05`
                 );
-                arena.context.fillStyle = gradient; //"#fff";
+                arena.context.fillStyle = gradient;
                 arena.context.globalAlpha = 1;
+                // Remove after a time
                 item.time += 0.1;
                 if (item.time > 1) {
                     object.splice(index, 1);
@@ -169,11 +161,6 @@ export default function Arena(
             arena.context.rotate((arena.ship.rotation * Math.PI * 2) / 180);
             arena.context.drawImage(arena.ship.img, -25, -25);
             arena.context.rotate(-(arena.ship.rotation * Math.PI * 2) / 180);
-            // arena.context.fillStyle = `rgba(100, 200, 255, ${shieldOpacity})`;
-            // arena.context.beginPath();
-            // arena.context.arc(0, 0, arena.ship.radius + 20, 0, 2 * Math.PI);
-            // arena.context.closePath();
-            // arena.context.fill();
 
             arena.context.restore();
         },
@@ -184,14 +171,11 @@ export default function Arena(
     }
     if (localStorage.getItem(arena.recordLapKey) === null) {
         arena.recordLap = 599999;
-        // arena.recordLap.setTime(599999);
     } else {
         arena.recordLap = localStorage.getItem(arena.recordLapKey);
     }
     arena.lastLap = 599999;
     arena.sessionBest = 599999;
-    // arena.lastLap.setTime(599999);
-    // arena.sessionBest.setTime(599999);
 
     if (localStorage.getItem(player + "effectsVolume") !== null) {
         arena.effectsVolume = localStorage.getItem(player + "effectsVolume");

@@ -338,12 +338,14 @@ export function drawBody(x, y, image, arena) {
 }
 
 export function finishLineCH(arena) {
-    let start = arena.finishImg.x * arena.size + arena.x;
-    let end = arena.finishImg.len * arena.size;
-    let yVal = arena.finishImg.y * arena.size + arena.y;
+    let start = arena.finishImg.x * arena.size + arena.x + arena.halfSize;
+    let end = arena.finishImg.len * arena.size - arena.size;
+    let yVal = arena.finishImg.y * arena.size + arena.y + arena.halfSize;
 
-    arena.context.save();
-    arena.context.translate(start + arena.halfSW, yVal + arena.halfSH);
+    // Context for arena finishline checkpoint testing.
+    // Open all blocks with context to use this.
+    // arena.context.save();
+    // arena.context.translate(start + arena.halfSW, yVal + arena.halfSH);
 
     if (
         0 > yVal - arena.halfSize &&
@@ -353,9 +355,6 @@ export function finishLineCH(arena) {
     ) {
         arena.finishLine = true;
         if (arena.finishLine && arena.checkPoint && arena.checkLine) {
-            // arena.lapEnd.setTime(Date.now());
-            // arena.lastLap.setTime(arena.lapEnd - arena.lapStart);
-            // arena.lapStart.setTime(Date.now());
             arena.lastLap = arena.currentLap;
             arena.currentLap = 0;
             // If last lap is faster than the session best, set new
@@ -378,29 +377,6 @@ export function finishLineCH(arena) {
                     arena.beatTimeBy = arena.sessionBest - arena.lastLap;
                     arena.sessionBest = arena.lastLap;
                 }
-                // if (arena.lastLap.getTime() < arena.sessionBest.getTime()) {
-                //     if (arena.lastLap.getTime() < arena.recordLap.getTime()) {
-                //         recordLap.volume(arena.effectsVolume);
-                //         recordLap.play();
-                //         arena.recordLapTimer = 1;
-                //         arena.beatTimeBy.setTime(
-                //             arena.recordLap.getTime() - arena.lastLap.getTime()
-                //         );
-                //         arena.recordLap.setTime(arena.lastLap.getTime());
-                //         arena.sessionBest.setTime(arena.lastLap.getTime());
-                //         localStorage.setItem(
-                //             arena.recordLapKey,
-                //             arena.recordLap.valueOf()
-                //         );
-                //     } else {
-                //         sessionBest.volume(arena.effectsVolume);
-                //         sessionBest.play();
-                //         arena.sessionBestTimer = 1;
-                //         arena.beatTimeBy.setTime(
-                //             arena.sessionBest.getTime() - arena.lastLap.getTime()
-                //         );
-                //         arena.sessionBest.setTime(arena.lastLap.valueOf());
-                //     }
             } else {
                 lap.volume(arena.effectsVolume);
                 lap.play();
@@ -409,52 +385,6 @@ export function finishLineCH(arena) {
         }
         arena.checkLine = false;
     }
-
-    // Draw finish line by making 2 black and 2 white squares a
-    // quarter the size of the arena block, in a square for
-    // each block to the .len of the the finishline
-    const quarterSize = arena.halfSize / 2;
-    for (let i = 0; i < arena.finishImg.len * 2; i++) {
-        arena.context.beginPath();
-        arena.context.rect(
-            -arena.halfSize + quarterSize * i * 2,
-            -arena.halfSize,
-            quarterSize,
-            quarterSize
-        );
-        arena.context.rect(
-            -quarterSize + quarterSize * i * 2,
-            -quarterSize,
-            quarterSize,
-            quarterSize
-        );
-        arena.context.fillStyle = "#ddd";
-        arena.context.fill();
-        arena.context.closePath();
-
-        arena.context.beginPath();
-        arena.context.rect(
-            -arena.halfSize + quarterSize * i * 2,
-            -quarterSize,
-            quarterSize,
-            quarterSize
-        );
-        arena.context.rect(
-            -arena.halfSize + quarterSize * i * 2 + quarterSize,
-            -arena.halfSize,
-            quarterSize,
-            quarterSize
-        );
-        arena.context.fillStyle = "#222";
-        arena.context.fill();
-        arena.context.closePath();
-    }
-    // arena.context.rect(
-    //     -arena.halfSize,
-    //     -arena.halfSize,
-    //     arena.size + end,
-    //     arena.halfSize
-    // );
 
     // Checkline
     if (
@@ -521,5 +451,5 @@ export function finishLineCH(arena) {
     // arena.context.closePath();
 
     // arena.context.translate(-(start + arena.halfSW), -(yVal + arena.halfSH));
-    arena.context.restore();
+    // arena.context.restore();
 }

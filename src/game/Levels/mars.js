@@ -13,8 +13,17 @@ import backgroundPic from "../images/background/cygnusLoopNebula2.webp";
 import alienShipPNG from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/mars.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function mars(arena) {
+    arena.finishImg = { x: 48.5, y: 224, len: 12 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
+
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var deimos = loadImageToCanvas(1030, 1030, deimosPNG, arena);
     var phobos = loadImageToCanvas(1400, 1400, phobosPNG, arena);
@@ -98,8 +107,6 @@ export default function mars(arena) {
         xStart: 25,
         yStart: 260,
     });
-
-    arena.finishImg = { x: 49, y: 225, len: 12 };
 
     var moonBlocks = [
         // Phobos{ x: 119, y: 255 },

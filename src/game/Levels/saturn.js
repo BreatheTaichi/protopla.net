@@ -21,8 +21,16 @@ import backgroundPic from "../images/background/SoulNebula.webp";
 import alienShip from "../images/ships/alienShip.webp";
 import arrowPNG from "../images/icons/courseArrow.webp";
 import loadingImage from "../images/loading/saturn.jpg";
+import finish from "../bricks/finishBlock.js";
 
 export default function Sun(arena) {
+    arena.finishImg = { x: 119, y: 143, len: 12 };
+    var finishBlock = finish(arena, arena.finishImg.len);
+    arena.images.push({
+        img: finishBlock,
+        xStart: arena.finishImg.x,
+        yStart: arena.finishImg.y,
+    });
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
     var background = loadImageToCanvas(6660, 3482, backgroundPic, arena);
     var saturn = loadImageToCanvas(4950, 1890, saturnPNG, arena);
@@ -121,8 +129,6 @@ export default function Sun(arena) {
     arena.images.push({ img: phoebe, xStart: 176, yStart: 179 });
     arena.images.push({ img: prometheus, xStart: 267, yStart: 202 });
 
-    arena.finishImg = { x: 120, y: 144, len: 11 };
-
     // from the right side of the finish line up
     verticalLine(131, 114, 30, "metal", arena);
     // left side of finish line
@@ -216,6 +222,9 @@ export default function Sun(arena) {
     verticalLine(134, 148, 5, "metal", arena);
 
     var saturnBlocks = [
+        // saturn extra blocks
+        { x: 131, y: 145 },
+
         // blocks over Pan from lower right, clockwise
         { x: 124, y: 107 },
         { x: 123, y: 107 },

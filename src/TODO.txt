@@ -1,5 +1,13 @@
 // TODO
 
+options menu, any screen with save - hit enter on anywhere to save and focus 
+back button
+
+react.lazy and all the other lighthouse stuff
+
+OptionsMenu to turn off thrust, or make a simpler thrust trail and other
+possible performance issues
+
 // gamepad on menus
 
 // Change drawHUD so that static words are printed on a canvas and only changed
@@ -36,8 +44,5 @@ Could make the hard version like the original but with more narrow corridors
 // leaves the course icons in weird places - style.marginLeft
 
 // add player name to ..all? screens  Probably just Menu screens
-
-// Credits page on options crediting NASA and whoever they want credited, 
-and sounds
 
 Make empty star for when the player hasn't earned one yet
