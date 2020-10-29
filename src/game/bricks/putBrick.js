@@ -1,8 +1,8 @@
 import { Howl } from "howler";
-import bumpMP3 from "./audio/bump.mp3";
-import bumpOGG from "./audio/bump.ogg";
-import bumpWAV from "./audio/bump.wav";
-import mBrick from "./bricks/metalBrick.js";
+import bumpMP3 from "../audio/bump.mp3";
+import bumpOGG from "../audio/bump.ogg";
+import bumpWAV from "../audio/bump.wav";
+import mBrick from "./metalBrick.js";
 var bump = new Howl({
     src: [bumpMP3, bumpOGG, bumpWAV],
 });

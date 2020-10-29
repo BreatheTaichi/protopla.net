@@ -11,6 +11,9 @@ export default function setShip(player) {
         localStorage.setItem(player + "friction", 0.98);
     if (localStorage.getItem(player + "bounceFriction") === null)
         localStorage.setItem(player + "bounceFriction", 0.7);
+
+    if (localStorage.getItem(player + "credits") === null)
+        localStorage.setItem(player + "credits", 0);
 }
 // TODO change this to a function that returns a player object
 // that can be passed through the program.  This will help when

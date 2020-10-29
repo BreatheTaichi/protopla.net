@@ -1,8 +1,9 @@
-import putBrick from "./putBrick.js";
+import putBrick from "./bricks/putBrick.js";
 import { drawBody, finishLineCH } from "./shapes.js";
 import Ship from "./Ship.js";
-
-var circ = (Math.PI * 360) / 180;
+import times from "./MedalTimes.js";
+import fillHUD from "./fillHUD.js";
+import dateFormat from "./dateFormat.js";
 
 export default function Arena(
     nameOfMap,
@@ -20,6 +21,10 @@ export default function Arena(
     var tierReached = parseInt(
         localStorage.getItem(player + nameOfMap + "tier")
     );
+    var recordLapKey = player + nameOfMap + "bestlap";
+    if (localStorage.getItem(recordLapKey) === null) {
+        localStorage.setItem(recordLapKey, 599999);
+    }
     var playerCredits = parseInt(localStorage.getItem(player + "credits"));
     var arena = {
         player: player,
@@ -45,6 +50,7 @@ export default function Arena(
         size: size,
 
         blocks: [],
+        HUDImages: [],
         background: new Image(),
         images: [],
         border: {},
@@ -74,24 +80,31 @@ export default function Arena(
 
         onFirstLap: true,
 
-        lastLap: 0,
+        sessionBest: 599999,
+        lastLap: 599999,
         lapStart: 0,
         lapEnd: 0,
         currentLap: 0,
-        recordLap: 0,
-        sessionBest: 0,
+
+        recordLapKey: recordLapKey,
+        recordLap: parseInt(localStorage.getItem(recordLapKey)),
 
         // Player beat their record time by:
         beatTimeBy: 0,
         recordLapTimer: 0,
         sessionBestTimer: 0,
+        times: [],
 
-        recordLapKey: player + nameOfMap + "bestlap",
+        hud: new fillHUD(this),
+
+        medalTimes: times(difficulty, player),
 
         tier: tierReached,
         credits: playerCredits,
 
         draw() {
+            arena.currentLap = arena.currentLap + 16 + 2 / 3;
+
             arena.x += arena.ship.xMomentum;
             arena.y += arena.ship.yMomentum;
 
@@ -163,26 +176,42 @@ export default function Arena(
             arena.context.rotate(-(arena.ship.rotation * Math.PI * 2) / 180);
 
             arena.context.restore();
+
+            arena.context.beginPath();
+            arena.context.fillStyle = "#eee";
+            arena.context.font = "25px Verdana";
+            arena.context.fillText(
+                "Lap " + dateFormat(arena.currentLap),
+                17,
+                25
+            );
+            arena.HUDImages.forEach(({ x, y, image }) => {
+                arena.context.drawImage(image, x, y);
+            });
+            arena.context.closePath();
+
+            arena.hud.popups(arena);
         },
     };
-
-    if (localStorage.getItem(arena.recordLapKey) === null) {
-        localStorage.setItem(arena.recordLapKey, 599999);
-    }
-    if (localStorage.getItem(arena.recordLapKey) === null) {
-        arena.recordLap = 599999;
-    } else {
-        arena.recordLap = localStorage.getItem(arena.recordLapKey);
-    }
-    arena.lastLap = 599999;
-    arena.sessionBest = 599999;
 
     if (localStorage.getItem(player + "effectsVolume") !== null) {
         arena.effectsVolume = localStorage.getItem(player + "effectsVolume");
     }
+
     if (localStorage.getItem(player + "musicVolume") !== null) {
         arena.musicVolume = localStorage.getItem(player + "musicVolume");
     }
+
+    for (let i = 0; i < arena.medalTimes.length; i++) {
+        if (arena.medalTimes[i].name === arena.mapName) {
+            arena.times = arena.medalTimes[i];
+        }
+    }
+
+    arena.hud.record(arena);
+    arena.hud.session(arena);
+    arena.hud.last(arena);
+    arena.hud.credits(arena);
 
     return arena;
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import useWindowListener from "../hooks/useWindowListener.js";
-import drawHUD from "./drawHUD.js";
 import raf from "raf";
 import Spinner from "./Spinner.js";
 import { Howl } from "howler";
@@ -185,7 +184,7 @@ export default function Engine(props) {
         } else {
             arena.ship.updateShip(key);
             arena.draw();
-            drawHUD(arena);
+            // drawHUD(arena);
         }
         if (arena.inGame) raf(main);
     }

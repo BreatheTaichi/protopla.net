@@ -2,12 +2,13 @@ import dateFormat from "./dateFormat.js";
 import times from "./MedalTimes.js";
 var recordMedal = new Image();
 var sessionMedal = new Image();
+
 export default function drawHUD(arena) {
     var medalTimes = times(arena.difficulty, arena.player);
     arena.context.beginPath();
     arena.context.fillStyle = "#eee";
     arena.context.font = "25px Verdana";
-    // arena.currentLap.setTime(Date.now() - arena.lapEnd);
+
     arena.currentLap = arena.currentLap + 16 + 2 / 3;
     arena.context.fillText(
         "Credits: " + arena.credits,
@@ -35,6 +36,7 @@ export default function drawHUD(arena) {
         arena.screenWidth - 230,
         25
     );
+
     arena.context.fillText(
         dateFormat(arena.sessionBest) + " Session",
         arena.screenWidth - 230,

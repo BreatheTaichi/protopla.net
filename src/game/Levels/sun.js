@@ -1,4 +1,4 @@
-import { circle, horizontalLine } from "../shapes.js";
+import { circle } from "../shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import sunPNG from "../images/sun/sun.webp";
 import backgroundPic from "../images/background/M81-82.webp";

@@ -342,6 +342,8 @@ export function finishLineCH(arena) {
     let end = arena.finishImg.len * arena.size - arena.size;
     let yVal = arena.finishImg.y * arena.size + arena.y + arena.halfSize;
 
+    // var hud = new fillHUD(arena);
+
     // Context for arena finishline checkpoint testing.
     // Open all blocks with context to use this.
     // arena.context.save();
@@ -354,8 +356,9 @@ export function finishLineCH(arena) {
         0 < start + arena.size + end
     ) {
         arena.finishLine = true;
-        if (arena.finishLine && arena.checkPoint && arena.checkLine) {
+        if (arena.checkPoint && arena.checkLine) {
             arena.lastLap = arena.currentLap;
+            arena.hud.last(arena);
             arena.currentLap = 0;
             // If last lap is faster than the session best, set new
             // session best.  If last lap is faster than record lap
@@ -365,17 +368,23 @@ export function finishLineCH(arena) {
                 if (arena.lastLap < arena.recordLap) {
                     recordLap.volume(arena.effectsVolume);
                     recordLap.play();
+                    // Set timer for record lap popup
                     arena.recordLapTimer = 1;
                     arena.beatTimeBy = arena.recordLap - arena.lastLap;
                     arena.recordLap = arena.lastLap;
                     arena.sessionBest = arena.lastLap;
                     localStorage.setItem(arena.recordLapKey, arena.recordLap);
+                    arena.hud.record(arena);
+                    arena.hud.session(arena);
+                    arena.hud.credits(arena);
                 } else {
                     sessionBest.volume(arena.effectsVolume);
                     sessionBest.play();
+                    // Set timer for session lap popup
                     arena.sessionBestTimer = 1;
                     arena.beatTimeBy = arena.sessionBest - arena.lastLap;
                     arena.sessionBest = arena.lastLap;
+                    arena.hud.session(arena);
                 }
             } else {
                 lap.volume(arena.effectsVolume);
