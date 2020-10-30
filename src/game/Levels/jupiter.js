@@ -33,7 +33,7 @@ export default function jupiter(arena) {
     var io = loadImageToCanvas(1000, 1000, ioPNG, arena);
     var ganymede = loadImageToCanvas(1400, 1400, ganymedePNG, arena);
     var europa = loadImageToCanvas(1200, 1200, europaPNG, arena);
-    var background = loadImageToCanvas(4500, 4000, backgroundPic, arena);
+    var background = loadImageToCanvas(4600, 4000, backgroundPic, arena);
     var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 245);
     arena.images.push({ img: arrow0, xStart: 75, yStart: 70 });
     var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 40);

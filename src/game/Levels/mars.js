@@ -28,7 +28,7 @@ export default function mars(arena) {
     var deimos = loadImageToCanvas(1030, 1030, deimosPNG, arena);
     var phobos = loadImageToCanvas(1400, 1400, phobosPNG, arena);
     var mars = loadImageToCanvas(2200, 2200, marsPNG, arena);
-    var background = loadImageToCanvas(4000, 4000, backgroundPic, arena);
+    var background = loadImageToCanvas(4500, 4500, backgroundPic, arena);
     var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 35);
     arena.images.push({ img: arrow0, xStart: 81, yStart: 206 });
     var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);

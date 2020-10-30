@@ -31,6 +31,9 @@ Performance options:
 
 Gamepad on menus for more seamless experience.
 
+Max screen size so player doesn't see past background image if they are on a large screen.
+Then I could get rid of the background fill and save some processing.
+
 Option to turn on names of bodies in race for better learning experience.
 Add random loading messages with different facts about each level.
 

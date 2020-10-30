@@ -22,7 +22,7 @@ export default function mercury(arena) {
     var triton = loadImageToCanvas(712, 712, tritonPNG, arena);
     var proteus = loadImageToCanvas(557, 627, proteusPNG, arena);
     var larissa = loadImageToCanvas(165, 143, larissaPNG, arena);
-    var background = loadImageToCanvas(3396, 4000, backgroundPic, arena);
+    var background = loadImageToCanvas(3500, 4000, backgroundPic, arena);
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     // var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
     // arena.images.push({ img: arrow0, xStart: 119, yStart: 112 });

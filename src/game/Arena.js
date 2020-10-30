@@ -115,11 +115,11 @@ export default function Arena(
             arena.x += arena.ship.xMomentum;
             arena.y += arena.ship.yMomentum;
             // Move background
-            var x1 = (arena.x - arena.halfSW + arena.width) / 3.5;
-            var y1 = (arena.y - arena.halfSH + arena.height) / 3.5;
+            var x1 = (arena.x + arena.width) / 3.5;
+            var y1 = (arena.y + arena.height) / 3.5;
 
-            // arena.context.fillStyle = "rgb(34, 34, 34)";
-            // arena.context.fillRect(0, 0, arena.screenWidth, arena.screenHeight);
+            arena.context.fillStyle = "rgb(34, 34, 34)";
+            arena.context.fillRect(0, 0, arena.screenWidth, arena.screenHeight);
             arena.context.drawImage(arena.background, x1, y1);
             // Add celestial bodies, finish line, and arrows
             arena.images.forEach((image) => {
