@@ -12,19 +12,31 @@ All menus can be controlled by arrow keys.
 
 Course menu doesn't reset on screen resize.
 
-\*\*Please let me know if you find any more!
+Gamepad must be activated on the course screen or it won't work.
+
+Webps need fallback in canvas.
+
+Safari gets stuck on image.onLoad.
+
+Please let me know if you find any more!
 
 ## TODOs and possible upgrades
 
-OptionsMenu to turn off thrust / make a simpler thrust trail.
+Performance options:
 
-Gamepad on menus.
+    Option to turn off thrust / make a simpler thrust trail.
+
+    Option to turn off background image, possibly make a simple generated background with some
+    stars that would take less processor than moving a huge image.
+
+Gamepad on menus for more seamless experience.
 
 Option to turn on names of bodies in race for better learning experience.
+Add random loading messages with different facts about each level.
 
-React.lazy and other lighthouse stuff.
+Load modules with React.lazy.
 
-Bonus levels like Pluto, protoplanets and asteroid belts. Unlocked after beating some level,
+Bonus level with Pluto, protoplanets and asteroids. Unlocked after beating a level,
 or getting a certain amount of points.
 Add point total that is the amount of credits obtained.
 
