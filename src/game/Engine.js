@@ -94,6 +94,9 @@ export default function Engine(props) {
             context.canvas.width = arena.screenWidth;
             context.canvas.height = arena.screenHeight;
         }
+        arena.hud.record(arena);
+        arena.hud.session(arena);
+        arena.hud.credits(arena);
     }
 
     useWindowListener("keydown", handleKeyPush.bind(this, true));
@@ -161,9 +164,9 @@ export default function Engine(props) {
         ) {
             getBlockPosition(canvas, e);
         });
-        return () => cancelAnimationFrame(getBlockRef.current);
+        // return () => cancelAnimationFrame(getBlockRef.current);
         // eslint-disable-next-line
-    }, []);
+    });
 
     // Start the main loop
     useEffect(() => {
@@ -184,7 +187,6 @@ export default function Engine(props) {
         } else {
             arena.ship.updateShip(key);
             arena.draw();
-            // drawHUD(arena);
         }
         if (arena.inGame) raf(main);
     }

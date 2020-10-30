@@ -1,4 +1,5 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
+import useWindowListener from "./hooks/useWindowListener.js";
 import Menu from "./Menu.js";
 import Engine from "./game/Engine.js";
 import jupiter from "./game/Levels/jupiter.js";
@@ -16,6 +17,8 @@ import Store from "./options/Store.js";
 import OptionsMenu from "./options/OptionsMenu.js";
 import StartMenu from "./StartMenu.js";
 
+var arena;
+
 const initialState = {
     player: {},
     page: "startMenu",
@@ -24,7 +27,6 @@ const initialState = {
     showGamepadToast: false,
     currentOptionsMenu: "HowTo",
 };
-var arena;
 function reducer(state, action) {
     switch (action.type) {
         case "menu":
@@ -32,7 +34,6 @@ function reducer(state, action) {
         case "gameStart":
             return { ...state, page: "engine" };
         case "startGame":
-            // TODO make player object and add here
             return { ...state, page: "menu", player: action.value };
         case "optionsMenu":
             return {
@@ -53,74 +54,23 @@ function reducer(state, action) {
         case "gamepadToastOff":
             return { ...state, showGamepadToast: false };
         case "Sol":
-            arena = new Arena(
-                "Sol",
-                0,
-                0,
-                -5,
-                -40,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
-            // state.numberToLoad = 3;
+            arena = new Arena("Sol", 0, 0, -5, -40, 40, 0, state.player);
             sun(arena, state.numberToLoad);
             return { ...state, page: "loading" };
         case "Mercury":
-            arena = new Arena(
-                "Mercury",
-                0,
-                15,
-                -75,
-                -85,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Mercury", 0, 15, -75, -85, 40, 0, state.player);
             mercury(arena);
             return { ...state, page: "loading" };
         case "Venus":
-            arena = new Arena(
-                "Venus",
-                0,
-                0,
-                -9,
-                -85,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Venus", 0, 0, -9, -85, 40, 0, state.player);
             venus(arena);
             return { ...state, page: "loading" };
         case "Earth":
-            arena = new Arena(
-                "Earth",
-                0,
-                0,
-                -51,
-                -25,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Earth", 0, 0, -51, -25, 40, 0, state.player);
             earth(arena);
             return { ...state, page: "loading" };
         case "Mars":
-            arena = new Arena(
-                "Mars",
-                0,
-                75,
-                -55,
-                -226,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Mars", 0, 75, -55, -226, 40, 0, state.player);
             mars(arena);
             return { ...state, page: "loading" };
         case "Jupiter":
@@ -132,8 +82,7 @@ function reducer(state, action) {
                 -120,
                 40,
                 0,
-                state.player.name,
-                state.player.difficulty
+                state.player
             );
             jupiter(arena);
             return { ...state, page: "loading" };
@@ -146,38 +95,17 @@ function reducer(state, action) {
                 -146,
                 40,
                 0,
-                state.player.name,
-                state.player.difficulty
+                state.player
             );
             saturn(arena);
             return { ...state, page: "loading" };
         case "Uranus":
-            arena = new Arena(
-                "Uranus",
-                20,
-                0,
-                -75,
-                -38,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Uranus", 20, 0, -75, -38, 40, 0, state.player);
             // state.numberToLoad = 3;
             uranus(arena);
             return { ...state, page: "loading" };
         case "Neptune":
-            arena = new Arena(
-                "Neptune",
-                10,
-                0,
-                -72,
-                -129,
-                40,
-                0,
-                state.player.name,
-                state.player.difficulty
-            );
+            arena = new Arena("Neptune", 10, 0, -72, -129, 40, 0, state.player);
             neptune(arena);
             return { ...state, page: "loading" };
         default:
@@ -187,54 +115,22 @@ function reducer(state, action) {
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
-    useEffect(() => {
-        window.addEventListener("gamepadconnected", function (e) {
-            // console.log(
-            //     "Gamepad connected at index %d: %s. %d buttons, %d axes.",
-            //     e.gamepad.index,
-            //     e.gamepad.id,
-            //     e.gamepad.buttons.length,
-            //     e.gamepad.axes.length
-            // );
-            // TODO create interval to check for gamepad, up moves to options
-            // and the store.  left-right changes levels
-            // checkGamepad();
-            dispatch({ type: "gamepadToast" });
-            setInterval(() => {
-                dispatch({ type: "gamepadToastOff" });
-            }, 3400);
-            dispatch({ type: "gamepadConnected" });
-        });
-        return window.removeEventListener("gamepadconnected", function (e) {
-            // checkGamepad();
-            dispatch({ type: "gamepadToast" });
-            setInterval(() => {
-                dispatch({ type: "gamepadToastOff" });
-            }, 3400);
-            dispatch({ type: "gamepadConnected" });
-        });
-    }, []);
-    useEffect(() => {
-        window.addEventListener("gamepaddisconnected", function (e) {
-            // console.log(
-            //     "Gamepad disconnected from index %d: %s",
-            //     e.gamepad.index,
-            //     e.gamepad.id
-            // );
-            dispatch({ type: "gamepadToast" });
-            setInterval(() => {
-                dispatch({ type: "gamepadToastOff" });
-            }, 3400);
-            dispatch({ type: "gamepadDisconnected" });
-        });
-        return window.removeEventListener("gamepaddisconnected", function (e) {
-            dispatch({ type: "gamepadToast" });
-            setInterval(() => {
-                dispatch({ type: "gamepadToastOff" });
-            }, 3400);
-            dispatch({ type: "gamepadDisconnected" });
-        });
-    }, []);
+
+    useWindowListener("gamepadconnected", function () {
+        dispatch({ type: "gamepadToast" });
+        setInterval(() => {
+            dispatch({ type: "gamepadToastOff" });
+        }, 3400);
+        dispatch({ type: "gamepadConnected" });
+    });
+
+    useWindowListener("gamepaddisconnected", function () {
+        dispatch({ type: "gamepadToast" });
+        setInterval(() => {
+            dispatch({ type: "gamepadToastOff" });
+        }, 3400);
+        dispatch({ type: "gamepadDisconnected" });
+    });
 
     const chooseContent = () => {
         switch (state.page) {

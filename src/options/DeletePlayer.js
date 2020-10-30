@@ -30,6 +30,7 @@ export default function DeletePlayer(props) {
         "rotationTier",
         "Saturnbestlap",
         "Saturntier",
+        "score",
         "Solbestlap",
         "Soltier",
         "Uranusbestlap",

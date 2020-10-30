@@ -13,24 +13,29 @@ export default function Arena(
     startY,
     size,
     shipAngle,
-    player,
-    difficulty
+    player
 ) {
-    if (localStorage.getItem(player + nameOfMap + "tier") === null)
-        localStorage.setItem(player + nameOfMap + "tier", 0);
+    if (localStorage.getItem(player.name + nameOfMap + "tier") === null)
+        localStorage.setItem(player.name + nameOfMap + "tier", 0);
     var tierReached = parseInt(
-        localStorage.getItem(player + nameOfMap + "tier")
+        localStorage.getItem(player.name + nameOfMap + "tier")
     );
-    var recordLapKey = player + nameOfMap + "bestlap";
+    var recordLapKey = player.name + nameOfMap + "bestlap";
     if (localStorage.getItem(recordLapKey) === null) {
         localStorage.setItem(recordLapKey, 599999);
     }
-    var playerCredits = parseInt(localStorage.getItem(player + "credits"));
+    var playerCredits = parseInt(localStorage.getItem(player.name + "credits"));
+    var playerScore = parseInt(localStorage.getItem(player.name + "score"));
 
     var arena = {
-        // players name and difficulty
-        player: player,
-        difficulty: difficulty,
+        // players name, credits and difficulty
+        player: player.name,
+        difficulty: player.difficulty,
+        score: playerScore,
+        credits: playerCredits,
+
+        // Medal rank
+        tier: tierReached,
 
         effectsVolume: 1,
         musicVolume: 1,
@@ -99,56 +104,65 @@ export default function Arena(
         // Times to beat for each medal rank
         times: [],
         // Images of medals and time repository
-        medalTimes: times(difficulty, player),
+        medalTimes: times(player.difficulty, player.name),
 
         // Makes canvas images for heads up display
         hud: new fillHUD(this),
 
-        // Medal rank
-        tier: tierReached,
-        credits: playerCredits,
-
         draw() {
             // Add time, 1000ms/60s
-            arena.currentLap = arena.currentLap + 16 + 2 / 3;
+            arena.currentLap = arena.currentLap + 16.666;
+
             // Move arena based on ship speed
             arena.x += arena.ship.xMomentum;
             arena.y += arena.ship.yMomentum;
+
             // Move background
             var x1 = (arena.x + arena.width) / 3.5;
             var y1 = (arena.y + arena.height) / 3.5;
 
+            // Fill background, then add background image
             arena.context.fillStyle = "rgb(34, 34, 34)";
             arena.context.fillRect(0, 0, arena.screenWidth, arena.screenHeight);
             arena.context.drawImage(arena.background, x1, y1);
-            // Add celestial bodies, finish line, and arrows
+
+            // Add celestial bodies, finish line graphic, and arrows
             arena.images.forEach((image) => {
                 drawBody(image.xStart, image.yStart, image.img, arena);
             });
-            // Check finish line
+
+            // Check finish line bounding boxes
             finishLineCH(arena);
+
             // Add bricks
             arena.blocks.forEach(({ x, y, type }) => {
                 putBrick(x, y, type, arena);
             });
+
             // Keep ship between 0 and 180
             if (arena.ship.rotation >= 180) arena.ship.rotation -= 180;
             if (arena.ship.rotation < 0) arena.ship.rotation += 180;
+
             // Center arena on screen
             arena.context.save();
             arena.context.translate(arena.halfSW, arena.halfSH);
+
             // Color thrust depending on Alignment Matrix level
             var thrustColor =
                 arena.ship.boost * 1500 + 40 > 255
                     ? 255
                     : arena.ship.boost * 1500 + 40;
+
             // Thruster trail
             arena.ship.thrustArray.forEach((item, index, object) => {
                 arena.context.beginPath();
-                item.xm += this.ship.xMomentum / 22;
+
+                // Give thrust item it's own momentum
+                // item.xm += this.ship.xMomentum / 22;
                 item.x += item.xm;
-                item.ym += this.ship.yMomentum / 22;
+                // item.ym += this.ship.yMomentum / 22;
                 item.y += item.ym;
+
                 // Slowly disappear over time
                 arena.context.globalAlpha = 1 - item.time;
                 arena.context.arc(
@@ -204,12 +218,14 @@ export default function Arena(
         },
     };
 
-    if (localStorage.getItem(player + "effectsVolume") !== null) {
-        arena.effectsVolume = localStorage.getItem(player + "effectsVolume");
+    if (localStorage.getItem(player.name + "effectsVolume") !== null) {
+        arena.effectsVolume = localStorage.getItem(
+            player.name + "effectsVolume"
+        );
     }
 
-    if (localStorage.getItem(player + "musicVolume") !== null) {
-        arena.musicVolume = localStorage.getItem(player + "musicVolume");
+    if (localStorage.getItem(player.name + "musicVolume") !== null) {
+        arena.musicVolume = localStorage.getItem(player.name + "musicVolume");
     }
 
     for (let i = 0; i < arena.medalTimes.length; i++) {
@@ -218,7 +234,7 @@ export default function Arena(
         }
     }
 
-    arena.ship = new Ship(shipAngle, 20, player, arena);
+    arena.ship = new Ship(shipAngle, 20, player.name, arena);
 
     arena.hud.record(arena);
     arena.hud.session(arena);

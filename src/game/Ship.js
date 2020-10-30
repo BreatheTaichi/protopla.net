@@ -1,10 +1,10 @@
 import userGamepad from "./Gamepad.js";
-function thrust(x, y, xm, ym) {
+function thrust(x, y, arena) {
     var thrust = {
         x: x,
         y: y,
-        xm: 0,
-        ym: 0,
+        xm: arena.ship.xMomentum / 3,
+        ym: arena.ship.yMomentum / 3,
         time: 0,
     };
     return thrust;
@@ -68,7 +68,7 @@ export default function Ship(rotation = 0, radius = 20, player, arena) {
                     ship.y +
                     (ship.radius + 5) *
                         Math.sin((Math.PI * (ship.rotation + rand)) / 90);
-                ship.thrustArray.push(thrust(bx, by));
+                ship.thrustArray.push(thrust(bx, by, arena));
                 rand = Math.random() * 3 + 57;
                 bx =
                     ship.x +
@@ -78,7 +78,7 @@ export default function Ship(rotation = 0, radius = 20, player, arena) {
                     ship.y +
                     (ship.radius + 5) *
                         Math.sin((Math.PI * (ship.rotation + rand)) / 90);
-                ship.thrustArray.push(thrust(bx, by));
+                ship.thrustArray.push(thrust(bx, by, arena));
             }
         },
 

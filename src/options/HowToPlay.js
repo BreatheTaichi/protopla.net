@@ -141,7 +141,10 @@ export default function HowToPlay(props) {
                     <h4>Fuel Balancer</h4>
                     <p>
                         Magnetic array that increases the efficiency of the ship
-                        engines by balancing the particles the Ramfield intakes.
+                        engines by balancing the intake and use of particles
+                        from the Ramfield. As the balancer is upgraded the
+                        purple hue in the ship exhaust will turn to bright green
+                        as the field aligns.
                     </p>
                 </div>
                 <div className="instructions-store-item">
@@ -162,12 +165,9 @@ export default function HowToPlay(props) {
                 </div>
                 <div className="instructions-store-item">
                     <h4>Ship Plating</h4>
-                    {/* // TODO make this next statement true by what..
-                Multiplying the boost by the bounce?
-                If so, it would be good to make the starting bounce harsher */}
                     <p>
-                        Less speed lost when you hit an object, less alignment
-                        lost.
+                        Your ship will bounce off objects more, losing less
+                        speed. Less alignment lost from the Fuel Balancer.
                     </p>
                 </div>
             </div>

@@ -46,7 +46,7 @@ export default function putBrick(x, y, type, arena) {
         bump.play();
         ship.yMomentum *= ship.bounceFriction;
         ship.xMomentum *= ship.bounceFriction;
-        ship.boost = 0;
+        ship.boost *= ship.bounceFriction;
         // Check distance to block
         const xVal = 0 > x ? -x : x;
         const yVal = 0 > y ? -y : y;

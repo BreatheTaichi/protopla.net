@@ -236,10 +236,8 @@ export function finishLineCH(arena) {
     let end = arena.finishImg.len * arena.size - arena.size;
     let yVal = arena.finishImg.y * arena.size + arena.y + arena.halfSize;
 
-    // var hud = new fillHUD(arena);
-
     // Context for arena finishline checkpoint testing.
-    // Open all blocks with context to use this.
+    // Uncomment all blocks with context to use this.
     // arena.context.save();
     // arena.context.translate(start + arena.halfSW, yVal + arena.halfSH);
 

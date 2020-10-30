@@ -10,10 +10,11 @@ import neptune from "./game/images/neptune/neptuneIcon.webp";
 import uranus from "./game/images/uranus/uranusIcon.webp";
 import dateFormat from "./game/dateFormat.js";
 import medalTimes from "./game/MedalTimes.js";
-import setShip from "./game/getPlayer.js";
+import getPlayer from "./game/getPlayer.js";
 import useWindowListener from "./hooks/useWindowListener.js";
 
 export default function Menu(props) {
+    getPlayer(props.state.player.name);
     if (localStorage.getItem(props.state.player.name + "credits") === null) {
         var testCredits;
         props.state.player.difficulty === "Test"
@@ -24,6 +25,10 @@ export default function Menu(props) {
     const [credits] = useState(
         localStorage.getItem(props.state.player.name + "credits")
     );
+    props.state.player.credits = localStorage.getItem(
+        props.state.player.name + "points"
+    );
+
     const [focused, setFocused] = useState("");
     const [lastBodyFocused, setLastBodyFocused] = useState("Sol");
     var coursesRevealed = 0;
@@ -138,10 +143,6 @@ export default function Menu(props) {
         }
     };
     useWindowListener("keydown", handleKeyDown.bind(this, true));
-
-    useEffect(() => {
-        setShip(props.state.player.name);
-    });
 
     // Usually this would be linked to focused state, and not be
     // limited by the , [] but in this case rerendering makes the

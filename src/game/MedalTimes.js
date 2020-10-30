@@ -284,11 +284,23 @@ export default function MedalTimes(difficulty, player) {
 
         tier = parseInt(localStorage.getItem(player + arena.mapName + "tier"));
         if (tier < arena.tier) {
+            var earned = 0;
             for (var k = arena.tier; k > tier; k--) {
-                if (k === 0) arena.credits += 100;
-                arena.credits += k * 100;
+                if (k === 0) earned += 100;
+                earned += k * 100;
             }
+            arena.credits += earned;
+            arena.score += earned;
+            console.log(
+                "earned: " +
+                    earned +
+                    "  arena.credits: " +
+                    arena.credits +
+                    "  arena.score: " +
+                    arena.score
+            );
             localStorage.setItem(player + "credits", arena.credits);
+            localStorage.setItem(player + "score", arena.score);
             localStorage.setItem(player + arena.mapName + "tier", arena.tier);
         }
 
