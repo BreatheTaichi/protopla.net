@@ -1,0 +1,16 @@
+%outline-border {
+    outline: 4px solid rgb(109, 138, 232);
+}
+%outline-border-opacity {
+    outline: 4px solid rgba(109, 138, 232, 0.8);
+}
+
+%dark-background {
+    background-color: rgb(34, 34, 34);
+}
+
+%dark-background-opacity {
+    background-color: rgba(34, 34, 34, 0.6);
+}
+
+$PT-font-stack: "PT Sans", ParaType, sans-serif;

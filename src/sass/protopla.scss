@@ -1,19 +1,4 @@
-%outline-border {
-    outline: 4px solid rgb(109, 138, 232);
-}
-%outline-border-opacity {
-    outline: 4px solid rgba(109, 138, 232, 0.8);
-}
-
-%dark-background {
-    background-color: rgb(34, 34, 34);
-}
-
-%dark-background-opacity {
-    background-color: rgba(34, 34, 34, 0.2);
-}
-
-$PT-font-stack: "PT Sans", ParaType, sans-serif;
+@import "./imports.scss";
 
 a:visited {
     color: rgb(130, 150, 218);
@@ -139,18 +124,20 @@ input {
                 img:first-child {
                     width: 100%;
                     object-fit: cover;
+                    // transform: translateX(10px);
                 }
             }
 
             .icon:focus {
                 width: 200px;
                 height: 200px;
-                transform: translateY(64px);
+                transform: translate(-10px, 64px);
             }
 
             .icon-best-lap {
+                transform: translateX(-8px);
                 color: white;
-                width: 194px;
+                width: 191px;
                 margin-left: 14px;
                 font-size: 1.4em;
                 border-left: 10px ridge rgb(25, 25, 53);
@@ -163,9 +150,10 @@ input {
             }
 
             .icon-text {
+                transform: translateX(-8px);
                 margin-top: 49px;
                 margin-right: auto;
-                width: 194px;
+                width: 190px;
                 margin-left: 14px;
                 font-size: 2.5em;
                 color: white;

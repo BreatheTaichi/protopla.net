@@ -1,8 +1,5 @@
 // TODO
 
-options menu, any screen with save - hit enter on anywhere to save and focus 
-back button
-
 react.lazy and all the other lighthouse stuff
 
 OptionsMenu to turn off thrust, or make a simpler thrust trail and other

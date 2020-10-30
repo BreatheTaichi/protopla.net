@@ -55,8 +55,8 @@ function reducer(state, action) {
         case "Sol":
             arena = new Arena(
                 "Sol",
-                75,
-                75,
+                5,
+                5,
                 -5,
                 -40,
                 40,
@@ -70,8 +70,8 @@ function reducer(state, action) {
         case "Mercury":
             arena = new Arena(
                 "Mercury",
-                75,
-                75,
+                15,
+                15,
                 -75,
                 -85,
                 40,
@@ -84,8 +84,8 @@ function reducer(state, action) {
         case "Venus":
             arena = new Arena(
                 "Venus",
-                75,
-                75,
+                5,
+                5,
                 -9,
                 -85,
                 40,
@@ -98,8 +98,8 @@ function reducer(state, action) {
         case "Earth":
             arena = new Arena(
                 "Earth",
-                99,
-                84,
+                5,
+                5,
                 -51,
                 -25,
                 40,
@@ -112,8 +112,8 @@ function reducer(state, action) {
         case "Mars":
             arena = new Arena(
                 "Mars",
-                99,
-                84,
+                50,
+                135,
                 -55,
                 -226,
                 40,
@@ -126,8 +126,8 @@ function reducer(state, action) {
         case "Jupiter":
             arena = new Arena(
                 "Jupiter",
-                99,
-                84,
+                15,
+                20,
                 -123,
                 -120,
                 40,
@@ -140,8 +140,8 @@ function reducer(state, action) {
         case "Saturn":
             arena = new Arena(
                 "Saturn",
-                99,
-                84,
+                32,
+                80,
                 -125,
                 -146,
                 40,
@@ -154,8 +154,8 @@ function reducer(state, action) {
         case "Uranus":
             arena = new Arena(
                 "Uranus",
-                75,
-                75,
+                50,
+                10,
                 -75,
                 -38,
                 40,
@@ -169,8 +169,8 @@ function reducer(state, action) {
         case "Neptune":
             arena = new Arena(
                 "Neptune",
-                99,
-                84,
+                50,
+                5,
                 -72,
                 -128,
                 40,

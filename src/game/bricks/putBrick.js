@@ -33,7 +33,7 @@ export default function putBrick(x, y, type, arena) {
         arena.context.translate(-x2 + halfBrick, -y2 + halfBrick);
     }
 
-    // Bounding box for bricks
+    // Bounding box for brick
     if (
         y - arena.halfSize - ship.radius < 0 &&
         y + arena.halfSize + ship.radius > 0 &&
