@@ -19,6 +19,7 @@ export default function StartMenu(props) {
     const [difficulty, setDifficulty] = useState("Normal");
     // Controlled component input that creates new player
     const [playerName, setPlayerName] = useState("");
+    const [score, setScore] = useState(0);
     // Shows new player screen, or choose player screen
     const [newPlayer, setNewPlayer] = useState(
         players.length === 0 ? true : false
@@ -110,6 +111,15 @@ export default function StartMenu(props) {
         document.getElementById(focused).focus();
     });
 
+    useEffect(() => {
+        players.forEach((obj) => {
+            if (parseInt(localStorage.getItem(obj.name + "score")) >= 18900) {
+                setScore(true);
+            }
+            console.log("choose " + score + " " + obj.difficulty);
+        });
+    });
+
     const ImgWithFallback = ({ src, fallback, type = "image/webp" }) => {
         return (
             <picture>
@@ -136,7 +146,8 @@ export default function StartMenu(props) {
                                 id={index}
                                 className="player-menu-choose-button"
                                 key={obj.name}
-                                onClick={() => {
+                                onClick={(e) => {
+                                    e.preventDefault();
                                     localStorage.setItem("lastPlayer", index);
                                     props.dispatch({
                                         type: "startGame",
@@ -158,7 +169,8 @@ export default function StartMenu(props) {
                 <button
                     className="player-menu-create-new-player-button"
                     id={players.length}
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.preventDefault();
                         setFocused("0");
                         setNewPlayer(true);
                     }}
@@ -188,27 +200,30 @@ export default function StartMenu(props) {
                 <div className="player-menu-button-grid">
                     <div className="difficulty">
                         {difficultyButtonArray.map((obj) => {
-                            // Class
-                            let selected =
-                                difficulty === obj.difficulty
-                                    ? "selected"
-                                    : "unselected";
-                            return (
-                                <button
-                                    className={selected}
-                                    key={obj.id}
-                                    id={obj.id}
-                                    onClick={(e) =>
-                                        handleDifficultyChange(
-                                            e,
-                                            obj.difficulty,
-                                            obj.id
-                                        )
-                                    }
-                                >
-                                    {obj.difficulty}
-                                </button>
-                            );
+                            console.log(score + " " + obj.difficulty);
+                            if (obj.difficulty !== "Expert" || score) {
+                                // Class
+                                let selected =
+                                    difficulty === obj.difficulty
+                                        ? "selected"
+                                        : "unselected";
+                                return (
+                                    <button
+                                        className={selected}
+                                        key={obj.id}
+                                        id={obj.id}
+                                        onClick={(e) =>
+                                            handleDifficultyChange(
+                                                e,
+                                                obj.difficulty,
+                                                obj.id
+                                            )
+                                        }
+                                    >
+                                        {obj.difficulty}
+                                    </button>
+                                );
+                            } else return <div key={obj.id}></div>;
                         })}
                     </div>
                     <div className="control-group">

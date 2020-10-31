@@ -37,8 +37,6 @@ Please let me know if you find any more!
 
 ## TODOs and upgrades
 
-Unlock Expert difficulty after getting all rubies on Normal.
-
 Ellipse bounding box for celestial bodies that has more realistic bounce.
 
 Load modules with React.lazy
@@ -49,7 +47,7 @@ Performance options:
 
 • Option to turn off background image, possibly make a simple generated background with some stars that would take less processor than moving a huge image.
 
-Gamepad on menus for more seamless experience.
+Gamepad usable on menus for more seamless experience.
 
 Max screen size so player doesn't see past background image if they are on a large screen. Then I could get rid of the background fill and save some processing.
 
