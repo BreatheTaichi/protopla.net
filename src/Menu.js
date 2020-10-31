@@ -10,29 +10,22 @@ import neptune from "./game/images/neptune/neptuneIcon.webp";
 import uranus from "./game/images/uranus/uranusIcon.webp";
 import dateFormat from "./game/dateFormat.js";
 import medalTimes from "./game/MedalTimes.js";
-import getPlayer from "./game/getPlayer.js";
 import useWindowListener from "./hooks/useWindowListener.js";
 
 export default function Menu(props) {
-    getPlayer(props.state.player.name);
-    if (localStorage.getItem(props.state.player.name + "credits") === null) {
-        var testCredits;
-        props.state.player.difficulty === "Test"
-            ? (testCredits = 20000)
-            : (testCredits = 0);
-        localStorage.setItem(props.state.player.name + "credits", testCredits);
-    }
     const [credits] = useState(
         localStorage.getItem(props.state.player.name + "credits")
     );
-    props.state.player.credits = localStorage.getItem(
-        props.state.player.name + "points"
+    const [score] = useState(
+        localStorage.getItem(props.state.player.name + "score")
     );
 
     const [focused, setFocused] = useState("");
     const [lastBodyFocused, setLastBodyFocused] = useState("Sol");
     var coursesRevealed = 0;
-    var beginFocused = "Sol";
+    var beginFocused = localStorage.getItem(
+        props.state.player.name + "levelFocused"
+    );
     var alreadyFocused = false;
     var courses = [
         { name: "Sol", source: sun, class: "sol" },
@@ -97,6 +90,10 @@ export default function Menu(props) {
     const handleIconKeyDown = (event, name) => {
         var courseWrapper = document.getElementById("course-wrapper");
         if (event.key === "Enter" || event.key === " ") {
+            localStorage.setItem(
+                props.state.player.name + "levelFocused",
+                focused
+            );
             props.dispatch({ type: focused });
         }
         if (event.key === "ArrowRight") {
@@ -221,9 +218,7 @@ export default function Menu(props) {
                         // with the left border on the right
                         var centerIcon =
                             window.innerWidth / 2 - 117 - 200 * coursesRevealed;
-                        if (medalIMG.display) {
-                            if (bestLap === null || bestLap === 0)
-                                beginFocused = obj.name;
+                        if (score >= medalIMG.pointsToUnlock) {
                             coursesRevealed++;
                             return (
                                 <div className="icon-wrapper" key={obj.name}>

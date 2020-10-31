@@ -28,11 +28,23 @@ export default function Arena(
     var playerScore = parseInt(localStorage.getItem(player.name + "score"));
 
     var arena = {
-        // players name, credits and difficulty
+        // Stop requestAnimationFrame when false
+        inGame: true,
+        // To stop the beat by time on the first lap
+        onFirstLap: true,
+
+        // Number of images not yet loaded, stop loading screen when this hits 0
+        numberToLoad: 0,
+        loadingMessage: [],
+
         player: player.name,
         difficulty: player.difficulty,
         score: playerScore,
         credits: playerCredits,
+
+        mapName: nameOfMap,
+
+        ship: {},
 
         // Medal rank
         tier: tierReached,
@@ -40,20 +52,10 @@ export default function Arena(
         effectsVolume: 1,
         musicVolume: 1,
 
-        ship: {},
-
-        mapName: nameOfMap,
         // When all three are true the lap is over
         finishLine: false,
         checkLine: false,
         checkPoint: false,
-
-        // Stop requestAnimationFrame when false
-        inGame: true,
-
-        // brick size
-        halfSize: size / 2,
-        size: size,
 
         // graphics
         blocks: [],
@@ -61,30 +63,23 @@ export default function Arena(
         images: [],
         background: new Image(),
         finishImg: {},
-
-        // Number of images not yet loaded, stop loading screen when this hits 0
-        numberToLoad: 0,
-        loadingMessage: [],
-
-        // Arena size and starting point for background
+        // Starting point for background
         width: width * size,
         height: height * size,
-
         // Starting point
         x: startX * size,
         y: startY * size,
-
-        // canvas context
+        // Canvas context
         context: null,
-
+        // Player window
         screenRatio: window.devicePixelRatio || 1,
         screenHeight: window.innerHeight,
         screenWidth: window.innerWidth,
         halfSH: window.innerHeight / 2,
         halfSW: window.innerWidth / 2,
-
-        // To stop the beat by time on the first lap
-        onFirstLap: true,
+        // Brick size
+        halfSize: size / 2,
+        size: size,
 
         // Start session and last lap at 9:59.999, currentLap at 0
         sessionBest: 599999,
@@ -93,21 +88,18 @@ export default function Arena(
 
         recordLapKey: recordLapKey,
         recordLap: parseInt(localStorage.getItem(recordLapKey)),
-
         // Player beat their record time by:
         beatTimeBy: 0,
-
         // Timer for popups when players beats a time
         recordLapTimer: 0,
         sessionBestTimer: 0,
 
+        // Makes canvas images for heads up display
+        hud: new fillHUD(this),
         // Times to beat for each medal rank
         times: [],
         // Images of medals and time repository
         medalTimes: times(player.difficulty, player.name),
-
-        // Makes canvas images for heads up display
-        hud: new fillHUD(this),
 
         draw() {
             // Add time, 1000ms/60s
@@ -158,9 +150,7 @@ export default function Arena(
                 arena.context.beginPath();
 
                 // Give thrust item it's own momentum
-                // item.xm += this.ship.xMomentum / 22;
                 item.x += item.xm;
-                // item.ym += this.ship.yMomentum / 22;
                 item.y += item.ym;
 
                 // Slowly disappear over time
@@ -172,6 +162,7 @@ export default function Arena(
                     0,
                     6.28319
                 );
+                // Thruster gradient and color stops
                 var gradient = arena.context.createRadialGradient(
                     item.x,
                     item.y,
@@ -195,7 +186,7 @@ export default function Arena(
                 arena.context.closePath();
                 arena.context.fill();
             });
-
+            // Draw ship
             arena.context.rotate((arena.ship.rotation * Math.PI * 2) / 180);
             arena.context.drawImage(arena.ship.img, -25, -25);
             arena.context.rotate(-(arena.ship.rotation * Math.PI * 2) / 180);
@@ -234,7 +225,7 @@ export default function Arena(
         }
     }
 
-    arena.ship = new Ship(shipAngle, 20, player.name, arena);
+    arena.ship = new Ship(shipAngle, 20, arena);
 
     arena.hud.record(arena);
     arena.hud.session(arena);

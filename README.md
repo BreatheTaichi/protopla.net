@@ -19,10 +19,11 @@ When a gamepad is connected and player hits escape, the window comes up, but is 
 Course menu doesn't reset on screen resize.
 Webps need fallback in canvas.
 Safari gets stuck on image.onLoad.
+Firefox doesn't open level when it's icon is focused and player clicks again.
 
 Please let me know if you find any more!
 
-## TODOs and possible upgrades
+## TODOs and upgrades
 
 Unlock Expert difficulty after getting all rubies on Normal.
 Ellipse bounding box for celestial bodies that has more realistic bounce.
@@ -35,7 +36,6 @@ Max screen size so player doesn't see past background image if they are on a lar
 Option to turn on names of bodies in race for better learning experience.
 Add random loading messages with different facts about each level.
 Bonus level with Pluto, protoplanets and asteroids. Unlocked after beating a level, or getting a certain amount of points.
-Add point total that is the amount of credits obtained.
 Set of easy levels and set of hard levels.
 New ship / block graphics.
 Type of block for long lines that don't jank when moving fast.

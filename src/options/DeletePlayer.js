@@ -17,6 +17,7 @@ export default function DeletePlayer(props) {
         "frictionTier",
         "Jupiterbestlap",
         "Jupitertier",
+        "levelFocused",
         "Marsbestlap",
         "Marstier",
         "maxBoost",

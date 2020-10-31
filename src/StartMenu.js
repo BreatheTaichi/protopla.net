@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import useWindowListener from "./hooks/useWindowListener.js";
 import menuSun from "./game/images/icons/menuSun2.webp";
 import menuSunJPG from "./game/images/icons/menuSun2.png";
+import getPlayer from "./game/getPlayer.js";
 
 export default function StartMenu(props) {
     // Get last used player for focus, or focus first element if none exists
@@ -203,6 +204,7 @@ export default function StartMenu(props) {
                                 "players",
                                 JSON.stringify(addPlayer)
                             );
+                            getPlayer(name, difficulty);
                             setDifficulty("Normal");
                             setPlayerName("");
                             setNewPlayer(false);
@@ -214,6 +216,7 @@ export default function StartMenu(props) {
                 </button>
                 <div className="player-menu-button-group">
                     {difficultyButtonArray.map((obj) => {
+                        // Class
                         let selected =
                             difficulty === obj.difficulty
                                 ? "selected"

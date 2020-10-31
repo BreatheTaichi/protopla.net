@@ -10,20 +10,18 @@ function thrust(x, y, arena) {
     return thrust;
 }
 
-export default function Ship(rotation = 0, radius = 20, player, arena) {
+export default function Ship(rotation = 0, radius = 20, arena) {
     var rotationSpeed = parseFloat(
-        localStorage.getItem(player + "rotationSpeed")
+        localStorage.getItem(arena.player + "rotationSpeed")
     );
-    var accel = parseFloat(localStorage.getItem(player + "acceleration"));
-    var boost = parseFloat(localStorage.getItem(player + "boost"));
-    var maxBoost = parseFloat(localStorage.getItem(player + "maxBoost"));
-    var friction = parseFloat(localStorage.getItem(player + "friction"));
+    var accel = parseFloat(localStorage.getItem(arena.player + "acceleration"));
+    var boost = parseFloat(localStorage.getItem(arena.player + "boost"));
+    var maxBoost = parseFloat(localStorage.getItem(arena.player + "maxBoost"));
+    var friction = parseFloat(localStorage.getItem(arena.player + "friction"));
     var bounceFriction = parseFloat(
-        localStorage.getItem(player + "bounceFriction")
+        localStorage.getItem(arena.player + "bounceFriction")
     );
     var ship = {
-        x: 0,
-        y: 0,
         xMomentum: 0,
         yMomentum: 0,
         rotation: rotation,
@@ -40,6 +38,9 @@ export default function Ship(rotation = 0, radius = 20, player, arena) {
         img: null,
         userGamepad: userGamepad(),
 
+        // Bool to switch thruster every other run
+        thrusterSwitch: true,
+
         accelerate(dir) {
             let bx, by;
             let addX =
@@ -50,36 +51,27 @@ export default function Ship(rotation = 0, radius = 20, player, arena) {
                 Math.cos((-ship.rotation * 2 * Math.PI) / 180) *
                 (ship.acceleration + ship.boost) *
                 dir;
+            ship.xMomentum -= addX;
+            ship.yMomentum -= addY;
 
             ship.boost < ship.maxBoost
                 ? (ship.boost += 0.0001)
                 : (ship.boost = ship.maxBoost);
 
-            ship.xMomentum -= addX;
-            ship.yMomentum -= addY;
-            var d = new Date();
-            if (d.getMilliseconds() % 2 === 1) {
-                var rand = Math.random() * 3 + 30;
-                bx =
-                    ship.x +
-                    (ship.radius + 5) *
-                        Math.cos((Math.PI * (ship.rotation + rand)) / 90);
-                by =
-                    ship.y +
-                    (ship.radius + 5) *
-                        Math.sin((Math.PI * (ship.rotation + rand)) / 90);
+            if (this.thrusterSwitch) {
+                var rand =
+                    (Math.PI * (ship.rotation + Math.random() * 3 + 30)) / 90;
+                bx = ship.radius * Math.cos(rand);
+                by = ship.radius * Math.sin(rand);
                 ship.thrustArray.push(thrust(bx, by, arena));
-                rand = Math.random() * 3 + 57;
-                bx =
-                    ship.x +
-                    (ship.radius + 5) *
-                        Math.cos((Math.PI * (ship.rotation + rand)) / 90);
-                by =
-                    ship.y +
-                    (ship.radius + 5) *
-                        Math.sin((Math.PI * (ship.rotation + rand)) / 90);
+
+                rand =
+                    (Math.PI * (ship.rotation + Math.random() * 3 + 60)) / 90;
+                bx = ship.radius * Math.cos(rand);
+                by = ship.radius * Math.sin(rand);
                 ship.thrustArray.push(thrust(bx, by, arena));
             }
+            this.thrusterSwitch = !this.thrusterSwitch;
         },
 
         updateShip(key) {
