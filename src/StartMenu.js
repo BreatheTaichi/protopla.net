@@ -173,93 +173,98 @@ export default function StartMenu(props) {
         return (
             <form className="player-menu-input">
                 <label className="player-menu-choose-title no-select">
-                    <em>Create New Player</em>
+                    <em>New Player</em>
+                    <input
+                        onChange={handleNameInput}
+                        className="player-new-input"
+                        id="0"
+                        maxLength="20"
+                        value={playerName}
+                        onClick={() => {
+                            setFocused("0");
+                        }}
+                    ></input>
                 </label>
-                <input
-                    onChange={handleNameInput}
-                    className="player-new-input"
-                    id="0"
-                    maxLength="20"
-                    value={playerName}
-                    onClick={() => {
-                        setFocused("0");
-                    }}
-                ></input>
-                <button
-                    className="player-menu-button"
-                    id="4"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        var duplicate = false;
-                        var name = document.getElementById("0").value;
-                        for (var i = 0; i < players.length; i++) {
-                            if (players[i].name === name) duplicate = true;
-                        }
-                        if (!duplicate && playerName !== "") {
-                            var obj = {};
-                            obj.name = name;
-                            obj.difficulty = difficulty;
-                            var addPlayer = players.concat({
-                                name: name,
-                                difficulty: difficulty,
-                            });
-                            setPlayers(addPlayer);
-                            localStorage.setItem(
-                                "players",
-                                JSON.stringify(addPlayer)
+                <div className="player-menu-button-grid">
+                    <div className="difficulty">
+                        {difficultyButtonArray.map((obj) => {
+                            // Class
+                            let selected =
+                                difficulty === obj.difficulty
+                                    ? "selected"
+                                    : "unselected";
+                            return (
+                                <button
+                                    className={selected}
+                                    key={obj.id}
+                                    id={obj.id}
+                                    onClick={(e) =>
+                                        handleDifficultyChange(
+                                            e,
+                                            obj.difficulty,
+                                            obj.id
+                                        )
+                                    }
+                                >
+                                    {obj.difficulty}
+                                </button>
                             );
-                            getPlayer(name, difficulty);
-                            setDifficulty("Normal");
-                            setPlayerName("");
-                            setNewPlayer(false);
-                            setFocused(players.length);
-                            props.dispatch({
-                                type: "startGame",
-                                value: obj,
-                            });
-                        }
-                    }}
-                >
-                    Create
-                </button>
-                <div className="player-menu-button-group">
-                    {difficultyButtonArray.map((obj) => {
-                        // Class
-                        let selected =
-                            difficulty === obj.difficulty
-                                ? "selected"
-                                : "unselected";
-                        return (
-                            <button
-                                className={"player-menu-difficulty " + selected}
-                                key={obj.id}
-                                id={obj.id}
-                                onClick={(e) =>
-                                    handleDifficultyChange(
-                                        e,
-                                        obj.difficulty,
-                                        obj.id
-                                    )
+                        })}
+                    </div>
+                    <div className="control-group">
+                        <button
+                            className="player-menu-button"
+                            id="4"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                var duplicate = false;
+                                var name = document.getElementById("0").value;
+                                for (var i = 0; i < players.length; i++) {
+                                    if (players[i].name === name)
+                                        duplicate = true;
                                 }
-                            >
-                                {obj.difficulty}
-                            </button>
-                        );
-                    })}
+                                if (!duplicate && playerName !== "") {
+                                    var obj = {};
+                                    obj.name = name;
+                                    obj.difficulty = difficulty;
+                                    var addPlayer = players.concat({
+                                        name: name,
+                                        difficulty: difficulty,
+                                    });
+                                    setPlayers(addPlayer);
+                                    localStorage.setItem(
+                                        "players",
+                                        JSON.stringify(addPlayer)
+                                    );
+                                    getPlayer(name, difficulty);
+                                    setDifficulty("Normal");
+                                    setPlayerName("");
+                                    setNewPlayer(false);
+                                    setFocused(players.length);
+                                    props.dispatch({
+                                        type: "startGame",
+                                        value: obj,
+                                    });
+                                }
+                            }}
+                        >
+                            Create
+                        </button>
+                        <button
+                            className="player-menu-button"
+                            id="5"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setNewPlayer(false);
+                                setDifficulty("Normal");
+                                setPlayerName("");
+                                setFocused("0");
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
-                <button
-                    className="player-menu-button"
-                    id="5"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setNewPlayer(false);
-                        setDifficulty("Normal");
-                        setPlayerName("");
-                        setFocused("0");
-                    }}
-                >
-                    Cancel
-                </button>
             </form>
         );
     };
