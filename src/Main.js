@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import useWindowListener from "./hooks/useWindowListener.js";
+import React, { useReducer, useEffect } from "react";
+// import useWindowListener from "./hooks/useWindowListener.js";
 import Menu from "./Menu.js";
 import Engine from "./game/Engine.js";
 import jupiter from "./game/Levels/jupiter.js";
@@ -101,7 +101,6 @@ function reducer(state, action) {
             return { ...state, page: "loading" };
         case "Uranus":
             arena = new Arena("Uranus", 20, 0, -75, -38, 40, 0, state.player);
-            // state.numberToLoad = 3;
             uranus(arena);
             return { ...state, page: "loading" };
         case "Neptune":
@@ -116,21 +115,33 @@ function reducer(state, action) {
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    useWindowListener("gamepadconnected", function () {
-        dispatch({ type: "gamepadToast" });
-        setInterval(() => {
-            dispatch({ type: "gamepadToastOff" });
-        }, 3400);
-        dispatch({ type: "gamepadConnected" });
-    });
+    const gpConnected = () =>
+        window.addEventListener("gamepadconnected", function (e) {
+            dispatch({ type: "gamepadToast" });
+            setInterval(() => {
+                dispatch({ type: "gamepadToastOff" });
+            }, 3400);
+            dispatch({ type: "gamepadConnected" });
+        });
 
-    useWindowListener("gamepaddisconnected", function () {
-        dispatch({ type: "gamepadToast" });
-        setInterval(() => {
-            dispatch({ type: "gamepadToastOff" });
-        }, 3400);
-        dispatch({ type: "gamepadDisconnected" });
-    });
+    useEffect(() => {
+        gpConnected();
+        return gpConnected();
+    }, []);
+
+    const gpDisconnected = () =>
+        window.addEventListener("gamepaddisconnected", function (e) {
+            dispatch({ type: "gamepadToast" });
+            setInterval(() => {
+                dispatch({ type: "gamepadToastOff" });
+            }, 3400);
+            dispatch({ type: "gamepadDisconnected" });
+        });
+
+    useEffect(() => {
+        gpDisconnected();
+        return gpDisconnected();
+    }, []);
 
     const chooseContent = () => {
         switch (state.page) {

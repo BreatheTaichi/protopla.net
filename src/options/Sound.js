@@ -72,6 +72,7 @@ export default function Sound(props) {
                         type="text"
                         min="0"
                         max="100"
+                        autoComplete="off"
                         name="effectsVolume"
                         value={effectsVolume}
                         onChange={(e) => handleNumberInput(e, setEffectsVolume)}
@@ -85,6 +86,7 @@ export default function Sound(props) {
                         type="text"
                         min="0"
                         max="100"
+                        autoComplete="off"
                         name="musicVolume"
                         value={musicVolume}
                         onChange={(e) => handleNumberInput(e, setMusicVolume)}

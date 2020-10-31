@@ -122,6 +122,7 @@ export default function StartMenu(props) {
     const playerList = () => {
         return (
             <ul className="player-menu-choose">
+                Select a player to start.
                 <span className="player-menu-title-name">Name</span>
                 <span className="player-menu-title-difficulty">Difficulty</span>
                 {Object.entries(players).length === 0 ? (
@@ -195,6 +196,9 @@ export default function StartMenu(props) {
                             if (players[i].name === name) duplicate = true;
                         }
                         if (!duplicate && playerName !== "") {
+                            var obj = {};
+                            obj.name = name;
+                            obj.difficulty = difficulty;
                             var addPlayer = players.concat({
                                 name: name,
                                 difficulty: difficulty,
@@ -209,6 +213,10 @@ export default function StartMenu(props) {
                             setPlayerName("");
                             setNewPlayer(false);
                             setFocused(players.length);
+                            props.dispatch({
+                                type: "startGame",
+                                value: obj,
+                            });
                         }
                     }}
                 >
