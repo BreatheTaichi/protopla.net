@@ -20,10 +20,11 @@ Dirt 3
 
 ## Known Issues
 
+Background in instructions shrinks too far on small screen.
+
 Gamepad must be activated on the course screen or it won't work.
 
-When a gamepad is connected and player hits escape, the window comes up, but is invisible. Probably has to do with the way I disallowed simultaneus keyboard and gamepad use so that the player can't double movements. Maybe a fix would be to check for the movement and add the change in after instead of changing in either.
-Just saw that the timer is still firing when in game, should shut it off as I enter. Also game engine still runs..???
+When a gamepad is connected and player hits escape, the sound plays but the game engine still runs. Menu should show and
 
 Course menu doesn't reset on screen resize.
 
@@ -64,7 +65,5 @@ New ship / block graphics.
 Type of block for long lines that don't jank when moving fast.
 
 Create shape.js function for line of blocks that isn't straight.
-
-Add player name to some screens.
 
 Rotate screen around central axis so ship stays facing up... without it being a nauseating experience. Rotation is easy, but haven't found out how to do it in a good way that doesn't turn the stomach. May not be necessary, play test showed that people get used to it pretty quickly, and static screen _seems_ to be a better experience for viewing the graphics.

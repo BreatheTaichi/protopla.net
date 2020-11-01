@@ -174,7 +174,7 @@ export default function Menu(props) {
                     }
                     onKeyDown={(e) => handleStore(e)}
                 >
-                    Credits: {credits}
+                    {props.state.player.name}: {credits} credits
                 </button>
                 <button
                     id="quit-id"

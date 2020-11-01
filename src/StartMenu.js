@@ -19,13 +19,42 @@ export default function StartMenu(props) {
     const [difficulty, setDifficulty] = useState("Normal");
     // Controlled component input that creates new player
     const [playerName, setPlayerName] = useState("");
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(false);
     // Shows new player screen, or choose player screen
     const [newPlayer, setNewPlayer] = useState(
         players.length === 0 ? true : false
     );
     // Focused item.  Shows
     const [focused, setFocused] = useState(newPlayer ? "0" : lastPlayer);
+
+    const createPlayer = (e) => {
+        e.preventDefault();
+        var duplicate = false;
+        var name = document.getElementById("0").value;
+        for (var i = 0; i < players.length; i++) {
+            if (players[i].name === name) duplicate = true;
+        }
+        if (!duplicate && playerName !== "") {
+            var obj = {};
+            obj.name = name;
+            obj.difficulty = difficulty;
+            var addPlayer = players.concat({
+                name: name,
+                difficulty: difficulty,
+            });
+            setPlayers(addPlayer);
+            localStorage.setItem("players", JSON.stringify(addPlayer));
+            getPlayer(name, difficulty);
+            setDifficulty("Normal");
+            setPlayerName("");
+            setNewPlayer(false);
+            setFocused(players.length);
+            props.dispatch({
+                type: "startGame",
+                value: obj,
+            });
+        }
+    };
 
     const regex = /^[0-9a-zA-Z]+$/;
     const handleNameInput = (e) => {
@@ -39,7 +68,6 @@ export default function StartMenu(props) {
         e.preventDefault();
         setDifficulty(difficulty);
         setFocused(id);
-        // document.getElementById(difficulty).classList.add("unselected");
     };
 
     var difficultyButtonArray = [
@@ -57,29 +85,33 @@ export default function StartMenu(props) {
         },
     ];
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (e) => {
         var itemToFocus;
-        if (event.key === "Escape") {
+        if (e.key === "Enter" && focused === "0") createPlayer(e);
+        if (e.key === "Escape") {
             setFocused("0");
             setNewPlayer(() => !newPlayer);
         }
 
-        if (event.key === "ArrowRight" && parseInt(focused) < 4 && newPlayer) {
+        if (e.key === "ArrowRight" && parseInt(focused) < 4 && newPlayer) {
             setFocused("4");
-        } else if (event.key === "ArrowRight" && newPlayer) setFocused("0");
+        } else if (e.key === "ArrowRight" && newPlayer) setFocused("0");
 
-        if (event.key === "ArrowLeft" && parseInt(focused) > 3 && newPlayer) {
+        if (e.key === "ArrowLeft" && parseInt(focused) > 3 && newPlayer) {
             setFocused("0");
-        } else if (event.key === "ArrowLeft" && newPlayer) setFocused("4");
+        } else if (e.key === "ArrowLeft" && newPlayer) setFocused("4");
 
-        if (event.key === "ArrowUp") {
+        if (e.key === "ArrowUp") {
             // Check if new player menu or choose player menu
             // If start of focus list go to end, otherwise go up one
             if (newPlayer) {
-                itemToFocus =
-                    parseInt(focused) > 0
-                        ? (itemToFocus = parseInt(focused) - 1)
-                        : (itemToFocus = 5);
+                if (!score && focused === 3) {
+                    itemToFocus = 1;
+                } else
+                    itemToFocus =
+                        parseInt(focused) > 0
+                            ? (itemToFocus = parseInt(focused) - 1)
+                            : (itemToFocus = 5);
             } else {
                 itemToFocus =
                     parseInt(focused) > 0
@@ -88,14 +120,17 @@ export default function StartMenu(props) {
             }
             setFocused(itemToFocus);
         }
-        if (event.key === "ArrowDown") {
+        if (e.key === "ArrowDown") {
             // Check if new player menu or choose player menu
             // If end of focus list go to start, otherwise go down one
             if (newPlayer) {
-                itemToFocus =
-                    parseInt(focused) < 5
-                        ? (itemToFocus = parseInt(focused) + 1)
-                        : (itemToFocus = 0);
+                if (!score && focused === 1) {
+                    itemToFocus = 3;
+                } else
+                    itemToFocus =
+                        parseInt(focused) < 5
+                            ? (itemToFocus = parseInt(focused) + 1)
+                            : (itemToFocus = 0);
             } else {
                 itemToFocus =
                     parseInt(focused) < players.length
@@ -116,7 +151,6 @@ export default function StartMenu(props) {
             if (parseInt(localStorage.getItem(obj.name + "score")) >= 18900) {
                 setScore(true);
             }
-            console.log("choose " + score + " " + obj.difficulty);
         });
     });
 
@@ -167,7 +201,7 @@ export default function StartMenu(props) {
                     })
                 )}
                 <button
-                    className="player-menu-create-new-player-button"
+                    className="create"
                     id={players.length}
                     onClick={(e) => {
                         e.preventDefault();
@@ -183,103 +217,76 @@ export default function StartMenu(props) {
 
     const newPlayerForm = () => {
         return (
-            <form className="player-menu-input">
+            <form
+                className="player-menu-input"
+                onSubmit={(e) => createPlayer(e)}
+            >
                 <label className="player-menu-choose-title no-select">
                     <em>New Player</em>
                     <input
-                        onChange={handleNameInput}
                         className="player-new-input"
                         id="0"
+                        tabIndex="1"
                         maxLength="20"
                         value={playerName}
+                        onChange={handleNameInput}
                         onClick={() => {
                             setFocused("0");
                         }}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                e.preventDefault();
+                                // e.stopPropagation();
+                                createPlayer(e);
+                            }
+                        }}
                     ></input>
                 </label>
-                <div className="player-menu-button-grid">
-                    <div className="difficulty">
-                        {difficultyButtonArray.map((obj) => {
-                            console.log(score + " " + obj.difficulty);
-                            if (obj.difficulty !== "Expert" || score) {
-                                // Class
-                                let selected =
-                                    difficulty === obj.difficulty
-                                        ? "selected"
-                                        : "unselected";
-                                return (
-                                    <button
-                                        className={selected}
-                                        key={obj.id}
-                                        id={obj.id}
-                                        onClick={(e) =>
-                                            handleDifficultyChange(
-                                                e,
-                                                obj.difficulty,
-                                                obj.id
-                                            )
-                                        }
-                                    >
-                                        {obj.difficulty}
-                                    </button>
-                                );
-                            } else return <div key={obj.id}></div>;
-                        })}
-                    </div>
-                    <div className="control-group">
-                        <button
-                            className="player-menu-button"
-                            id="4"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                var duplicate = false;
-                                var name = document.getElementById("0").value;
-                                for (var i = 0; i < players.length; i++) {
-                                    if (players[i].name === name)
-                                        duplicate = true;
+                {difficultyButtonArray.map((obj) => {
+                    if (obj.difficulty !== "Expert" || score) {
+                        // Class
+                        let selected =
+                            difficulty === obj.difficulty
+                                ? "selected"
+                                : "unselected";
+                        return (
+                            <button
+                                className={selected + " " + obj.difficulty}
+                                key={obj.id}
+                                id={obj.id}
+                                onClick={(e) =>
+                                    handleDifficultyChange(
+                                        e,
+                                        obj.difficulty,
+                                        obj.id
+                                    )
                                 }
-                                if (!duplicate && playerName !== "") {
-                                    var obj = {};
-                                    obj.name = name;
-                                    obj.difficulty = difficulty;
-                                    var addPlayer = players.concat({
-                                        name: name,
-                                        difficulty: difficulty,
-                                    });
-                                    setPlayers(addPlayer);
-                                    localStorage.setItem(
-                                        "players",
-                                        JSON.stringify(addPlayer)
-                                    );
-                                    getPlayer(name, difficulty);
-                                    setDifficulty("Normal");
-                                    setPlayerName("");
-                                    setNewPlayer(false);
-                                    setFocused(players.length);
-                                    props.dispatch({
-                                        type: "startGame",
-                                        value: obj,
-                                    });
-                                }
-                            }}
-                        >
-                            Create
-                        </button>
-                        <button
-                            className="player-menu-button"
-                            id="5"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setNewPlayer(false);
-                                setDifficulty("Normal");
-                                setPlayerName("");
-                                setFocused("0");
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
+                            >
+                                {obj.difficulty}
+                            </button>
+                        );
+                    } else return <div key={obj.id}></div>;
+                })}
+                <input
+                    id="4"
+                    type="submit"
+                    value="Create"
+                    tabIndex="2"
+                    className="player-menu-button create"
+                ></input>
+                <button
+                    className="player-menu-button cancel"
+                    id="5"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setNewPlayer(false);
+                        setDifficulty("Normal");
+                        setPlayerName("");
+                        setFocused("0");
+                    }}
+                >
+                    Cancel
+                </button>
             </form>
         );
     };
