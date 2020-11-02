@@ -19,19 +19,14 @@ export default function mercury(arena) {
 
     var mercury = loadImageToCanvas(2040, 2040, mercuryPNG, arena);
     var mercuryBW = loadImageToCanvas(1640, 1640, mercuryBWPNG, arena);
-    if (arena.showBackground) {
-        var background = loadImageToCanvas(3730, 4000, backgroundPic, arena);
-        arena.background = background;
-    }
+    var background = loadImageToCanvas(3730, 4000, backgroundPic, arena);
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
-    if (arena.showArrows) {
-        var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
-        arena.images.push({ img: arrow, xStart: 56, yStart: 37 });
-        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 105);
-        arena.images.push({ img: arrow2, xStart: 20, yStart: 50 });
-        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-        arena.images.push({ img: arrow3, xStart: 40, yStart: 111 });
-    }
+    var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
+    arena.images.push({ img: arrow, xStart: 56, yStart: 37 });
+    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 105);
+    arena.images.push({ img: arrow2, xStart: 20, yStart: 50 });
+    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
+    arena.images.push({ img: arrow3, xStart: 40, yStart: 111 });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -59,9 +54,7 @@ export default function mercury(arena) {
         },
     ];
     arena.ship.img = alienShip;
-    if (arena.showBackground) {
-        arena.background = background;
-    }
+    arena.background = background;
     arena.images.push({ img: mercury, xStart: 17, yStart: 55 });
     arena.images.push({ img: mercuryBW, xStart: 22, yStart: 0.5 });
 

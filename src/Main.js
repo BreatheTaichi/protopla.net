@@ -35,6 +35,8 @@ function reducer(state, action) {
             return { ...state, page: "engine" };
         case "startGame":
             return { ...state, page: "menu", player: action.value };
+        case "saveOptions":
+            return { ...state, player: action.value };
         case "optionsMenu":
             return {
                 ...state,

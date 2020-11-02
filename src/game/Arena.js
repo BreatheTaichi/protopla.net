@@ -39,6 +39,11 @@ export default function Arena(
 
         player: player.name,
         difficulty: player.difficulty,
+        showArrows: player.arrows,
+        showBackground: player.background,
+        showThrustTrail: player.thrustTrail,
+        effectsVolume: player.effectsVolume,
+        musicVolume: player.musicVolume,
         score: playerScore,
         credits: playerCredits,
 
@@ -48,9 +53,6 @@ export default function Arena(
 
         // Medal rank
         tier: tierReached,
-
-        effectsVolume: 1,
-        musicVolume: 1,
 
         // When all three are true the lap is over
         finishLine: false,
@@ -114,7 +116,7 @@ export default function Arena(
             var y1 = (arena.y + arena.height) / 3.5;
 
             // Fill background, then add background image
-            arena.context.fillStyle = "rgb(34, 34, 34)";
+            arena.context.fillStyle = "rgb(20, 21, 20)";
             arena.context.fillRect(0, 0, arena.screenWidth, arena.screenHeight);
             arena.context.drawImage(arena.background, x1, y1);
 
@@ -139,53 +141,58 @@ export default function Arena(
             arena.context.save();
             arena.context.translate(arena.halfSW, arena.halfSH);
 
-            // Color thrust depending on Alignment Matrix level
-            var thrustColor =
-                arena.ship.boost * 1500 + 40 > 255
-                    ? 255
-                    : arena.ship.boost * 1500 + 40;
+            if (arena.showThrustTrail) {
+                // Color thrust depending on Alignment Matrix level
+                var thrustColor =
+                    arena.ship.boost * 1500 + 40 > 255
+                        ? 255
+                        : arena.ship.boost * 1500 + 40;
 
-            // Thruster trail
-            arena.ship.thrustArray.forEach((item, index, object) => {
-                arena.context.beginPath();
+                // Thruster trail
+                arena.ship.thrustArray.forEach((item, index, object) => {
+                    arena.context.beginPath();
 
-                // Give thrust item it's own momentum
-                item.x += item.xm;
-                item.y += item.ym;
+                    // Give thrust item it's own momentum
+                    item.x += item.xm;
+                    item.y += item.ym;
 
-                // Slowly disappear over time
-                arena.context.globalAlpha = 1 - item.time;
-                arena.context.arc(
-                    item.x,
-                    item.y,
-                    10 + 10 * item.time,
-                    0,
-                    6.28319
-                );
-                // Thruster gradient and color stops
-                var gradient = arena.context.createRadialGradient(
-                    item.x,
-                    item.y,
-                    5,
-                    item.x,
-                    item.y,
-                    15 + 10 * item.time
-                );
-                gradient.addColorStop(0, `rgba(100, ${thrustColor}, 130, .4`);
-                gradient.addColorStop(
-                    0.7,
-                    `rgba(150, 200, ${thrustColor}, .05`
-                );
-                arena.context.fillStyle = gradient;
-                arena.context.globalAlpha = 1;
-                // Remove thruster item from array after a time
-                item.time += 0.05;
-                if (item.time > 1) {
-                    object.splice(index, 1);
-                }
-                arena.context.closePath();
-                arena.context.fill();
-            });
+                    // Slowly disappear over time
+                    arena.context.globalAlpha = 1 - item.time;
+                    arena.context.arc(
+                        item.x,
+                        item.y,
+                        10 + 10 * item.time,
+                        0,
+                        6.28319
+                    );
+                    // Thruster gradient and color stops
+                    var gradient = arena.context.createRadialGradient(
+                        item.x,
+                        item.y,
+                        5,
+                        item.x,
+                        item.y,
+                        15 + 10 * item.time
+                    );
+                    gradient.addColorStop(
+                        0,
+                        `rgba(100, ${thrustColor}, 130, .4`
+                    );
+                    gradient.addColorStop(
+                        0.7,
+                        `rgba(150, 200, ${thrustColor}, .05`
+                    );
+                    arena.context.fillStyle = gradient;
+                    arena.context.globalAlpha = 1;
+                    // Remove thruster item from array after a time
+                    item.time += 0.05;
+                    if (item.time > 1) {
+                        object.splice(index, 1);
+                    }
+                    arena.context.closePath();
+                    arena.context.fill();
+                });
+            }
             // Draw ship
             arena.context.rotate((arena.ship.rotation * Math.PI * 2) / 180);
             arena.context.drawImage(arena.ship.img, -25, -25);
@@ -208,16 +215,6 @@ export default function Arena(
             arena.hud.popups(arena);
         },
     };
-
-    if (localStorage.getItem(player.name + "effectsVolume") !== null) {
-        arena.effectsVolume = localStorage.getItem(
-            player.name + "effectsVolume"
-        );
-    }
-
-    if (localStorage.getItem(player.name + "musicVolume") !== null) {
-        arena.musicVolume = localStorage.getItem(player.name + "musicVolume");
-    }
 
     for (let i = 0; i < arena.medalTimes.length; i++) {
         if (arena.medalTimes[i].name === arena.mapName) {

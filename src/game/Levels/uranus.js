@@ -21,24 +21,28 @@ export default function Sun(arena) {
         yStart: arena.finishImg.y,
     });
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
+    arena.ship.img = ship;
     var uranus = loadImageToCanvas(2600, 2600, uranusPNG, arena);
     var titania = loadImageToCanvas(489, 489, titaniaPNG, arena);
     var ariel = loadImageToCanvas(359, 359, arielPNG, arena);
     var oberon = loadImageToCanvas(473, 473, oberonPNG, arena);
     var umbriel = loadImageToCanvas(363, 363, umbrielPNG, arena);
     var puck = loadImageToCanvas(50, 50, puckPNG, arena);
-    var background = loadImageToCanvas(3568, 2785, backgroundPic, arena);
-    var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, -60);
-    arena.images.push({ img: arrow, xStart: 77, yStart: 30 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 95);
-    arena.images.push({ img: arrow2, xStart: 85, yStart: 51 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 170);
-    arena.images.push({ img: arrow3, xStart: 80, yStart: 72 });
-    var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, -30);
-    arena.images.push({ img: arrow4, xStart: 29, yStart: 78 });
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(3568, 2785, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, -60);
+        arena.images.push({ img: arrow, xStart: 77, yStart: 30 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 95);
+        arena.images.push({ img: arrow2, xStart: 85, yStart: 51 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 170);
+        arena.images.push({ img: arrow3, xStart: 80, yStart: 72 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, -30);
+        arena.images.push({ img: arrow4, xStart: 29, yStart: 78 });
+    }
 
-    arena.ship.img = ship;
-    arena.background = background;
     arena.images.push({ img: uranus, xStart: 5, yStart: 5 });
     arc(37, 37, -15, 98, 31.8, "invisible", arena);
     arena.images.push({ img: titania, xStart: 80, yStart: 28 });

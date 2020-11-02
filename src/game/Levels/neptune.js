@@ -22,10 +22,23 @@ export default function mercury(arena) {
     var triton = loadImageToCanvas(712, 712, tritonPNG, arena);
     var proteus = loadImageToCanvas(557, 627, proteusPNG, arena);
     var larissa = loadImageToCanvas(165, 143, larissaPNG, arena);
-    var background = loadImageToCanvas(3500, 4000, backgroundPic, arena);
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(3500, 4000, backgroundPic, arena);
+        arena.background = background;
+    }
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
-    // var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
-    // arena.images.push({ img: arrow0, xStart: 119, yStart: 112 });
+    arena.ship.img = alienShip;
+    arena.images.push({ img: neptune, xStart: 35, yStart: 50 });
+    circle(55, 70, 18.8, "invisible", arena);
+    arena.images.push({ img: triton, xStart: 50, yStart: 115 });
+    circle(58.8, 123.8, 7.8, "invisible", arena);
+    arena.images.push({ img: proteus, xStart: 26.7, yStart: 109 });
+    arena.images.push({ img: larissa, xStart: 70, yStart: 93 });
+
+    if (arena.showArrows) {
+        // var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
+        // arena.images.push({ img: arrow0, xStart: 119, yStart: 112 });
+    }
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -53,14 +66,6 @@ export default function mercury(arena) {
                 "https://www.nasa.gov/feature/goddard/2018/lagoon-nebula-visible-light-view",
         },
     ];
-    arena.ship.img = alienShip;
-    arena.background = background;
-    arena.images.push({ img: neptune, xStart: 35, yStart: 50 });
-    circle(55, 70, 18.8, "invisible", arena);
-    arena.images.push({ img: triton, xStart: 50, yStart: 115 });
-    circle(58.8, 123.8, 7.8, "invisible", arena);
-    arena.images.push({ img: proteus, xStart: 26.7, yStart: 109 });
-    arena.images.push({ img: larissa, xStart: 70, yStart: 93 });
 
     // first ring outside of neptune
     arc(55, 70, 122, 440, 27, "metal", arena);

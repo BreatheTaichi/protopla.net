@@ -18,13 +18,18 @@ export default function Sun(arena) {
 
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
     var sun = loadImageToCanvas(2600, 2600, sunPNG, arena);
-    var background = loadImageToCanvas(3945, 2630, backgroundPic, arena);
     var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 90);
 
-    arena.ship.img = ship;
-    arena.background = background;
-    arena.images.push({ img: arrow, xStart: 67, yStart: 36 });
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(3945, 2630, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        arena.images.push({ img: arrow, xStart: 67, yStart: 36 });
+    }
+
     arena.images.push({ img: sun, xStart: 4.8, yStart: 5 });
+    arena.ship.img = ship;
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../sass/options.css";
 import GamepadForm from "./GamepadControls.js";
 import DeletePlayer from "./DeletePlayer.js";
-import Sound from "./Sound.js";
+import GameOptions from "./GameOptions.js";
 import Store from "./Store.js";
 import HowToPlay from "./HowToPlay.js";
 import Credits from "./Credits.js";
@@ -39,11 +39,11 @@ export default function OptionsMenu(props) {
                         case "options-menu-store":
                             setCurrentButton("options-menu-how-to");
                             break;
-                        case "options-menu-sound":
+                        case "options-menu-game-options":
                             setCurrentButton("options-menu-store");
                             break;
                         case "options-menu-delete":
-                            setCurrentButton("options-menu-sound");
+                            setCurrentButton("options-menu-game-options");
                             break;
                         case "options-menu-gamepad":
                             setCurrentButton("options-menu-delete");
@@ -74,9 +74,9 @@ export default function OptionsMenu(props) {
                             setCurrentButton("options-menu-store");
                             break;
                         case "options-menu-store":
-                            setCurrentButton("options-menu-sound");
+                            setCurrentButton("options-menu-game-options");
                             break;
-                        case "options-menu-sound":
+                        case "options-menu-game-options":
                             setCurrentButton("options-menu-delete");
                             break;
                         case "options-menu-delete":
@@ -131,9 +131,9 @@ export default function OptionsMenu(props) {
             text: "Store",
         },
         {
-            id: "options-menu-sound",
-            click: "Sound",
-            text: "Sound",
+            id: "options-menu-game-options",
+            click: "GameOptions",
+            text: "Game Options",
         },
         {
             id: "options-menu-delete",
@@ -164,11 +164,12 @@ export default function OptionsMenu(props) {
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />
                 );
-            case "Sound":
+            case "GameOptions":
                 return (
-                    <Sound
+                    <GameOptions
                         state={props.state}
                         setOnMenu={setOnMenu}
+                        dispatch={props.dispatch}
                         setCurrentButton={setCurrentButton}
                         setSubmenuNumberOfItems={setSubmenuNumberOfItems}
                     />

@@ -19,21 +19,41 @@ export default function earth(arena) {
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var luna = loadImageToCanvas(1520, 1520, lunaPNG, arena);
     var earth = loadImageToCanvas(1800, 1800, earthPNG, arena);
-    var background = loadImageToCanvas(4508, 3430, backgroundPic, arena);
-    var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
-    arena.images.push({ img: arrow0, xStart: 86, yStart: 10 });
-    var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, -15);
-    arena.images.push({ img: arrow1, xStart: 56, yStart: 9 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 90);
-    arena.images.push({ img: arrow2, xStart: 59, yStart: 57 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 195);
-    arena.images.push({ img: arrow3, xStart: 53, yStart: 75 });
-    var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 225);
-    arena.images.push({ img: arrow4, xStart: 10, yStart: 74 });
-    var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-    arena.images.push({ img: arrow5, xStart: 12, yStart: 50 });
-    var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 290);
-    arena.images.push({ img: arrow6, xStart: 40, yStart: 43 });
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(4508, 3430, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
+        arena.images.push({ img: arrow0, xStart: 86, yStart: 10 });
+        var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, -15);
+        arena.images.push({ img: arrow1, xStart: 56, yStart: 9 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 90);
+        arena.images.push({ img: arrow2, xStart: 59, yStart: 57 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 195);
+        arena.images.push({ img: arrow3, xStart: 53, yStart: 75 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 225);
+        arena.images.push({ img: arrow4, xStart: 10, yStart: 74 });
+        var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
+        arena.images.push({ img: arrow5, xStart: 12, yStart: 50 });
+        var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 290);
+        arena.images.push({ img: arrow6, xStart: 40, yStart: 43 });
+    }
+    arena.ship.img = alienShip;
+    arena.images.push({
+        img: earth,
+        xStart: 1,
+        yStart: 1,
+        width: earth.width,
+        height: earth.height,
+    });
+    arena.images.push({
+        img: luna,
+        xStart: 52.9,
+        yStart: 11,
+        width: luna.width,
+        height: luna.height,
+    });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -60,22 +80,6 @@ export default function earth(arena) {
             link: "https://apod.nasa.gov/apod/ap181107.html",
         },
     ];
-    arena.ship.img = alienShip;
-    arena.background = background;
-    arena.images.push({
-        img: earth,
-        xStart: 1,
-        yStart: 1,
-        width: earth.width,
-        height: earth.height,
-    });
-    arena.images.push({
-        img: luna,
-        xStart: 52.9,
-        yStart: 11,
-        width: luna.width,
-        height: luna.height,
-    });
 
     // Outer Box
     var lunaBlocks = [

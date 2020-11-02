@@ -5,6 +5,8 @@ export default function DeletePlayer(props) {
     var storageArray = [
         "acceleration",
         "accelerationTier",
+        "arrows",
+        "background",
         "boost",
         "boostTier",
         "bounceFriction",
@@ -34,6 +36,7 @@ export default function DeletePlayer(props) {
         "score",
         "Solbestlap",
         "Soltier",
+        "thrustTrail",
         "Uranusbestlap",
         "Uranustier",
         "Venusbestlap",

@@ -24,9 +24,10 @@ export default function StartMenu(props) {
     const [newPlayer, setNewPlayer] = useState(
         players.length === 0 ? true : false
     );
-    // Focused item.  Shows
+    // Focused item
     const [focused, setFocused] = useState(newPlayer ? "0" : lastPlayer);
 
+    // Make new player and start game
     const createPlayer = (e) => {
         e.preventDefault();
         var duplicate = false;
@@ -35,23 +36,26 @@ export default function StartMenu(props) {
             if (players[i].name === name) duplicate = true;
         }
         if (!duplicate && playerName !== "") {
-            var obj = {};
-            obj.name = name;
-            obj.difficulty = difficulty;
+            var player = {};
+
+            player.name = name;
+            player.difficulty = difficulty;
+            player.arrows = true;
+            player.thrustTrail = true;
+            player.background = true;
+            player.effectsVolume = 1;
+            player.musicVolume = 1;
+            // Set default storage values
+            getPlayer(name, difficulty);
             var addPlayer = players.concat({
                 name: name,
                 difficulty: difficulty,
             });
             setPlayers(addPlayer);
             localStorage.setItem("players", JSON.stringify(addPlayer));
-            getPlayer(name, difficulty);
-            setDifficulty("Normal");
-            setPlayerName("");
-            setNewPlayer(false);
-            setFocused(players.length);
             props.dispatch({
                 type: "startGame",
-                value: obj,
+                value: player,
             });
         }
     };
@@ -175,6 +179,21 @@ export default function StartMenu(props) {
                     </div>
                 ) : (
                     players.map((obj, index) => {
+                        obj.thrustTrail =
+                            localStorage.getItem(obj.name + "thrustTrail") ===
+                            "true";
+                        obj.arrows =
+                            localStorage.getItem(obj.name + "arrows") ===
+                            "true";
+                        obj.background =
+                            localStorage.getItem(obj.name + "background") ===
+                            "true";
+                        obj.musicVolume = localStorage.getItem(
+                            obj.name + "musicVolume"
+                        );
+                        obj.effectsVolume = localStorage.getItem(
+                            obj.name + "effectsVolume"
+                        );
                         return (
                             <button
                                 id={index}

@@ -25,20 +25,37 @@ export default function mars(arena) {
     });
 
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
+
+    arena.ship.img = alienShip;
     var deimos = loadImageToCanvas(1030, 1030, deimosPNG, arena);
     var phobos = loadImageToCanvas(1400, 1400, phobosPNG, arena);
     var mars = loadImageToCanvas(2200, 2200, marsPNG, arena);
-    var background = loadImageToCanvas(4500, 4500, backgroundPic, arena);
-    var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 35);
-    arena.images.push({ img: arrow0, xStart: 81, yStart: 206 });
-    var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
-    arena.images.push({ img: arrow1, xStart: 125, yStart: 248 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
-    arena.images.push({ img: arrow2, xStart: 106, yStart: 234 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 270);
-    arena.images.push({ img: arrow3, xStart: 20, yStart: 283 });
-    var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 180);
-    arena.images.push({ img: arrow4, xStart: 98, yStart: 224 });
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(4500, 4500, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 35);
+        arena.images.push({ img: arrow0, xStart: 81, yStart: 206 });
+        var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
+        arena.images.push({ img: arrow1, xStart: 125, yStart: 248 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
+        arena.images.push({ img: arrow2, xStart: 106, yStart: 234 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 270);
+        arena.images.push({ img: arrow3, xStart: 20, yStart: 283 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 180);
+        arena.images.push({ img: arrow4, xStart: 98, yStart: 224 });
+    }
+    arena.images.push({
+        img: deimos,
+        xStart: 59,
+        yStart: 205.5,
+    });
+    arena.images.push({
+        img: deimos,
+        xStart: 59,
+        yStart: 205.5,
+    });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -65,14 +82,6 @@ export default function mars(arena) {
             link: "https://www.nasa.gov/mission_pages/galex/pia15415.html",
         },
     ];
-
-    arena.ship.img = alienShip;
-    arena.background = background;
-    arena.images.push({
-        img: deimos,
-        xStart: 59,
-        yStart: 205.5,
-    });
     // Circle around Deimos
     arc(72, 218, 25, 345, 25, "metal", arena);
     // Arrow
