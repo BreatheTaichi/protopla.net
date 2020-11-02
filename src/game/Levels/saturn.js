@@ -4,7 +4,7 @@ import {
     verticalLine,
     circle,
     ellipse,
-} from "../shapes.js";
+} from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import saturnPNG from "../images/saturn/Saturn.webp";
 import enceladusPNG from "../images/saturn/enceladus.webp";
@@ -145,7 +145,7 @@ export default function Sun(arena) {
     // from arc back to saturn
     verticalLine(139, 105, 30, "metal", arena);
     // second ring around pan
-    arc(114, 114, 125, 403, 40, "metal", arena);
+    arc(114, 114, 125, 401, 40, "metal", arena);
     // around hyperion
     arc(92, 160, 40, 220, 22, "metal", arena);
     // third ring around pan
@@ -228,6 +228,7 @@ export default function Sun(arena) {
     var saturnBlocks = [
         // saturn extra blocks
         { x: 131, y: 145 },
+        { x: 145, y: 141 },
 
         // blocks over Pan from lower right, clockwise
         { x: 124, y: 107 },

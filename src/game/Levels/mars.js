@@ -4,7 +4,7 @@ import {
     diagonalLeft,
     horizontalLine,
     verticalLine,
-} from "../shapes.js";
+} from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import deimosPNG from "../images/mars/deimos.webp";
 import phobosPNG from "../images/mars/phobos.webp";

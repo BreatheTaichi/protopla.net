@@ -5,7 +5,7 @@ import {
     diagonalRight,
     horizontalLine,
     verticalLine,
-} from "../shapes.js";
+} from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import jupiterPNG from "../images/jupiter/jupiterAurora.webp";
 import callistoPNG from "../images/jupiter/callisto.webp";

@@ -22,7 +22,7 @@ Dirt 3
 
 Gamepad must be activated on the course screen or it won't work.
 
-When a gamepad is connected and player hits escape, the sound plays but the game engine still runs. Menu should show and
+When a gamepad is connected and player hits escape, the sound plays but the game engine still runs. Menu should show and game engine should stop.
 
 Course menu doesn't reset on screen resize.
 
@@ -36,30 +36,18 @@ Please let me know if you find any more!
 
 ## TODOs and upgrades
 
-Ellipse bounding box for celestial bodies that has more realistic bounce.
-
-Load modules with React.lazy
-
-Performance options:
-
-• Option to turn off thrust / make a simpler thrust trail.
-
-• Option to turn off background image, possibly make a simple generated background with some stars that would take less processor than moving a huge image.
-
-Gamepad usable on menus for more seamless experience.
-
-Max screen size so player doesn't see past background image if they are on a large screen. Then I could get rid of the background fill and save some processing.
-
 Option to turn on names of bodies in race for better learning experience.
 
 Add random loading messages with different facts about each level.
 
-Bonus level with Pluto, protoplanets and asteroids. Unlocked after beating a level, or getting a certain amount of points.
+Set of easy levels and set of hard levels. Bonus level with Pluto, protoplanets and asteroids. Unlocked after getting a certain amount of points.
 
-Set of easy levels and set of hard levels.
+Max screen size so player doesn't see past background image if they are on a large screen. Then I could get rid of the background fill and save some processing.
 
-New ship / block graphics.
+Ellipse bounding box for celestial bodies that has more realistic bounce.
 
-Type of block for long lines that don't jank when moving fast.
+Load modules with React.lazy
 
-Create shape.js function for line of blocks that isn't straight.
+New ship / block graphics. Type of block for long lines that don't jank when moving fast.
+
+Gamepad usable on menus for more seamless experience.

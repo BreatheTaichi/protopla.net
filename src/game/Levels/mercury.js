@@ -1,4 +1,4 @@
-import { circle, arc, diagonalRight, diagonalLeft } from "../shapes.js";
+import { circle, arc, diagonalRight, diagonalLeft } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import mercuryPNG from "../images/mercury/mercury.webp";
 import mercuryBWPNG from "../images/mercury/mercuryBW.webp";

@@ -1,5 +1,6 @@
 import putBrick from "./bricks/putBrick.js";
-import { drawBody, finishLineCH } from "./shapes.js";
+import { drawBody } from "./bricks/shapes.js";
+import finishLineCH from "./bricks/finishBounding.js";
 import Ship from "./Ship.js";
 import times from "./MedalTimes.js";
 import fillHUD from "./fillHUD.js";

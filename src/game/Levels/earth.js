@@ -1,4 +1,4 @@
-import { verticalLine, horizontalLine } from "../shapes.js";
+import { verticalLine, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import lunaPNG from "../images/earth/luna.webp";
 import earthPNG from "../images/earth/earth.webp";

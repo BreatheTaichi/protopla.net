@@ -63,7 +63,7 @@ export default function Engine(props) {
             case "Escape":
                 key.escape = value;
                 gameMenu = !gameMenu;
-                console.log("gameMenu: " + gameMenu + " value: " + value);
+                // console.log("gameMenu: " + gameMenu + " value: " + value);
                 pause.volume(0.5 * arena.effectsVolume);
                 pause.play();
                 break;

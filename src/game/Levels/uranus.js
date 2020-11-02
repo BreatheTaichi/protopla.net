@@ -1,4 +1,4 @@
-import { arc, circle, diagonalLeft, horizontalLine } from "../shapes.js";
+import { arc, circle, diagonalLeft, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import uranusPNG from "../images/uranus/uranus.webp";
 import arielPNG from "../images/uranus/ariel.webp";

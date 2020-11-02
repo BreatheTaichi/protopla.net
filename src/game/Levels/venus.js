@@ -1,4 +1,4 @@
-import { circle, arc, verticalLine, horizontalLine } from "../shapes.js";
+import { circle, arc, verticalLine, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import venusPNG from "../images/venus/venus.webp";
 import backgroundPic from "../images/background/GrandDesign.webp";

@@ -1,4 +1,4 @@
-import { circle } from "../shapes.js";
+import { circle, line } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import sunPNG from "../images/sun/sun.webp";
 import backgroundPic from "../images/background/M81-82.webp";
@@ -52,6 +52,7 @@ export default function Sun(arena) {
     ];
 
     circle(37.5, 37.5, 37, "metal", arena);
+    line(5, 40, 15, 32, "metal", arena);
 
     var sunBlocks = [
         { x: 13, y: 36 },
