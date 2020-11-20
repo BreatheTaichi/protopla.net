@@ -13,6 +13,7 @@ export default function MedalTimes(difficulty, player) {
         medalTimes = [
             {
                 name: "Sol",
+                pointsToUnlock: 0,
                 goldMedal: 10000,
                 silverMedal: 12000,
                 bronzeMedal: 15000,
@@ -22,81 +23,90 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Mercury",
+                pointsToUnlock: 100,
                 goldMedal: 12500,
                 silverMedal: 15000,
                 bronzeMedal: 20000,
                 goldStar: 30000,
-                silverStar: 40000,
+                silverStar: 36000,
                 bronzeStar: 55000,
             },
             {
                 name: "Venus",
+                pointsToUnlock: 200,
                 goldMedal: 22000,
                 silverMedal: 25000,
                 bronzeMedal: 30000,
-                goldStar: 40000,
-                silverStar: 60000,
-                bronzeStar: 80000,
-            },
-            {
-                name: "Earth",
-                goldMedal: 16000,
-                silverMedal: 20000,
-                bronzeMedal: 28000,
-                goldStar: 40000,
-                silverStar: 50000,
+                goldStar: 38000,
+                silverStar: 45000,
                 bronzeStar: 60000,
             },
             {
+                name: "Earth",
+                pointsToUnlock: 700,
+                goldMedal: 16000,
+                silverMedal: 20000,
+                bronzeMedal: 26000,
+                goldStar: 34000,
+                silverStar: 43000,
+                bronzeStar: 50000,
+            },
+            {
                 name: "Mars",
+                pointsToUnlock: 1200,
                 goldMedal: 35000,
                 silverMedal: 40000,
                 bronzeMedal: 47000,
-                goldStar: 75000,
-                silverStar: 90000,
-                bronzeStar: 115000,
+                goldStar: 60000,
+                silverStar: 70000,
+                bronzeStar: 90000,
             },
             {
                 name: "Jupiter",
+                pointsToUnlock: 2000,
                 goldMedal: 35000,
                 silverMedal: 40000,
                 bronzeMedal: 55000,
-                goldStar: 70000,
-                silverStar: 100000,
-                bronzeStar: 125000,
+                goldStar: 100000,
+                silverStar: 110000,
+                bronzeStar: 120000,
             },
             {
                 name: "Saturn",
+                pointsToUnlock: 3000,
                 goldMedal: 100000,
                 silverMedal: 120000,
-                bronzeMedal: 160000,
-                goldStar: 220000,
-                silverStar: 280000,
-                bronzeStar: 310000,
+                bronzeMedal: 140000,
+                goldStar: 160000,
+                silverStar: 200000,
+                bronzeStar: 280000,
             },
             {
                 name: "Uranus",
+                pointsToUnlock: 4000,
                 goldMedal: 15000,
-                silverMedal: 18000,
-                bronzeMedal: 20000,
-                goldStar: 25000,
-                silverStar: 35000,
-                bronzeStar: 45000,
+                silverMedal: 16000,
+                bronzeMedal: 18000,
+                goldStar: 20000,
+                silverStar: 25000,
+                bronzeStar: 35000,
             },
             {
                 name: "Neptune",
+                pointsToUnlock: 5000,
                 goldMedal: 39000,
                 silverMedal: 42000,
-                bronzeMedal: 52000,
-                goldStar: 62000,
-                silverStar: 80000,
-                bronzeStar: 90000,
+                bronzeMedal: 46000,
+                goldStar: 52000,
+                silverStar: 56000,
+                bronzeStar: 60000,
             },
         ];
     } else if (difficulty === "Normal" || difficulty === "Test") {
         medalTimes = [
             {
                 name: "Sol",
+                pointsToUnlock: 0,
                 goldMedal: 15000,
                 silverMedal: 20000,
                 bronzeMedal: 30000,
@@ -106,6 +116,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Mercury",
+                pointsToUnlock: 100,
                 goldMedal: 20000,
                 silverMedal: 30000,
                 bronzeMedal: 40000,
@@ -115,6 +126,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Venus",
+                pointsToUnlock: 200,
                 goldMedal: 30000,
                 silverMedal: 40000,
                 bronzeMedal: 60000,
@@ -124,6 +136,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Earth",
+                pointsToUnlock: 400,
                 goldMedal: 28000,
                 silverMedal: 40000,
                 bronzeMedal: 50000,
@@ -133,6 +146,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Mars",
+                pointsToUnlock: 700,
                 goldMedal: 50000,
                 silverMedal: 60000,
                 bronzeMedal: 80000,
@@ -142,6 +156,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Jupiter",
+                pointsToUnlock: 1100,
                 goldMedal: 55000,
                 silverMedal: 70000,
                 bronzeMedal: 100000,
@@ -151,6 +166,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Saturn",
+                pointsToUnlock: 1600,
                 goldMedal: 160000,
                 silverMedal: 220000,
                 bronzeMedal: 310000,
@@ -160,6 +176,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Uranus",
+                pointsToUnlock: 2200,
                 goldMedal: 25000,
                 silverMedal: 30000,
                 bronzeMedal: 35000,
@@ -169,6 +186,7 @@ export default function MedalTimes(difficulty, player) {
             },
             {
                 name: "Neptune",
+                pointsToUnlock: 2900,
                 goldMedal: 50000,
                 silverMedal: 60000,
                 bronzeMedal: 75000,
@@ -180,32 +198,12 @@ export default function MedalTimes(difficulty, player) {
     }
 
     medalTimes.medalIMG = function (name, bestLap, lastName, difficulty) {
-        var obj = { img: new Image(), display: true };
+        var obj = { img: new Image(), display: true, pointsToUnlock: 0 };
         var image = new Image();
-        // first time lastName comes through it is set to none so Sol always shows
-        // then it's set to Sol for the next check.  Check if it's null, set display
-        // to false, check if the user has gotten at least a bronze before displaying
-        if (lastName !== "none") {
-            var lastBestLap = 0;
-            lastBestLap = parseInt(
-                localStorage.getItem(player + lastName + "bestlap")
-            );
-            for (let k = 0; k < this.length; k++) {
-                if (lastBestLap === null) {
-                    obj.display = false;
-                } else if (this[k].name === lastName) {
-                    if (lastBestLap <= this[k].bronzeStar) {
-                        obj.display = true;
-                    } else {
-                        obj.display = false;
-                    }
-                }
-                if (difficulty === "Test") obj.display = true;
-            }
-        }
 
         for (let i = 0; i < this.length; i++) {
             if (this[i].name === name) {
+                obj.pointsToUnlock = this[i].pointsToUnlock;
                 if (bestLap <= this[i].goldMedal) {
                     image = goldMedal;
                     break;
@@ -291,14 +289,6 @@ export default function MedalTimes(difficulty, player) {
             }
             arena.credits += earned;
             arena.score += earned;
-            console.log(
-                "earned: " +
-                    earned +
-                    "  arena.credits: " +
-                    arena.credits +
-                    "  arena.score: " +
-                    arena.score
-            );
             localStorage.setItem(player + "credits", arena.credits);
             localStorage.setItem(player + "score", arena.score);
             localStorage.setItem(player + arena.mapName + "tier", arena.tier);

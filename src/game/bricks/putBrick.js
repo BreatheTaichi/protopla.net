@@ -13,8 +13,8 @@ var metalBrick = mBrick(brickSize);
 
 export default function putBrick(x, y, type, arena) {
     let ship = arena.ship;
-    x = x + arena.x;
-    y = y + arena.y;
+    x += arena.x;
+    y += arena.y;
     // Bounding box for screen, skip bricks out of view
     if (
         x < -arena.halfSW - arena.size ||

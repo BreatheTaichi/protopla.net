@@ -1,4 +1,4 @@
-import { circle, arc, verticalLine, horizontalLine } from "../shapes.js";
+import { arc, verticalLine, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import venusPNG from "../images/venus/venus.webp";
 import backgroundPic from "../images/background/GrandDesign.webp";
@@ -15,15 +15,34 @@ export default function venus(arena) {
         xStart: arena.finishImg.x,
         yStart: arena.finishImg.y,
     });
+
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
+    arena.ship.img = alienShip;
     var venus = loadImageToCanvas(2200, 2160, venusPNG, arena);
-    var background = loadImageToCanvas(3970, 3970, backgroundPic, arena);
-    var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
-    arena.images.push({ img: arrow, xStart: 59, yStart: 52 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
-    arena.images.push({ img: arrow2, xStart: 45, yStart: 128 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, -90);
-    arena.images.push({ img: arrow3, xStart: 35, yStart: 155 });
+    arena.images.push({ img: venus, xStart: 15, yStart: 55 });
+    // circle(42.5, 82, 26, "invisible", arena);
+    arena.ellipses.push({
+        h: 42.5 * 40,
+        k: 82 * 40,
+        rx: 28 * 40,
+        ry: 27.5 * 40,
+    });
+
+    // { x: 11, y: 150 },
+    // { x: 54, y: 150 },
+
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(3970, 3970, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
+        arena.images.push({ img: arrow, xStart: 59, yStart: 52 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
+        arena.images.push({ img: arrow2, xStart: 45, yStart: 128 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, -90);
+        arena.images.push({ img: arrow3, xStart: 35, yStart: 155 });
+    }
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -44,16 +63,10 @@ export default function venus(arena) {
                 "https://science.nasa.gov/ngc-6814-grand-design-spiral-galaxy-hubble",
         },
     ];
-    arena.ship.img = alienShip;
-    arena.background = background;
-    arena.images.push({ img: venus, xStart: 15, yStart: 55 });
-
-    // Venus
-    circle(42.5, 82, 26, "invisible", arena);
 
     arc(42, 82, 105, 436, 40, "metal", arena);
     // Line from bottom of venus
-    verticalLine(42, 109, 55, "metal", arena);
+    verticalLine(42, 110, 54, "metal", arena);
     // Coming from the bottom of the outer arc, Left
     verticalLine(32, 121, 8, "metal", arena);
     horizontalLine(12, 129, 20, "metal", arena);

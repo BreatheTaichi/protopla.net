@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import useWindowListener from "./hooks/useWindowListener.js";
+import React, { useReducer, useEffect } from "react";
+// import useWindowListener from "./hooks/useWindowListener.js";
 import Menu from "./Menu.js";
 import Engine from "./game/Engine.js";
 import jupiter from "./game/Levels/jupiter.js";
@@ -35,6 +35,8 @@ function reducer(state, action) {
             return { ...state, page: "engine" };
         case "startGame":
             return { ...state, page: "menu", player: action.value };
+        case "saveOptions":
+            return { ...state, player: action.value };
         case "optionsMenu":
             return {
                 ...state,
@@ -58,7 +60,7 @@ function reducer(state, action) {
             sun(arena, state.numberToLoad);
             return { ...state, page: "loading" };
         case "Mercury":
-            arena = new Arena("Mercury", 0, 15, -75, -85, 40, 0, state.player);
+            arena = new Arena("Mercury", 0, 15, -80, -85, 40, 0, state.player);
             mercury(arena);
             return { ...state, page: "loading" };
         case "Venus":
@@ -100,12 +102,11 @@ function reducer(state, action) {
             saturn(arena);
             return { ...state, page: "loading" };
         case "Uranus":
-            arena = new Arena("Uranus", 20, 0, -75, -38, 40, 0, state.player);
-            // state.numberToLoad = 3;
+            arena = new Arena("Uranus", 20, 0, -75, -39, 40, 0, state.player);
             uranus(arena);
             return { ...state, page: "loading" };
         case "Neptune":
-            arena = new Arena("Neptune", 10, 0, -72, -129, 40, 0, state.player);
+            arena = new Arena("Neptune", 10, 0, -72, -130, 40, 0, state.player);
             neptune(arena);
             return { ...state, page: "loading" };
         default:
@@ -116,21 +117,33 @@ function reducer(state, action) {
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    useWindowListener("gamepadconnected", function () {
-        dispatch({ type: "gamepadToast" });
-        setInterval(() => {
-            dispatch({ type: "gamepadToastOff" });
-        }, 3400);
-        dispatch({ type: "gamepadConnected" });
-    });
+    const gpConnected = () =>
+        window.addEventListener("gamepadconnected", function (e) {
+            dispatch({ type: "gamepadToast" });
+            setInterval(() => {
+                dispatch({ type: "gamepadToastOff" });
+            }, 3400);
+            dispatch({ type: "gamepadConnected" });
+        });
 
-    useWindowListener("gamepaddisconnected", function () {
-        dispatch({ type: "gamepadToast" });
-        setInterval(() => {
-            dispatch({ type: "gamepadToastOff" });
-        }, 3400);
-        dispatch({ type: "gamepadDisconnected" });
-    });
+    useEffect(() => {
+        gpConnected();
+        return gpConnected();
+    }, []);
+
+    const gpDisconnected = () =>
+        window.addEventListener("gamepaddisconnected", function (e) {
+            dispatch({ type: "gamepadToast" });
+            setInterval(() => {
+                dispatch({ type: "gamepadToastOff" });
+            }, 3400);
+            dispatch({ type: "gamepadDisconnected" });
+        });
+
+    useEffect(() => {
+        gpDisconnected();
+        return gpDisconnected();
+    }, []);
 
     const chooseContent = () => {
         switch (state.page) {

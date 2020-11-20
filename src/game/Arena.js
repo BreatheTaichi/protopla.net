@@ -1,5 +1,6 @@
 import putBrick from "./bricks/putBrick.js";
-import { drawBody, finishLineCH } from "./shapes.js";
+import { drawBody } from "./bricks/shapes.js";
+import finishLineCH from "./bricks/finishBounding.js";
 import Ship from "./Ship.js";
 import times from "./MedalTimes.js";
 import fillHUD from "./fillHUD.js";
@@ -28,63 +29,61 @@ export default function Arena(
     var playerScore = parseInt(localStorage.getItem(player.name + "score"));
 
     var arena = {
-        // players name, credits and difficulty
-        player: player.name,
-        difficulty: player.difficulty,
-        score: playerScore,
-        credits: playerCredits,
-
-        // Medal rank
-        tier: tierReached,
-
-        effectsVolume: 1,
-        musicVolume: 1,
-
-        ship: {},
-
-        mapName: nameOfMap,
-        // When all three are true the lap is over
-        finishLine: false,
-        checkLine: false,
-        checkPoint: false,
-
         // Stop requestAnimationFrame when false
         inGame: true,
-
-        // brick size
-        halfSize: size / 2,
-        size: size,
-
-        // graphics
-        blocks: [],
-        HUDImages: [],
-        images: [],
-        background: new Image(),
-        finishImg: {},
+        // To stop the beat by time on the first lap
+        onFirstLap: true,
 
         // Number of images not yet loaded, stop loading screen when this hits 0
         numberToLoad: 0,
         loadingMessage: [],
 
-        // Arena size and starting point for background
+        player: player.name,
+        difficulty: player.difficulty,
+        showArrows: player.arrows,
+        showBackground: player.background,
+        showThrustTrail: player.thrustTrail,
+        effectsVolume: player.effectsVolume,
+        musicVolume: player.musicVolume,
+        score: playerScore,
+        credits: playerCredits,
+
+        mapName: nameOfMap,
+
+        ship: {},
+
+        // Medal rank
+        tier: tierReached,
+
+        // When all three are true the lap is over
+        finishLine: false,
+        checkLine: false,
+        checkPoint: false,
+
+        // graphics
+        blocks: [],
+        HUDImages: [],
+        images: [],
+        ellipses: [],
+        background: new Image(),
+        finishImg: {},
+        // Starting point for background
         width: width * size,
         height: height * size,
-
         // Starting point
         x: startX * size,
         y: startY * size,
-
-        // canvas context
+        // Canvas context
         context: null,
-
+        // Player window
         screenRatio: window.devicePixelRatio || 1,
         screenHeight: window.innerHeight,
         screenWidth: window.innerWidth,
         halfSH: window.innerHeight / 2,
         halfSW: window.innerWidth / 2,
-
-        // To stop the beat by time on the first lap
-        onFirstLap: true,
+        // Brick size
+        halfSize: size / 2,
+        size: size,
 
         // Start session and last lap at 9:59.999, currentLap at 0
         sessionBest: 599999,
@@ -93,21 +92,18 @@ export default function Arena(
 
         recordLapKey: recordLapKey,
         recordLap: parseInt(localStorage.getItem(recordLapKey)),
-
         // Player beat their record time by:
         beatTimeBy: 0,
-
         // Timer for popups when players beats a time
         recordLapTimer: 0,
         sessionBestTimer: 0,
 
+        // Makes canvas images for heads up display
+        hud: new fillHUD(this),
         // Times to beat for each medal rank
         times: [],
         // Images of medals and time repository
         medalTimes: times(player.difficulty, player.name),
-
-        // Makes canvas images for heads up display
-        hud: new fillHUD(this),
 
         draw() {
             // Add time, 1000ms/60s
@@ -122,13 +118,75 @@ export default function Arena(
             var y1 = (arena.y + arena.height) / 3.5;
 
             // Fill background, then add background image
-            arena.context.fillStyle = "rgb(34, 34, 34)";
+            arena.context.fillStyle = "rgb(20, 21, 20)";
             arena.context.fillRect(0, 0, arena.screenWidth, arena.screenHeight);
             arena.context.drawImage(arena.background, x1, y1);
 
             // Add celestial bodies, finish line graphic, and arrows
             arena.images.forEach((image) => {
                 drawBody(image.xStart, image.yStart, image.img, arena);
+            });
+
+            arena.ellipses.forEach((o) => {
+                var h = o.h + arena.x;
+                var k = o.k + arena.y;
+                // bounding box: |x - h| > rx or |y - k| > ry
+                if (
+                    0 > h - o.rx &&
+                    0 < h + o.rx &&
+                    0 > k - o.ry &&
+                    0 < k + o.ry
+                ) {
+                    // d is (x - h)^2/rx^2 + (y - k)^2/ry^2 <= 1
+                    // x,y is always 0,0
+                    const d = (h * h) / (o.rx * o.rx) + (k * k) / (o.ry * o.ry);
+                    // const d = h * h + k * k;
+                    // const m = o.rx * o.rx * (o.ry * o.ry);
+                    // TODO More efficient to put the r^2 on the other side of
+                    // the function.  Multiplication is faster than division.
+                    // d is huge, though when I do it as above
+                    if (d <= 1) {
+                        var xM = this.ship.xMomentum;
+                        var yM = this.ship.yMomentum;
+
+                        // // TODO check for major and minor axis
+                        // // Get focal length to calculate angle
+                        // var f = Math.sqrt(o.rx * o.rx - o.ry * o.ry);
+
+                        // Following is arena movement reversed
+                        // Angle from center of ellipse
+                        var angleFromBody = vectorAngle(-h, -k);
+                        // Angle of ship
+                        var incomingAngle = vectorAngle(-xM, -yM);
+
+                        // Dividing center point by radius gets the
+                        var x = h / o.rx;
+                        var y = k / o.ry;
+                        arena.x += x;
+                        arena.y += y;
+                        var magnitude = Math.sqrt(xM * xM + yM * yM);
+                        let v = reflectVector(incomingAngle, angleFromBody);
+                        // Change arena's momentum
+                        this.ship.xMomentum =
+                            v.x * magnitude * this.ship.bounceFriction;
+                        this.ship.yMomentum =
+                            v.y * magnitude * this.ship.bounceFriction;
+                        this.ship.boost *= this.ship.bounceFriction;
+                    }
+                    // Visual element for bounding ellipse
+                    // arena.context.lineWidth = 6;
+                    // arena.context.strokeStyle = "#fff";
+                    // arena.context.ellipse(
+                    //     h + arena.halfSW,
+                    //     k + arena.halfSH,
+                    //     o.rx - 40,
+                    //     o.ry - 40,
+                    //     0,
+                    //     0,
+                    //     2 * Math.PI
+                    // );
+                    // arena.context.stroke();
+                }
             });
 
             // Check finish line bounding boxes
@@ -147,55 +205,59 @@ export default function Arena(
             arena.context.save();
             arena.context.translate(arena.halfSW, arena.halfSH);
 
-            // Color thrust depending on Alignment Matrix level
-            var thrustColor =
-                arena.ship.boost * 1500 + 40 > 255
-                    ? 255
-                    : arena.ship.boost * 1500 + 40;
+            if (arena.showThrustTrail) {
+                // Color thrust depending on level of Alignment Matrix
+                var thrustColor =
+                    arena.ship.boost * 1500 + 40 > 255
+                        ? 255
+                        : arena.ship.boost * 1500 + 40;
 
-            // Thruster trail
-            arena.ship.thrustArray.forEach((item, index, object) => {
-                arena.context.beginPath();
+                // Thruster trail
+                arena.ship.thrustArray.forEach((item, index, object) => {
+                    arena.context.beginPath();
 
-                // Give thrust item it's own momentum
-                // item.xm += this.ship.xMomentum / 22;
-                item.x += item.xm;
-                // item.ym += this.ship.yMomentum / 22;
-                item.y += item.ym;
+                    // Give thrust item it's own momentum
+                    item.x += item.xm;
+                    item.y += item.ym;
 
-                // Slowly disappear over time
-                arena.context.globalAlpha = 1 - item.time;
-                arena.context.arc(
-                    item.x,
-                    item.y,
-                    10 + 10 * item.time,
-                    0,
-                    6.28319
-                );
-                var gradient = arena.context.createRadialGradient(
-                    item.x,
-                    item.y,
-                    5,
-                    item.x,
-                    item.y,
-                    15 + 10 * item.time
-                );
-                gradient.addColorStop(0, `rgba(100, ${thrustColor}, 130, .4`);
-                gradient.addColorStop(
-                    0.7,
-                    `rgba(150, 200, ${thrustColor}, .05`
-                );
-                arena.context.fillStyle = gradient;
-                arena.context.globalAlpha = 1;
-                // Remove thruster item from array after a time
-                item.time += 0.05;
-                if (item.time > 1) {
-                    object.splice(index, 1);
-                }
-                arena.context.closePath();
-                arena.context.fill();
-            });
-
+                    // Slowly disappear over time
+                    arena.context.globalAlpha = 1 - item.time;
+                    arena.context.arc(
+                        item.x,
+                        item.y,
+                        10 + 10 * item.time,
+                        0,
+                        6.28319
+                    );
+                    // Thruster gradient and color stops
+                    var gradient = arena.context.createRadialGradient(
+                        item.x,
+                        item.y,
+                        5,
+                        item.x,
+                        item.y,
+                        15 + 10 * item.time
+                    );
+                    gradient.addColorStop(
+                        0,
+                        `rgba(100, ${thrustColor}, 130, .4`
+                    );
+                    gradient.addColorStop(
+                        0.7,
+                        `rgba(150, 200, ${thrustColor}, .05`
+                    );
+                    arena.context.fillStyle = gradient;
+                    arena.context.globalAlpha = 1;
+                    // Remove thruster item from array after a time
+                    item.time += 0.05;
+                    if (item.time > 1) {
+                        object.splice(index, 1);
+                    }
+                    arena.context.closePath();
+                    arena.context.fill();
+                });
+            }
+            // Draw ship
             arena.context.rotate((arena.ship.rotation * Math.PI * 2) / 180);
             arena.context.drawImage(arena.ship.img, -25, -25);
             arena.context.rotate(-(arena.ship.rotation * Math.PI * 2) / 180);
@@ -218,23 +280,13 @@ export default function Arena(
         },
     };
 
-    if (localStorage.getItem(player.name + "effectsVolume") !== null) {
-        arena.effectsVolume = localStorage.getItem(
-            player.name + "effectsVolume"
-        );
-    }
-
-    if (localStorage.getItem(player.name + "musicVolume") !== null) {
-        arena.musicVolume = localStorage.getItem(player.name + "musicVolume");
-    }
-
     for (let i = 0; i < arena.medalTimes.length; i++) {
         if (arena.medalTimes[i].name === arena.mapName) {
             arena.times = arena.medalTimes[i];
         }
     }
 
-    arena.ship = new Ship(shipAngle, 20, player.name, arena);
+    arena.ship = new Ship(shipAngle, 20, arena);
 
     arena.hud.record(arena);
     arena.hud.session(arena);
@@ -242,4 +294,34 @@ export default function Arena(
     arena.hud.credits(arena);
 
     return arena;
+}
+
+function vectorAngle(xUnit, yUnit) {
+    var angle = Math.atan(yUnit / xUnit) * (180 / Math.PI);
+    if (xUnit < 0 && yUnit >= 0) {
+        angle += 180;
+    } else if (xUnit < 0 && yUnit < 0) {
+        angle += 180;
+    } else if (xUnit >= 0 && yUnit < 0) {
+        angle += 360;
+    }
+    return angle;
+}
+
+function reflectVector(vector, normal) {
+    let vectorRadians = (vector * (2 * Math.PI)) / 360;
+    let normalRadians = (normal * (2 * Math.PI)) / 360;
+    // r = d - 2(d * n)n  // d * n is dot product
+    var r = {};
+    r.dx = Math.round(100 * Math.cos(vectorRadians)) / 100;
+    r.dy = Math.round(100 * Math.sin(vectorRadians)) / 100;
+    r.nx = Math.round(100 * Math.cos(normalRadians)) / 100;
+    r.ny = Math.round(100 * Math.sin(normalRadians)) / 100;
+
+    var dDotn = 2 * (r.dx * r.nx + r.dy * r.ny);
+
+    r.x = -Math.round(100 * (r.dx - r.nx * dDotn)) / 100;
+    r.y = -Math.round(100 * (r.dy - r.ny * dDotn)) / 100;
+
+    return r;
 }

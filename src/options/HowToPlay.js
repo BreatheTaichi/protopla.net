@@ -124,7 +124,7 @@ export default function HowToPlay(props) {
             <h3>Store Items</h3>
             <div className="instructions-store-grid">
                 <div className="instructions-store-item">
-                    <h4>Thrust</h4>
+                    <h4>Thrusters</h4>
                     <p>
                         The basic propulsion system for your ship. Sturdy and
                         reliable.
@@ -171,6 +171,44 @@ export default function HowToPlay(props) {
                     </p>
                 </div>
             </div>
+            <h3>Tips</h3>
+            <h4>Building your ship</h4>
+            <p>
+                Number one is speed. The best way to increase speed is the Fuel
+                Balancer. Unfortunately when your ship hits a wall it will lose
+                most of its alignment, which will slow you down.
+            </p>
+            <p>
+                Next in line are Thrusters and Bussard Ramfield. Thrusters are
+                only half as powerful as the Fuel Balancer, but still a great
+                way to improve speed.
+            </p>
+            <p>
+                Upgrading the Bussard Ramfield will remove some of the friction
+                that slows your ship down. This will help get to max speed, and
+                give the feeling of sliding around corners. Important for
+                getting top speeds, but can make the ship feel out of control at
+                higher levels.
+            </p>
+            <p>
+                As your ship speed increases you will need to add rotation so
+                that maneuverability stays high. How much you will need depends
+                on skill level, see how long you can put it off!
+            </p>
+            <p>
+                Ship Plating and Alignment Matrix are very good if you are
+                hitting walls often. If you are going for the highest times your
+                ship will need these points elsewhere, though.
+            </p>
+            <h4>Racing tips</h4>
+            <p>
+                Be as comfortable racing forward as you are in reverse. This way
+                you can reverse any time, taking sharp corners very quickly.
+            </p>
+            <p>
+                When turning, if you can hug the outside wall before you turn
+                your ship will gain more speed coming into the next area.
+            </p>
         </section>
     );
 }

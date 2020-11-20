@@ -1,10 +1,4 @@
-import {
-    arc,
-    horizontalLine,
-    verticalLine,
-    circle,
-    ellipse,
-} from "../shapes.js";
+import { arc, horizontalLine, verticalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import saturnPNG from "../images/saturn/Saturn.webp";
 import enceladusPNG from "../images/saturn/enceladus.webp";
@@ -32,7 +26,11 @@ export default function Sun(arena) {
         yStart: arena.finishImg.y,
     });
     var ship = loadImageToCanvas(50, 50, alienShip, arena);
-    var background = loadImageToCanvas(6660, 3482, backgroundPic, arena);
+    arena.ship.img = ship;
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(6660, 3482, backgroundPic, arena);
+        arena.background = background;
+    }
     var saturn = loadImageToCanvas(4950, 1890, saturnPNG, arena);
     var enceladus = loadImageToCanvas(1000, 1000, enceladusPNG, arena);
     var epimetheus = loadImageToCanvas(586, 559, epimetheusPNG, arena);
@@ -44,40 +42,92 @@ export default function Sun(arena) {
     var pandora = loadImageToCanvas(516, 768, pandoraPNG, arena);
     var phoebe = loadImageToCanvas(704, 931, phoebePNG, arena);
     var prometheus = loadImageToCanvas(497, 298, prometheusPNG, arena);
-    var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
-    arena.images.push({ img: arrow0, xStart: 119, yStart: 112 });
-    var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 270);
-    arena.images.push({ img: arrow1, xStart: 143, yStart: 129 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 130);
-    arena.images.push({ img: arrow2, xStart: 98, yStart: 82 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 50);
-    arena.images.push({ img: arrow3, xStart: 91, yStart: 129 });
-    var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 260);
-    arena.images.push({ img: arrow4, xStart: 80, yStart: 158 });
-    var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, -45);
-    arena.images.push({ img: arrow5, xStart: 166, yStart: 128 });
-    var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-    arena.images.push({ img: arrow6, xStart: 225, yStart: 135 });
-    var arrow7 = loadImageToCanvas(150, 150, arrowPNG, arena, 40);
-    arena.images.push({ img: arrow7, xStart: 337, yStart: 131 });
-    var arrow8 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
-    arena.images.push({ img: arrow8, xStart: 328, yStart: 164 });
-    var arrow9 = loadImageToCanvas(150, 150, arrowPNG, arena, 85);
-    arena.images.push({ img: arrow9, xStart: 215, yStart: 162 });
-    var arrow10 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
-    arena.images.push({ img: arrow10, xStart: 220, yStart: 203 });
-    var arrow11 = loadImageToCanvas(150, 150, arrowPNG, arena, 210);
-    arena.images.push({ img: arrow11, xStart: 203, yStart: 183 });
-    var arrow12 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-    arena.images.push({ img: arrow12, xStart: 238, yStart: 203 });
-    var arrow13 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
-    arena.images.push({ img: arrow13, xStart: 249, yStart: 215 });
-    var arrow14 = loadImageToCanvas(150, 150, arrowPNG, arena, 295);
-    arena.images.push({ img: arrow14, xStart: 159, yStart: 184 });
-    var arrow15 = loadImageToCanvas(150, 150, arrowPNG, arena, 95);
-    arena.images.push({ img: arrow15, xStart: 145, yStart: 165 });
-    var arrow16 = loadImageToCanvas(150, 150, arrowPNG, arena, 265);
-    arena.images.push({ img: arrow16, xStart: 127, yStart: 167 });
+    if (arena.showArrows) {
+        var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
+        arena.images.push({ img: arrow0, xStart: 119, yStart: 112 });
+        var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, 270);
+        arena.images.push({ img: arrow1, xStart: 143, yStart: 129 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 130);
+        arena.images.push({ img: arrow2, xStart: 98, yStart: 82 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 50);
+        arena.images.push({ img: arrow3, xStart: 91, yStart: 129 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 260);
+        arena.images.push({ img: arrow4, xStart: 80, yStart: 158 });
+        var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, -45);
+        arena.images.push({ img: arrow5, xStart: 166, yStart: 128 });
+        var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
+        arena.images.push({ img: arrow6, xStart: 225, yStart: 135 });
+        var arrow7 = loadImageToCanvas(150, 150, arrowPNG, arena, 40);
+        arena.images.push({ img: arrow7, xStart: 337, yStart: 131 });
+        var arrow8 = loadImageToCanvas(150, 150, arrowPNG, arena, 220);
+        arena.images.push({ img: arrow8, xStart: 328, yStart: 164 });
+        var arrow9 = loadImageToCanvas(150, 150, arrowPNG, arena, 85);
+        arena.images.push({ img: arrow9, xStart: 215, yStart: 162 });
+        var arrow10 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
+        arena.images.push({ img: arrow10, xStart: 220, yStart: 203 });
+        var arrow11 = loadImageToCanvas(150, 150, arrowPNG, arena, 210);
+        arena.images.push({ img: arrow11, xStart: 203, yStart: 183 });
+        var arrow12 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
+        arena.images.push({ img: arrow12, xStart: 238, yStart: 203 });
+        var arrow13 = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
+        arena.images.push({ img: arrow13, xStart: 249, yStart: 215 });
+        var arrow14 = loadImageToCanvas(150, 150, arrowPNG, arena, 295);
+        arena.images.push({ img: arrow14, xStart: 159, yStart: 184 });
+        var arrow15 = loadImageToCanvas(150, 150, arrowPNG, arena, 95);
+        arena.images.push({ img: arrow15, xStart: 145, yStart: 165 });
+        var arrow16 = loadImageToCanvas(150, 150, arrowPNG, arena, 265);
+        arena.images.push({ img: arrow16, xStart: 127, yStart: 167 });
+    }
+    arena.images.push({ img: saturn, xStart: 129, yStart: 122 });
+    // ellipse(191, 145.6, 24.4, 22.2, "invisible", arena);
+    // ellipse(190.3, 145, 58.3, 5, "invisible", arena);
+    arena.ellipses.push({
+        h: 190.8 * 40,
+        k: 145.6 * 40,
+        rx: 26.5 * 40,
+        ry: 24.3 * 40,
+    });
+    arena.ellipses.push({
+        h: 190.3 * 40,
+        k: 145 * 40,
+        rx: 60.3 * 40,
+        ry: 7 * 40,
+    });
+
+    arena.images.push({ img: enceladus, xStart: 326, yStart: 140 });
+    // circle(338.4, 152.5, 11.35, "invisible", arena);
+    arena.ellipses.push({
+        h: 338.4 * 40,
+        k: 152.5 * 40,
+        rx: 13 * 40,
+        ry: 13 * 40,
+    });
+
+    arena.images.push({ img: epimetheus, xStart: 150, yStart: 161 });
+    // circle(157, 168, 6, "invisible", arena);
+    arena.ellipses.push({
+        h: 157 * 40,
+        k: 168 * 40,
+        rx: 7.5 * 40,
+        ry: 7.5 * 40,
+    });
+
+    arena.images.push({ img: iapetus, xStart: 85, yStart: 100 });
+    // circle(97.7, 112.2, 11.2, "invisible", arena);
+    arena.ellipses.push({
+        h: 97.9 * 40,
+        k: 112.5 * 40,
+        rx: 13 * 40,
+        ry: 13 * 40,
+    });
+
+    arena.images.push({ img: pan, xStart: 114, yStart: 99 });
+    arena.images.push({ img: hyperion, xStart: 85, yStart: 145 });
+    arena.images.push({ img: helene, xStart: 134, yStart: 175 });
+    arena.images.push({ img: janus, xStart: 217, yStart: 186 });
+    arena.images.push({ img: pandora, xStart: 304, yStart: 152 });
+    arena.images.push({ img: phoebe, xStart: 176, yStart: 179 });
+    arena.images.push({ img: prometheus, xStart: 267, yStart: 202 });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -105,29 +155,6 @@ export default function Sun(arena) {
                 "https://www.jpl.nasa.gov/spaceimages/details.php?id=pia13014",
         },
     ];
-    arena.ship.img = ship;
-    arena.background = background;
-    arena.images.push({ img: saturn, xStart: 129, yStart: 122 });
-    ellipse(191, 145.6, 24.4, 22.2, "invisible", arena);
-    ellipse(190.3, 145, 58.3, 5, "invisible", arena);
-
-    arena.images.push({ img: pan, xStart: 114, yStart: 99 });
-    arena.images.push({ img: hyperion, xStart: 85, yStart: 145 });
-
-    arena.images.push({ img: enceladus, xStart: 326, yStart: 140 });
-    circle(338.4, 152.5, 11.35, "invisible", arena);
-
-    arena.images.push({ img: epimetheus, xStart: 150, yStart: 161 });
-    circle(157, 168, 6, "invisible", arena);
-
-    arena.images.push({ img: helene, xStart: 134, yStart: 175 });
-    arena.images.push({ img: iapetus, xStart: 85, yStart: 100 });
-    circle(97.7, 112.2, 11.2, "invisible", arena);
-
-    arena.images.push({ img: janus, xStart: 217, yStart: 186 });
-    arena.images.push({ img: pandora, xStart: 304, yStart: 152 });
-    arena.images.push({ img: phoebe, xStart: 176, yStart: 179 });
-    arena.images.push({ img: prometheus, xStart: 267, yStart: 202 });
 
     // from the right side of the finish line up
     verticalLine(131, 114, 30, "metal", arena);
@@ -141,7 +168,7 @@ export default function Sun(arena) {
     // from arc back to saturn
     verticalLine(139, 105, 30, "metal", arena);
     // second ring around pan
-    arc(114, 114, 125, 403, 40, "metal", arena);
+    arc(114, 114, 125, 401, 40, "metal", arena);
     // around hyperion
     arc(92, 160, 40, 220, 22, "metal", arena);
     // third ring around pan
@@ -223,7 +250,8 @@ export default function Sun(arena) {
 
     var saturnBlocks = [
         // saturn extra blocks
-        { x: 131, y: 145 },
+        // { x: 131.3, y: 145 },
+        // { x: 145, y: 141 },
 
         // blocks over Pan from lower right, clockwise
         { x: 124, y: 107 },
@@ -478,10 +506,10 @@ export default function Sun(arena) {
         { x: 193, y: 189 },
 
         // enceladus
-        { x: 338, y: 140 },
-        { x: 350, y: 151 },
-        { x: 350, y: 152 },
-        { x: 350, y: 153 },
+        // { x: 338, y: 140 },
+        // { x: 350, y: 151 },
+        // { x: 350, y: 152 },
+        // { x: 350, y: 153 },
     ];
 
     saturnBlocks.forEach(({ x, y }) => {

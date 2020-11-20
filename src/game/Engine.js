@@ -15,7 +15,7 @@ var pause = new Howl({
 export default function Engine(props) {
     var arena = props.arena;
     var gameMenu = false;
-    // var gamepad = userGamepad();
+
     var key = {
         left: false,
         right: false,
@@ -24,6 +24,13 @@ export default function Engine(props) {
         escape: false,
         enter: false,
     };
+
+    // Check for gamepad, otherwise use keyboard.
+    var gamepadActive;
+    var gamepad = navigator.getGamepads()[0];
+    if (gamepad && gamepad.connected) {
+        gamepadActive = true;
+    }
 
     const canvasRef = useRef();
     const getBlockRef = useRef();
@@ -56,6 +63,7 @@ export default function Engine(props) {
             case "Escape":
                 key.escape = value;
                 gameMenu = !gameMenu;
+                // console.log("gameMenu: " + gameMenu + " value: " + value);
                 pause.volume(0.5 * arena.effectsVolume);
                 pause.play();
                 break;
@@ -164,14 +172,12 @@ export default function Engine(props) {
         ) {
             getBlockPosition(canvas, e);
         });
-        // return () => cancelAnimationFrame(getBlockRef.current);
-        // eslint-disable-next-line
+        return () => cancelAnimationFrame(getBlockRef.current);
     });
 
-    // Start the main loop
+    // Start requestAnimationFrame on Main loop
     useEffect(() => {
         arena.context = canvasRef.current.getContext("2d");
-        // arena.inGame = true;
         animationRef.current = raf(main);
         return () => {
             raf.cancel(animationRef.current);
@@ -179,13 +185,16 @@ export default function Engine(props) {
         // eslint-disable-next-line
     }, []);
 
+    // Main loop
     function main() {
         if (gameMenu) {
             menu();
         } else if (arena.numberToLoad > 0) {
             Spinner(arena);
         } else {
-            arena.ship.updateShip(key);
+            gamepadActive
+                ? arena.ship.gamepadUpdate(gamepad)
+                : arena.ship.keyboardUpdate(key);
             arena.draw();
         }
         if (arena.inGame) raf(main);

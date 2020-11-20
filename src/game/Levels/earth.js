@@ -1,4 +1,4 @@
-import { verticalLine, horizontalLine } from "../shapes.js";
+import { verticalLine, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import lunaPNG from "../images/earth/luna.webp";
 import earthPNG from "../images/earth/earth.webp";
@@ -18,22 +18,55 @@ export default function earth(arena) {
     });
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     var luna = loadImageToCanvas(1520, 1520, lunaPNG, arena);
+    arena.ellipses.push({
+        h: 72 * 40,
+        k: 30 * 40,
+        rx: 19.7 * 40,
+        ry: 19.7 * 40,
+    });
     var earth = loadImageToCanvas(1800, 1800, earthPNG, arena);
-    var background = loadImageToCanvas(4508, 3430, backgroundPic, arena);
-    var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
-    arena.images.push({ img: arrow0, xStart: 86, yStart: 10 });
-    var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, -15);
-    arena.images.push({ img: arrow1, xStart: 56, yStart: 9 });
-    var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 90);
-    arena.images.push({ img: arrow2, xStart: 59, yStart: 57 });
-    var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 195);
-    arena.images.push({ img: arrow3, xStart: 53, yStart: 75 });
-    var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 225);
-    arena.images.push({ img: arrow4, xStart: 10, yStart: 74 });
-    var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-    arena.images.push({ img: arrow5, xStart: 12, yStart: 50 });
-    var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 290);
-    arena.images.push({ img: arrow6, xStart: 40, yStart: 43 });
+    arena.ellipses.push({
+        h: 23.5 * 40,
+        k: 23.5 * 40,
+        rx: 23 * 40,
+        ry: 23 * 40,
+    });
+
+    if (arena.showBackground) {
+        var background = loadImageToCanvas(4508, 3430, backgroundPic, arena);
+        arena.background = background;
+    }
+    if (arena.showArrows) {
+        var arrow0 = loadImageToCanvas(150, 150, arrowPNG, arena, 45);
+        arena.images.push({ img: arrow0, xStart: 86, yStart: 10 });
+        var arrow1 = loadImageToCanvas(150, 150, arrowPNG, arena, -15);
+        arena.images.push({ img: arrow1, xStart: 56, yStart: 9 });
+        var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 90);
+        arena.images.push({ img: arrow2, xStart: 59, yStart: 57 });
+        var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 195);
+        arena.images.push({ img: arrow3, xStart: 53, yStart: 75 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 225);
+        arena.images.push({ img: arrow4, xStart: 10, yStart: 74 });
+        var arrow5 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
+        arena.images.push({ img: arrow5, xStart: 12, yStart: 50 });
+        var arrow6 = loadImageToCanvas(150, 150, arrowPNG, arena, 290);
+        arena.images.push({ img: arrow6, xStart: 40, yStart: 43 });
+    }
+    arena.ship.img = alienShip;
+    arena.images.push({
+        img: earth,
+        xStart: 1,
+        yStart: 1,
+        width: earth.width,
+        height: earth.height,
+    });
+    arena.images.push({
+        img: luna,
+        xStart: 52.9,
+        yStart: 11,
+        width: luna.width,
+        height: luna.height,
+    });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -60,212 +93,194 @@ export default function earth(arena) {
             link: "https://apod.nasa.gov/apod/ap181107.html",
         },
     ];
-    arena.ship.img = alienShip;
-    arena.background = background;
-    arena.images.push({
-        img: earth,
-        xStart: 1,
-        yStart: 1,
-        width: earth.width,
-        height: earth.height,
-    });
-    arena.images.push({
-        img: luna,
-        xStart: 52.9,
-        yStart: 11,
-        width: luna.width,
-        height: luna.height,
-    });
 
     // Outer Box
     var lunaBlocks = [
         // luna starting at left wall, counterclockwise to top wall
-        { x: 2, y: 28 },
-        { x: 2, y: 29 },
-        { x: 3, y: 30 },
-        { x: 3, y: 31 },
-        { x: 3, y: 32 },
-        { x: 4, y: 33 },
-        { x: 4, y: 34 },
-        { x: 5, y: 35 },
-        { x: 6, y: 36 },
-        { x: 6, y: 37 },
-        { x: 7, y: 38 },
-        { x: 8, y: 39 },
-        { x: 9, y: 40 },
-        { x: 10, y: 41 },
-        { x: 11, y: 41 },
-        { x: 12, y: 42 },
-        { x: 13, y: 42 },
-        { x: 14, y: 43 },
-        { x: 15, y: 43 },
-        { x: 16, y: 44 },
-        { x: 17, y: 44 },
-        { x: 18, y: 44 },
-        { x: 19, y: 45 },
-        { x: 20, y: 45 },
-        { x: 21, y: 45 },
-        { x: 22, y: 45 },
-        { x: 23, y: 45 },
-        { x: 24, y: 45 },
-        { x: 25, y: 45 },
-        { x: 26, y: 45 },
-        { x: 27, y: 45 },
-        { x: 28, y: 45 },
-        { x: 29, y: 44 },
-        { x: 30, y: 44 },
-        { x: 31, y: 44 },
-        { x: 32, y: 43 },
-        { x: 33, y: 43 },
-        { x: 34, y: 42 },
-        { x: 34, y: 42 },
-        { x: 35, y: 42 },
-        { x: 36, y: 41 },
-        { x: 37, y: 40 },
-        { x: 38, y: 39 },
-        { x: 39, y: 38 },
-        { x: 40, y: 37 },
-        { x: 41, y: 36 },
-        { x: 41, y: 35 },
-        { x: 42, y: 34 },
-        { x: 42, y: 33 },
-        { x: 43, y: 32 },
-        { x: 43, y: 31 },
-        { x: 44, y: 30 },
-        { x: 44, y: 29 },
-        { x: 44, y: 28 },
-        { x: 44, y: 27 },
-        { x: 44, y: 26 },
-        { x: 45, y: 25 },
-        { x: 45, y: 24 },
-        { x: 45, y: 23 },
-        { x: 45, y: 22 },
-        { x: 44, y: 21 },
-        { x: 44, y: 20 },
-        { x: 44, y: 19 },
-        { x: 44, y: 18 },
-        { x: 44, y: 17 },
-        { x: 43, y: 16 },
-        { x: 43, y: 15 },
-        { x: 42, y: 14 },
-        { x: 42, y: 13 },
-        { x: 42, y: 12 },
-        { x: 41, y: 11 },
-        { x: 40, y: 10 },
-        { x: 39, y: 9 },
-        { x: 38, y: 8 },
-        { x: 37, y: 7 },
-        // { x: 36, y: 6 }, // good brick to comment out for shortcut upper right
-        { x: 35, y: 5 },
-        { x: 34, y: 5 },
-        { x: 33, y: 4 },
-        { x: 32, y: 4 },
-        { x: 31, y: 3 },
-        { x: 30, y: 3 },
-        { x: 29, y: 3 },
-        { x: 28, y: 2 },
-        { x: 27, y: 2 },
-        { x: 26, y: 2 },
-        { x: 25, y: 2 },
-        { x: 24, y: 1 },
-
-        // earth
-
-        // Right wall at start, going down
-        { x: 55, y: 24 },
-        { x: 55, y: 25 },
-        { x: 55, y: 26 },
-        { x: 54, y: 27 },
-        { x: 54, y: 28 },
-        { x: 54, y: 29 },
-        { x: 54, y: 30 },
-        { x: 54, y: 31 },
-        { x: 54, y: 32 },
-        { x: 54, y: 33 },
-        { x: 55, y: 34 },
-        { x: 55, y: 35 },
-        { x: 55, y: 36 },
-        { x: 55, y: 37 },
-        { x: 55, y: 38 },
-        { x: 55, y: 39 },
-        // Right wall at start, going up
-        { x: 55, y: 23 },
-        { x: 56, y: 22 },
-        { x: 56, y: 21 },
-        { x: 57, y: 20 },
-        { x: 58, y: 19 },
-        { x: 59, y: 18 },
-        { x: 60, y: 17 },
-        { x: 61, y: 16 },
-        { x: 62, y: 15 },
-        { x: 63, y: 15 },
-        { x: 64, y: 14 },
-        { x: 65, y: 14 },
-        { x: 66, y: 13 },
-        { x: 67, y: 13 },
-        { x: 67, y: 13 },
-        { x: 68, y: 13 },
-        { x: 69, y: 12 },
-        { x: 70, y: 12 },
-        { x: 71, y: 12 },
-        { x: 72, y: 12 },
-        // continues off right wall -reversed
-        { x: 88, y: 24 },
-        { x: 88, y: 23 },
-        { x: 88, y: 22 },
-        { x: 87, y: 21 },
-        { x: 86, y: 20 },
-        { x: 86, y: 19 },
-        { x: 85, y: 18 },
-        { x: 84, y: 17 },
-        { x: 83, y: 16 },
-        { x: 82, y: 15 },
-        { x: 81, y: 15 },
-        { x: 80, y: 14 },
-        { x: 79, y: 14 },
-        { x: 78, y: 13 },
-        { x: 77, y: 13 },
-        { x: 76, y: 13 },
-        { x: 75, y: 12 },
-        { x: 74, y: 12 },
-        { x: 73, y: 12 },
-        // after 1V
-        { x: 88, y: 36 },
-        { x: 88, y: 37 },
-        { x: 87, y: 38 },
-        { x: 87, y: 39 },
-        { x: 86, y: 40 },
-        { x: 86, y: 41 },
-        { x: 85, y: 42 },
-        { x: 84, y: 43 },
-        { x: 83, y: 44 },
-        { x: 82, y: 45 },
-        { x: 81, y: 45 },
-        { x: 80, y: 46 },
-        { x: 79, y: 46 },
-        { x: 78, y: 47 },
-        { x: 77, y: 47 },
-        { x: 76, y: 47 },
-        { x: 75, y: 48 },
-        { x: 74, y: 48 },
-        { x: 73, y: 48 },
-        { x: 72, y: 48 },
-        { x: 71, y: 48 },
-        { x: 70, y: 48 },
-        { x: 69, y: 48 },
-        { x: 68, y: 48 },
-        { x: 67, y: 47 },
-        { x: 66, y: 47 },
-        { x: 65, y: 47 },
-        { x: 64, y: 46 },
-        { x: 63, y: 46 },
-        { x: 62, y: 45 },
-        { x: 61, y: 45 },
-        { x: 60, y: 44 },
-        { x: 59, y: 43 },
-        { x: 58, y: 42 },
-        { x: 57, y: 41 },
-        { x: 56, y: 40 },
+        // { x: 2, y: 28 },
+        // { x: 2, y: 29 },
+        // { x: 3, y: 30 },
+        // { x: 3, y: 31 },
+        // { x: 3, y: 32 },
+        // { x: 4, y: 33 },
+        // { x: 4, y: 34 },
+        // { x: 5, y: 35 },
+        // { x: 6, y: 36 },
+        // { x: 6, y: 37 },
+        // { x: 7, y: 38 },
+        // { x: 8, y: 39 },
+        // { x: 9, y: 40 },
+        // { x: 10, y: 41 },
+        // { x: 11, y: 41 },
+        // { x: 12, y: 42 },
+        // { x: 13, y: 42 },
+        // { x: 14, y: 43 },
+        // { x: 15, y: 43 },
+        // { x: 16, y: 44 },
+        // { x: 17, y: 44 },
+        // { x: 18, y: 44 },
+        // { x: 19, y: 45 },
+        // { x: 20, y: 45 },
+        // { x: 21, y: 45 },
+        // { x: 22, y: 45 },
+        // { x: 23, y: 45 },
+        // { x: 24, y: 45 },
+        // { x: 25, y: 45 },
+        // { x: 26, y: 45 },
+        // { x: 27, y: 45 },
+        // { x: 28, y: 45 },
+        // { x: 29, y: 44 },
+        // { x: 30, y: 44 },
+        // { x: 31, y: 44 },
+        // { x: 32, y: 43 },
+        // { x: 33, y: 43 },
+        // { x: 34, y: 42 },
+        // { x: 34, y: 42 },
+        // { x: 35, y: 42 },
+        // { x: 36, y: 41 },
+        // { x: 37, y: 40 },
+        // { x: 38, y: 39 },
+        // { x: 39, y: 38 },
+        // { x: 40, y: 37 },
+        // { x: 41, y: 36 },
+        // { x: 41, y: 35 },
+        // { x: 42, y: 34 },
+        // { x: 42, y: 33 },
+        // { x: 43, y: 32 },
+        // { x: 43, y: 31 },
+        // { x: 44, y: 30 },
+        // { x: 44, y: 29 },
+        // { x: 44, y: 28 },
+        // { x: 44, y: 27 },
+        // { x: 44, y: 26 },
+        // { x: 45, y: 25 },
+        // { x: 45, y: 24 },
+        // { x: 45, y: 23 },
+        // { x: 45, y: 22 },
+        // { x: 44, y: 21 },
+        // { x: 44, y: 20 },
+        // { x: 44, y: 19 },
+        // { x: 44, y: 18 },
+        // { x: 44, y: 17 },
+        // { x: 43, y: 16 },
+        // { x: 43, y: 15 },
+        // { x: 42, y: 14 },
+        // { x: 42, y: 13 },
+        // { x: 42, y: 12 },
+        // { x: 41, y: 11 },
+        // { x: 40, y: 10 },
+        // { x: 39, y: 9 },
+        // { x: 38, y: 8 },
+        // { x: 37, y: 7 },
+        // // { x: 36, y: 6 }, // good brick to comment out for shortcut upper right
+        // { x: 35, y: 5 },
+        // { x: 34, y: 5 },
+        // { x: 33, y: 4 },
+        // { x: 32, y: 4 },
+        // { x: 31, y: 3 },
+        // { x: 30, y: 3 },
+        // { x: 29, y: 3 },
+        // { x: 28, y: 2 },
+        // { x: 27, y: 2 },
+        // { x: 26, y: 2 },
+        // { x: 25, y: 2 },
+        // { x: 24, y: 1 },
+        // // earth
+        // // Right wall at start, going down
+        // { x: 55, y: 24 },
+        // { x: 55, y: 25 },
+        // { x: 55, y: 26 },
+        // { x: 54, y: 27 },
+        // { x: 54, y: 28 },
+        // { x: 54, y: 29 },
+        // { x: 54, y: 30 },
+        // { x: 54, y: 31 },
+        // { x: 54, y: 32 },
+        // { x: 54, y: 33 },
+        // { x: 55, y: 34 },
+        // { x: 55, y: 35 },
+        // { x: 55, y: 36 },
+        // { x: 55, y: 37 },
+        // { x: 55, y: 38 },
+        // { x: 55, y: 39 },
+        // // Right wall at start, going up
+        // { x: 55, y: 23 },
+        // { x: 56, y: 22 },
+        // { x: 56, y: 21 },
+        // { x: 57, y: 20 },
+        // { x: 58, y: 19 },
+        // { x: 59, y: 18 },
+        // { x: 60, y: 17 },
+        // { x: 61, y: 16 },
+        // { x: 62, y: 15 },
+        // { x: 63, y: 15 },
+        // { x: 64, y: 14 },
+        // { x: 65, y: 14 },
+        // { x: 66, y: 13 },
+        // { x: 67, y: 13 },
+        // { x: 67, y: 13 },
+        // { x: 68, y: 13 },
+        // { x: 69, y: 12 },
+        // { x: 70, y: 12 },
+        // { x: 71, y: 12 },
+        // { x: 72, y: 12 },
+        // // continues off right wall -reversed
+        // { x: 88, y: 24 },
+        // { x: 88, y: 23 },
+        // { x: 88, y: 22 },
+        // { x: 87, y: 21 },
+        // { x: 86, y: 20 },
+        // { x: 86, y: 19 },
+        // { x: 85, y: 18 },
+        // { x: 84, y: 17 },
+        // { x: 83, y: 16 },
+        // { x: 82, y: 15 },
+        // { x: 81, y: 15 },
+        // { x: 80, y: 14 },
+        // { x: 79, y: 14 },
+        // { x: 78, y: 13 },
+        // { x: 77, y: 13 },
+        // { x: 76, y: 13 },
+        // { x: 75, y: 12 },
+        // { x: 74, y: 12 },
+        // { x: 73, y: 12 },
+        // // after 1V
+        // { x: 88, y: 36 },
+        // { x: 88, y: 37 },
+        // { x: 87, y: 38 },
+        // { x: 87, y: 39 },
+        // { x: 86, y: 40 },
+        // { x: 86, y: 41 },
+        // { x: 85, y: 42 },
+        // { x: 84, y: 43 },
+        // { x: 83, y: 44 },
+        // { x: 82, y: 45 },
+        // { x: 81, y: 45 },
+        // { x: 80, y: 46 },
+        // { x: 79, y: 46 },
+        // { x: 78, y: 47 },
+        // { x: 77, y: 47 },
+        // { x: 76, y: 47 },
+        // { x: 75, y: 48 },
+        // { x: 74, y: 48 },
+        // { x: 73, y: 48 },
+        // { x: 72, y: 48 },
+        // { x: 71, y: 48 },
+        // { x: 70, y: 48 },
+        // { x: 69, y: 48 },
+        // { x: 68, y: 48 },
+        // { x: 67, y: 47 },
+        // { x: 66, y: 47 },
+        // { x: 65, y: 47 },
+        // { x: 64, y: 46 },
+        // { x: 63, y: 46 },
+        // { x: 62, y: 45 },
+        // { x: 61, y: 45 },
+        // { x: 60, y: 44 },
+        // { x: 59, y: 43 },
+        // { x: 58, y: 42 },
+        // { x: 57, y: 41 },
+        // { x: 56, y: 40 },
     ];
     // Track
     var track = [
@@ -414,8 +429,8 @@ export default function earth(arena) {
     verticalLine(0, 0, 85, "metal", arena);
     verticalLine(100, 0, 56, "metal", arena);
 
-    // earth, right side
-    verticalLine(89, 25, 11, "invisible", arena);
+    // // earth, right side
+    // verticalLine(89, 25, 11, "invisible", arena);
 
     lunaBlocks.forEach(({ x, y }) => {
         arena.blocks.push({

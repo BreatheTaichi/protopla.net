@@ -92,7 +92,7 @@ export default function Store(props) {
                 acceleration,
                 setAcceleration,
                 0.005,
-                "Thrust"
+                "Thrusters"
             )}
             {storeItem(
                 2,
