@@ -1,4 +1,4 @@
-import { circle, arc, diagonalRight, diagonalLeft } from "../bricks/shapes.js";
+import { arc, diagonalRight, diagonalLeft } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import mercuryPNG from "../images/mercury/mercury.webp";
 import mercuryBWPNG from "../images/mercury/mercuryBW.webp";
@@ -72,12 +72,24 @@ export default function mercury(arena) {
     arc(42, 36, 35, 75, 20, "metal", arena);
     // Left horn
     arc(42, 36, 105, 140, 20, "metal", arena);
-    // Above horn
-    arc(42, 20, 20, 162, 20, "invisible", arena);
 
     diagonalRight(62, 28, 15, "metal", arena);
     diagonalLeft(22, 28, 15, "metal", arena);
 
     // Mercury
-    circle(42.5, 80.5, 24, "invisible", arena);
+    // circle(42.5, 80.5, 24, "invisible", arena);
+    arena.ellipses.push({
+        h: 42.5 * 40,
+        k: 80.5 * 40,
+        rx: 26 * 40,
+        ry: 26 * 40,
+    });
+    // Above horn
+    // arc(42, 20, 20, 162, 20, "invisible", arena);
+    arena.ellipses.push({
+        h: 42.5 * 40,
+        k: 21 * 40,
+        rx: 21 * 40,
+        ry: 21 * 40,
+    });
 }

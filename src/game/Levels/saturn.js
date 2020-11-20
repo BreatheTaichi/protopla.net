@@ -1,10 +1,4 @@
-import {
-    arc,
-    horizontalLine,
-    verticalLine,
-    circle,
-    ellipse,
-} from "../bricks/shapes.js";
+import { arc, horizontalLine, verticalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import saturnPNG from "../images/saturn/Saturn.webp";
 import enceladusPNG from "../images/saturn/enceladus.webp";
@@ -85,22 +79,51 @@ export default function Sun(arena) {
         arena.images.push({ img: arrow16, xStart: 127, yStart: 167 });
     }
     arena.images.push({ img: saturn, xStart: 129, yStart: 122 });
-    ellipse(191, 145.6, 24.4, 22.2, "invisible", arena);
-    ellipse(190.3, 145, 58.3, 5, "invisible", arena);
+    // ellipse(191, 145.6, 24.4, 22.2, "invisible", arena);
+    // ellipse(190.3, 145, 58.3, 5, "invisible", arena);
+    arena.ellipses.push({
+        h: 190.8 * 40,
+        k: 145.6 * 40,
+        rx: 26.5 * 40,
+        ry: 24.3 * 40,
+    });
+    arena.ellipses.push({
+        h: 190.3 * 40,
+        k: 145 * 40,
+        rx: 60.3 * 40,
+        ry: 7 * 40,
+    });
+
+    arena.images.push({ img: enceladus, xStart: 326, yStart: 140 });
+    // circle(338.4, 152.5, 11.35, "invisible", arena);
+    arena.ellipses.push({
+        h: 338.4 * 40,
+        k: 152.5 * 40,
+        rx: 13 * 40,
+        ry: 13 * 40,
+    });
+
+    arena.images.push({ img: epimetheus, xStart: 150, yStart: 161 });
+    // circle(157, 168, 6, "invisible", arena);
+    arena.ellipses.push({
+        h: 157 * 40,
+        k: 168 * 40,
+        rx: 7.5 * 40,
+        ry: 7.5 * 40,
+    });
+
+    arena.images.push({ img: iapetus, xStart: 85, yStart: 100 });
+    // circle(97.7, 112.2, 11.2, "invisible", arena);
+    arena.ellipses.push({
+        h: 97.9 * 40,
+        k: 112.5 * 40,
+        rx: 13 * 40,
+        ry: 13 * 40,
+    });
 
     arena.images.push({ img: pan, xStart: 114, yStart: 99 });
     arena.images.push({ img: hyperion, xStart: 85, yStart: 145 });
-
-    arena.images.push({ img: enceladus, xStart: 326, yStart: 140 });
-    circle(338.4, 152.5, 11.35, "invisible", arena);
-
-    arena.images.push({ img: epimetheus, xStart: 150, yStart: 161 });
-    circle(157, 168, 6, "invisible", arena);
-
     arena.images.push({ img: helene, xStart: 134, yStart: 175 });
-    arena.images.push({ img: iapetus, xStart: 85, yStart: 100 });
-    circle(97.7, 112.2, 11.2, "invisible", arena);
-
     arena.images.push({ img: janus, xStart: 217, yStart: 186 });
     arena.images.push({ img: pandora, xStart: 304, yStart: 152 });
     arena.images.push({ img: phoebe, xStart: 176, yStart: 179 });
@@ -227,8 +250,8 @@ export default function Sun(arena) {
 
     var saturnBlocks = [
         // saturn extra blocks
-        { x: 131.3, y: 145 },
-        { x: 145, y: 141 },
+        // { x: 131.3, y: 145 },
+        // { x: 145, y: 141 },
 
         // blocks over Pan from lower right, clockwise
         { x: 124, y: 107 },
@@ -483,10 +506,10 @@ export default function Sun(arena) {
         { x: 193, y: 189 },
 
         // enceladus
-        { x: 338, y: 140 },
-        { x: 350, y: 151 },
-        { x: 350, y: 152 },
-        { x: 350, y: 153 },
+        // { x: 338, y: 140 },
+        // { x: 350, y: 151 },
+        // { x: 350, y: 152 },
+        // { x: 350, y: 153 },
     ];
 
     saturnBlocks.forEach(({ x, y }) => {

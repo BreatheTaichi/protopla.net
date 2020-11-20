@@ -1,9 +1,7 @@
 import {
     arc,
-    circle,
     diagonalLeft,
     diagonalRight,
-    ellipse,
     horizontalLine,
     verticalLine,
 } from "../bricks/shapes.js";
@@ -57,19 +55,49 @@ export default function jupiter(arena) {
     }
 
     arena.images.push({ img: io, xStart: 120, yStart: 40 });
-    circle(132.4, 52.5, 11, "invisible", arena);
+    // circle(132.4, 52.5, 11, "invisible", arena);
+    arena.ellipses.push({
+        h: 132.4 * 40,
+        k: 52.5 * 40,
+        rx: 13 * 40,
+        ry: 13 * 40,
+    });
 
     arena.images.push({ img: europa, xStart: 70, yStart: 20 });
-    circle(85, 35, 13.7, "invisible", arena);
+    // circle(85, 35, 13.7, "invisible", arena);
+    arena.ellipses.push({
+        h: 85 * 40,
+        k: 35 * 40,
+        rx: 15.5 * 40,
+        ry: 15.5 * 40,
+    });
 
     arena.images.push({ img: callisto, xStart: 50, yStart: 50 });
-    circle(60, 60, 8.7, "invisible", arena);
+    // circle(60, 60, 8.7, "invisible", arena);
+    arena.ellipses.push({
+        h: 60 * 40,
+        k: 60 * 40,
+        rx: 10.6 * 40,
+        ry: 10.6 * 40,
+    });
 
     arena.images.push({ img: ganymede, xStart: -5, yStart: 70 });
-    circle(12.5, 87.5, 16.2, "invisible", arena);
+    // circle(12.5, 87.5, 16.2, "invisible", arena);
+    arena.ellipses.push({
+        h: 12.5 * 40,
+        k: 87.5 * 40,
+        rx: 18 * 40,
+        ry: 18 * 40,
+    });
 
     arena.images.push({ img: jupiter, xStart: 40, yStart: 80 });
-    ellipse(77, 118.5, 35.3, 35, "invisible", arena);
+    // ellipse(77, 118.5, 35.3, 35, "invisible", arena);
+    arena.ellipses.push({
+        h: 77.1 * 40,
+        k: 118.6 * 40,
+        rx: 37.3 * 40,
+        ry: 36.7 * 40,
+    });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -117,19 +145,19 @@ export default function jupiter(arena) {
     // Ganymede to Jupiter
     diagonalRight(29.5, 94.5, 13, "metal", arena);
 
-    var inviBlocks = [
-        { x: 77, y: 47 },
-        { x: 60, y: 86 },
-        { x: 123, y: 45 },
-        { x: 28, y: 94 },
-    ];
-    inviBlocks.forEach(({ x, y }) => {
-        arena.blocks.push({
-            x: x * arena.size,
-            y: y * arena.size,
-            type: "invisible",
-        });
-    });
+    // var inviBlocks = [
+    //     // { x: 77, y: 47 },
+    //     // { x: 60, y: 86 },
+    //     // { x: 123, y: 45 },
+    //     // { x: 28, y: 94 },
+    // ];
+    // inviBlocks.forEach(({ x, y }) => {
+    //     arena.blocks.push({
+    //         x: x * arena.size,
+    //         y: y * arena.size,
+    //         type: "invisible",
+    //     });
+    // });
     var blocks = [{ x: 38, y: 71 }];
 
     blocks.forEach(({ x, y }) => {

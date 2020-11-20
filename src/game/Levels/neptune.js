@@ -1,4 +1,4 @@
-import { circle, arc, diagonalLeft } from "../bricks/shapes.js";
+import { arc, diagonalLeft } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import neptunePNG from "../images/neptune/neptune.webp";
 import larissaPNG from "../images/neptune/larissa.webp";
@@ -29,9 +29,21 @@ export default function mercury(arena) {
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
     arena.ship.img = alienShip;
     arena.images.push({ img: neptune, xStart: 35, yStart: 50 });
-    circle(55, 70, 18.8, "invisible", arena);
+    // circle(55, 70, 18.8, "invisible", arena);
+    arena.ellipses.push({
+        h: 55 * 40,
+        k: 70 * 40,
+        rx: 20.5 * 40,
+        ry: 20.5 * 40,
+    });
     arena.images.push({ img: triton, xStart: 50, yStart: 115 });
-    circle(58.8, 123.8, 7.8, "invisible", arena);
+    // circle(58.8, 123.8, 7.8, "invisible", arena);
+    arena.ellipses.push({
+        h: 58.9 * 40,
+        k: 123.9 * 40,
+        rx: 9.5 * 40,
+        ry: 9.5 * 40,
+    });
     arena.images.push({ img: proteus, xStart: 26.7, yStart: 109 });
     arena.images.push({ img: larissa, xStart: 70, yStart: 93 });
 
@@ -72,7 +84,7 @@ export default function mercury(arena) {
     // second ring
     arc(55, 70, 112, 405, 35, "metal", arena);
     // 3 diagonal lines under neptune - top, middle, bottom
-    diagonalLeft(55, 90, 13, "metal", arena);
+    diagonalLeft(54, 91, 13, "metal", arena);
     diagonalLeft(59, 98, 13, "metal", arena);
     diagonalLeft(67, 103, 13, "metal", arena);
     // first ring around triton

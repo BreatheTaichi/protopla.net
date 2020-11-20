@@ -1,4 +1,4 @@
-import { circle, arc, verticalLine, horizontalLine } from "../bricks/shapes.js";
+import { arc, verticalLine, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import venusPNG from "../images/venus/venus.webp";
 import backgroundPic from "../images/background/GrandDesign.webp";
@@ -20,7 +20,13 @@ export default function venus(arena) {
     arena.ship.img = alienShip;
     var venus = loadImageToCanvas(2200, 2160, venusPNG, arena);
     arena.images.push({ img: venus, xStart: 15, yStart: 55 });
-    circle(42.5, 82, 26, "invisible", arena);
+    // circle(42.5, 82, 26, "invisible", arena);
+    arena.ellipses.push({
+        h: 42.5 * 40,
+        k: 82 * 40,
+        rx: 28 * 40,
+        ry: 27.5 * 40,
+    });
 
     // { x: 11, y: 150 },
     // { x: 54, y: 150 },
@@ -60,7 +66,7 @@ export default function venus(arena) {
 
     arc(42, 82, 105, 436, 40, "metal", arena);
     // Line from bottom of venus
-    verticalLine(42, 109, 55, "metal", arena);
+    verticalLine(42, 110, 54, "metal", arena);
     // Coming from the bottom of the outer arc, Left
     verticalLine(32, 121, 8, "metal", arena);
     horizontalLine(12, 129, 20, "metal", arena);

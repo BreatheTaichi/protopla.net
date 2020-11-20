@@ -131,56 +131,62 @@ export default function Arena(
                 var h = o.h + arena.x;
                 var k = o.k + arena.y;
                 // bounding box: |x - h| > rx or |y - k| > ry
+                if (
+                    0 > h - o.rx &&
+                    0 < h + o.rx &&
+                    0 > k - o.ry &&
+                    0 < k + o.ry
+                ) {
+                    // d is (x - h)^2/rx^2 + (y - k)^2/ry^2 <= 1
+                    // x,y is always 0,0
+                    const d = (h * h) / (o.rx * o.rx) + (k * k) / (o.ry * o.ry);
+                    // const d = h * h + k * k;
+                    // const m = o.rx * o.rx * (o.ry * o.ry);
+                    // TODO More efficient to put the r^2 on the other side of
+                    // the function.  Multiplication is faster than division.
+                    // d is huge, though when I do it as above
+                    if (d <= 1) {
+                        var xM = this.ship.xMomentum;
+                        var yM = this.ship.yMomentum;
 
-                // d is (x - h)^2/rx^2 + (y - k)^2/ry^2 <= 1
-                // x,y is always 0,0
-                const d = (h * h) / (o.rx * o.rx) + (k * k) / (o.ry * o.ry);
-                // const d = h * h + k * k;
-                // const m = o.rx * o.rx * (o.ry * o.ry);
-                // TODO More efficient to put the r^2 on the other side of
-                // the function.  Multiplication is faster than division.
-                // d is huge, though when I do it as above with if (d <= m)
-                if (d <= 1) {
-                    var xM = this.ship.xMomentum;
-                    var yM = this.ship.yMomentum;
+                        // // TODO check for major and minor axis
+                        // // Get focal length to calculate angle
+                        // var f = Math.sqrt(o.rx * o.rx - o.ry * o.ry);
 
-                    // Following is arena movement reversed
-                    // Angle from center of ellipse
-                    var angleFromBody = vectorAngle(-h, -k);
-                    // Angle of ship
-                    var incomingAngle = vectorAngle(-xM, -yM);
+                        // Following is arena movement reversed
+                        // Angle from center of ellipse
+                        var angleFromBody = vectorAngle(-h, -k);
+                        // Angle of ship
+                        var incomingAngle = vectorAngle(-xM, -yM);
 
-                    // Dividing center point by radius gets the
-                    var x = h / o.rx;
-                    var y = k / o.ry;
-                    arena.x += x;
-                    arena.y += y;
-                    var magnitude = Math.sqrt(xM * xM + yM * yM);
-                    let v = reflectVector(incomingAngle, angleFromBody);
-                    // Change arena's momentum
-                    this.ship.xMomentum =
-                        v.x * magnitude * this.ship.bounceFriction;
-                    this.ship.yMomentum =
-                        v.y * magnitude * this.ship.bounceFriction;
-                    this.ship.boost *= this.ship.bounceFriction;
+                        // Dividing center point by radius gets the
+                        var x = h / o.rx;
+                        var y = k / o.ry;
+                        arena.x += x;
+                        arena.y += y;
+                        var magnitude = Math.sqrt(xM * xM + yM * yM);
+                        let v = reflectVector(incomingAngle, angleFromBody);
+                        // Change arena's momentum
+                        this.ship.xMomentum =
+                            v.x * magnitude * this.ship.bounceFriction;
+                        this.ship.yMomentum =
+                            v.y * magnitude * this.ship.bounceFriction;
+                        this.ship.boost *= this.ship.bounceFriction;
+                    }
+                    // Visual element for bounding ellipse
+                    // arena.context.lineWidth = 6;
+                    // arena.context.strokeStyle = "#fff";
+                    // arena.context.ellipse(
+                    //     h + arena.halfSW,
+                    //     k + arena.halfSH,
+                    //     o.rx - 40,
+                    //     o.ry - 40,
+                    //     0,
+                    //     0,
+                    //     2 * Math.PI
+                    // );
+                    // arena.context.stroke();
                 }
-                // Show the outline of the x value of ellipse making a circle
-                // Could make two circles, one with x and one with y
-                arena.context.arc(
-                    h + arena.halfSW,
-                    k + arena.halfSH,
-                    o.rx - 40,
-                    0,
-                    2 * Math.PI
-                );
-                arena.context.arc(
-                    h + arena.halfSW,
-                    k + arena.halfSH,
-                    o.ry - 40,
-                    0,
-                    2 * Math.PI
-                );
-                arena.context.stroke();
             });
 
             // Check finish line bounding boxes

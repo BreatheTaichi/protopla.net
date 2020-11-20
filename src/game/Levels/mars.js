@@ -1,5 +1,4 @@
 import {
-    circle,
     arc,
     diagonalLeft,
     horizontalLine,
@@ -103,7 +102,13 @@ export default function mars(arena) {
     });
 
     // Circle on Mars
-    circle(52.3, 287.5, 26, "invisible", arena);
+    // circle(52.3, 287.5, 26, "invisible", arena);
+    arena.ellipses.push({
+        h: 52.5 * 40,
+        k: 287.5 * 40,
+        rx: 28 * 40,
+        ry: 28 * 40,
+    });
     // Circle around Mars
     arc(52, 287, -30, 300, 36, "metal", arena);
     // Lower diagonal to the circle around mars

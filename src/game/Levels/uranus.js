@@ -1,4 +1,4 @@
-import { arc, circle, diagonalLeft, horizontalLine } from "../bricks/shapes.js";
+import { arc, diagonalLeft, horizontalLine } from "../bricks/shapes.js";
 import loadImageToCanvas from "../../hooks/loadImageToCanvas.js";
 import uranusPNG from "../images/uranus/uranus.webp";
 import arielPNG from "../images/uranus/ariel.webp";
@@ -44,16 +44,52 @@ export default function Sun(arena) {
     }
 
     arena.images.push({ img: uranus, xStart: 5, yStart: 5 });
-    arc(37, 37, -15, 98, 31.8, "invisible", arena);
+    // arc(37, 37, -15, 98, 31.8, "invisible", arena);
+    arena.ellipses.push({
+        h: 37 * 40,
+        k: 37.2 * 40,
+        rx: 33.5 * 40,
+        ry: 33.5 * 40,
+    });
     arena.images.push({ img: titania, xStart: 80, yStart: 28 });
-    circle(86, 34, 5, "invisible", arena);
+    // circle(86, 34, 5, "invisible", arena);
+    arena.ellipses.push({
+        h: 86 * 40,
+        k: 34 * 40,
+        rx: 6.5 * 40,
+        ry: 6.5 * 40,
+    });
     arena.images.push({ img: ariel, xStart: 88, yStart: 48 });
-    circle(92.3, 52.5, 3.5, "invisible", arena);
+    // circle(92.3, 52.5, 3.5, "invisible", arena);
+    arena.ellipses.push({
+        h: 92.4 * 40,
+        k: 52.5 * 40,
+        rx: 5 * 40,
+        ry: 5 * 40,
+    });
     arena.images.push({ img: oberon, xStart: 72, yStart: 60 });
-    circle(77.8, 66, 4.6, "invisible", arena);
+    // circle(77.8, 66, 4.6, "invisible", arena);
+    arena.ellipses.push({
+        h: 77.9 * 40,
+        k: 65.9 * 40,
+        rx: 6.4 * 40,
+        ry: 6.4 * 40,
+    });
     arena.images.push({ img: umbriel, xStart: 60, yStart: 80 });
-    circle(64.4, 84.4, 3.5, "invisible", arena);
+    // circle(64.4, 84.4, 3.5, "invisible", arena);
+    arena.ellipses.push({
+        h: 64.5 * 40,
+        k: 84.5 * 40,
+        rx: 5 * 40,
+        ry: 5 * 40,
+    });
     arena.images.push({ img: puck, xStart: 34, yStart: 85 });
+    arena.ellipses.push({
+        h: 34.5 * 40,
+        k: 85.5 * 40,
+        rx: 1 * 40,
+        ry: 1 * 40,
+    });
 
     // outside uranus
     arc(37, 37, 0, 85, 43, "metal", arena);
@@ -68,22 +104,22 @@ export default function Sun(arena) {
     // umbriel past oberon, to ariel
     arc(73, 61, -10, 100, 23, "metal", arena);
     // outside titania
-    arc(86, 34, 200, 418, 18, "metal", arena);
+    arc(86, 34, 200, 415, 18, "metal", arena);
 
-    var uranusBlocks = [
-        // over puck
-        { x: 34.6, y: 85.6 },
-        // connecting circle outside of puck to uranus
-        { x: 32, y: 69 },
-    ];
+    // var uranusBlocks = [
+    //     // over puck
+    //     { x: 34.6, y: 85.6 },
+    //     // connecting circle outside of puck to uranus
+    //     { x: 32, y: 69 },
+    // ];
 
-    uranusBlocks.forEach(({ x, y }) => {
-        arena.blocks.push({
-            x: x * arena.size,
-            y: y * arena.size,
-            type: "invisible",
-        });
-    });
+    // uranusBlocks.forEach(({ x, y }) => {
+    //     arena.blocks.push({
+    //         x: x * arena.size,
+    //         y: y * arena.size,
+    //         type: "invisible",
+    //     });
+    // });
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
