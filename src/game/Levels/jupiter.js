@@ -3,6 +3,7 @@ import {
     circle,
     diagonalLeft,
     diagonalRight,
+    ellipse,
     horizontalLine,
     verticalLine,
 } from "../bricks/shapes.js";
@@ -59,7 +60,7 @@ export default function jupiter(arena) {
     circle(132.4, 52.5, 11, "invisible", arena);
 
     arena.images.push({ img: europa, xStart: 70, yStart: 20 });
-    circle(85, 35, 13.6, "invisible", arena);
+    circle(85, 35, 13.7, "invisible", arena);
 
     arena.images.push({ img: callisto, xStart: 50, yStart: 50 });
     circle(60, 60, 8.7, "invisible", arena);
@@ -68,7 +69,7 @@ export default function jupiter(arena) {
     circle(12.5, 87.5, 16.2, "invisible", arena);
 
     arena.images.push({ img: jupiter, xStart: 40, yStart: 80 });
-    circle(77, 118.5, 34.7, "invisible", arena);
+    ellipse(77, 118.5, 35.3, 35, "invisible", arena);
 
     arena.loadingImage = loadingImage;
     arena.loadingMessage = [
@@ -102,7 +103,7 @@ export default function jupiter(arena) {
     // between Europa and Io
     diagonalLeft(110, 49, 16, "metal", arena);
     // Europa to Io
-    arc(106, 52, 250, 337, 18, "metal", arena);
+    arc(105.7, 52, 255, 337, 18, "metal", arena);
     horizontalLine(116, 76, 18, "metal", arena);
     // Around Io
     arc(132, 52, -90, 90, 24, "metal", arena);
@@ -114,12 +115,22 @@ export default function jupiter(arena) {
     // Around Ganymede
     arc(12, 87, 75, 327, 30, "metal", arena);
     // Ganymede to Jupiter
-    diagonalRight(29.5, 92.5, 14, "metal", arena);
+    diagonalRight(29.5, 94.5, 13, "metal", arena);
 
-    var blocks = [
+    var inviBlocks = [
         { x: 77, y: 47 },
-        { x: 38, y: 71 },
+        { x: 60, y: 86 },
+        { x: 123, y: 45 },
+        { x: 28, y: 94 },
     ];
+    inviBlocks.forEach(({ x, y }) => {
+        arena.blocks.push({
+            x: x * arena.size,
+            y: y * arena.size,
+            type: "invisible",
+        });
+    });
+    var blocks = [{ x: 38, y: 71 }];
 
     blocks.forEach(({ x, y }) => {
         arena.blocks.push({

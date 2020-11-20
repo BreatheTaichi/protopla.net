@@ -60,7 +60,7 @@ function reducer(state, action) {
             sun(arena, state.numberToLoad);
             return { ...state, page: "loading" };
         case "Mercury":
-            arena = new Arena("Mercury", 0, 15, -75, -85, 40, 0, state.player);
+            arena = new Arena("Mercury", 0, 15, -80, -85, 40, 0, state.player);
             mercury(arena);
             return { ...state, page: "loading" };
         case "Venus":
@@ -102,11 +102,11 @@ function reducer(state, action) {
             saturn(arena);
             return { ...state, page: "loading" };
         case "Uranus":
-            arena = new Arena("Uranus", 20, 0, -75, -38, 40, 0, state.player);
+            arena = new Arena("Uranus", 20, 0, -75, -39, 40, 0, state.player);
             uranus(arena);
             return { ...state, page: "loading" };
         case "Neptune":
-            arena = new Arena("Neptune", 10, 0, -72, -129, 40, 0, state.player);
+            arena = new Arena("Neptune", 10, 0, -72, -130, 40, 0, state.player);
             neptune(arena);
             return { ...state, page: "loading" };
         default:

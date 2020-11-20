@@ -227,7 +227,7 @@ export default function Sun(arena) {
 
     var saturnBlocks = [
         // saturn extra blocks
-        { x: 131, y: 145 },
+        { x: 131.3, y: 145 },
         { x: 145, y: 141 },
 
         // blocks over Pan from lower right, clockwise

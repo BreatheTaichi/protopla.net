@@ -107,12 +107,12 @@ export function ellipse(cx, cy, a, b, type, arena) {
             if (points[j].x === x && points[j].y === y) match = true;
         }
         if (!match) {
+            points.push({ x: x, y: y });
             arena.blocks.push({
                 x: x * arena.size,
                 y: y * arena.size,
                 type: type,
             });
-            points.push({ x: x, y: y });
             arena.blocks.push({
                 x: x2 * arena.size,
                 y: y2 * arena.size,

@@ -20,6 +20,10 @@ export default function venus(arena) {
     arena.ship.img = alienShip;
     var venus = loadImageToCanvas(2200, 2160, venusPNG, arena);
     arena.images.push({ img: venus, xStart: 15, yStart: 55 });
+    circle(42.5, 82, 26, "invisible", arena);
+
+    // { x: 11, y: 150 },
+    // { x: 54, y: 150 },
 
     if (arena.showBackground) {
         var background = loadImageToCanvas(3970, 3970, backgroundPic, arena);
@@ -53,9 +57,6 @@ export default function venus(arena) {
                 "https://science.nasa.gov/ngc-6814-grand-design-spiral-galaxy-hubble",
         },
     ];
-
-    // Venus
-    circle(42.5, 82, 26, "invisible", arena);
 
     arc(42, 82, 105, 436, 40, "metal", arena);
     // Line from bottom of venus

@@ -64,6 +64,7 @@ export default function Arena(
         blocks: [],
         HUDImages: [],
         images: [],
+        ellipses: [],
         background: new Image(),
         finishImg: {},
         // Starting point for background
@@ -126,6 +127,62 @@ export default function Arena(
                 drawBody(image.xStart, image.yStart, image.img, arena);
             });
 
+            arena.ellipses.forEach((o) => {
+                var h = o.h + arena.x;
+                var k = o.k + arena.y;
+                // bounding box: |x - h| > rx or |y - k| > ry
+
+                // d is (x - h)^2/rx^2 + (y - k)^2/ry^2 <= 1
+                // x,y is always 0,0
+                const d = (h * h) / (o.rx * o.rx) + (k * k) / (o.ry * o.ry);
+                // const d = h * h + k * k;
+                // const m = o.rx * o.rx * (o.ry * o.ry);
+                // TODO More efficient to put the r^2 on the other side of
+                // the function.  Multiplication is faster than division.
+                // d is huge, though when I do it as above with if (d <= m)
+                if (d <= 1) {
+                    var xM = this.ship.xMomentum;
+                    var yM = this.ship.yMomentum;
+
+                    // Following is arena movement reversed
+                    // Angle from center of ellipse
+                    var angleFromBody = vectorAngle(-h, -k);
+                    // Angle of ship
+                    var incomingAngle = vectorAngle(-xM, -yM);
+
+                    // Dividing center point by radius gets the
+                    var x = h / o.rx;
+                    var y = k / o.ry;
+                    arena.x += x;
+                    arena.y += y;
+                    var magnitude = Math.sqrt(xM * xM + yM * yM);
+                    let v = reflectVector(incomingAngle, angleFromBody);
+                    // Change arena's momentum
+                    this.ship.xMomentum =
+                        v.x * magnitude * this.ship.bounceFriction;
+                    this.ship.yMomentum =
+                        v.y * magnitude * this.ship.bounceFriction;
+                    this.ship.boost *= this.ship.bounceFriction;
+                }
+                // Show the outline of the x value of ellipse making a circle
+                // Could make two circles, one with x and one with y
+                arena.context.arc(
+                    h + arena.halfSW,
+                    k + arena.halfSH,
+                    o.rx - 40,
+                    0,
+                    2 * Math.PI
+                );
+                arena.context.arc(
+                    h + arena.halfSW,
+                    k + arena.halfSH,
+                    o.ry - 40,
+                    0,
+                    2 * Math.PI
+                );
+                arena.context.stroke();
+            });
+
             // Check finish line bounding boxes
             finishLineCH(arena);
 
@@ -143,7 +200,7 @@ export default function Arena(
             arena.context.translate(arena.halfSW, arena.halfSH);
 
             if (arena.showThrustTrail) {
-                // Color thrust depending on Alignment Matrix level
+                // Color thrust depending on level of Alignment Matrix
                 var thrustColor =
                     arena.ship.boost * 1500 + 40 > 255
                         ? 255
@@ -231,4 +288,34 @@ export default function Arena(
     arena.hud.credits(arena);
 
     return arena;
+}
+
+function vectorAngle(xUnit, yUnit) {
+    var angle = Math.atan(yUnit / xUnit) * (180 / Math.PI);
+    if (xUnit < 0 && yUnit >= 0) {
+        angle += 180;
+    } else if (xUnit < 0 && yUnit < 0) {
+        angle += 180;
+    } else if (xUnit >= 0 && yUnit < 0) {
+        angle += 360;
+    }
+    return angle;
+}
+
+function reflectVector(vector, normal) {
+    let vectorRadians = (vector * (2 * Math.PI)) / 360;
+    let normalRadians = (normal * (2 * Math.PI)) / 360;
+    // r = d - 2(d * n)n  // d * n is dot product
+    var r = {};
+    r.dx = Math.round(100 * Math.cos(vectorRadians)) / 100;
+    r.dy = Math.round(100 * Math.sin(vectorRadians)) / 100;
+    r.nx = Math.round(100 * Math.cos(normalRadians)) / 100;
+    r.ny = Math.round(100 * Math.sin(normalRadians)) / 100;
+
+    var dDotn = 2 * (r.dx * r.nx + r.dy * r.ny);
+
+    r.x = -Math.round(100 * (r.dx - r.nx * dDotn)) / 100;
+    r.y = -Math.round(100 * (r.dy - r.ny * dDotn)) / 100;
+
+    return r;
 }

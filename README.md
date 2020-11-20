@@ -34,7 +34,9 @@ Firefox doesn't open level when it's icon is focused and player clicks again.
 
 Please let me know if you find any more!
 
-## TODOs and upgrades
+## TODOs
+
+Make HUD more visible.
 
 Option to turn on names of bodies in race for better learning experience.
 

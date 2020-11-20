@@ -9,7 +9,7 @@ import loadingImage from "../images/loading/mercury.jpg";
 import finish from "../bricks/finishBlock.js";
 
 export default function mercury(arena) {
-    arena.finishImg = { x: 67, y: 82, len: 15 };
+    arena.finishImg = { x: 67, y: 82, len: 27 };
     var finishBlock = finish(arena, arena.finishImg.len);
     arena.images.push({
         img: finishBlock,
@@ -24,13 +24,20 @@ export default function mercury(arena) {
         arena.background = background;
     }
     var alienShip = loadImageToCanvas(50, 50, alienShipPNG, arena);
+    arena.ship.img = alienShip;
+
+    arena.images.push({ img: mercury, xStart: 17, yStart: 55 });
+    arena.images.push({ img: mercuryBW, xStart: 22, yStart: 0.5 });
+
     if (arena.showArrows) {
         var arrow = loadImageToCanvas(150, 150, arrowPNG, arena, 135);
         arena.images.push({ img: arrow, xStart: 56, yStart: 37 });
         var arrow2 = loadImageToCanvas(150, 150, arrowPNG, arena, 105);
         arena.images.push({ img: arrow2, xStart: 20, yStart: 50 });
         var arrow3 = loadImageToCanvas(150, 150, arrowPNG, arena, 0);
-        arena.images.push({ img: arrow3, xStart: 40, yStart: 111 });
+        arena.images.push({ img: arrow3, xStart: 40, yStart: 116 });
+        var arrow4 = loadImageToCanvas(150, 150, arrowPNG, arena, 240);
+        arena.images.push({ img: arrow4, xStart: 74, yStart: 59 });
     }
 
     arena.loadingImage = loadingImage;
@@ -58,27 +65,18 @@ export default function mercury(arena) {
                 "https://apod.nasa.gov/apod/image/2010/STScI_NGC2525_1865x2000.jpg",
         },
     ];
-    arena.ship.img = alienShip;
-    if (arena.showBackground) {
-        arena.background = background;
-    }
-    arena.images.push({ img: mercury, xStart: 17, yStart: 55 });
-    arena.images.push({ img: mercuryBW, xStart: 22, yStart: 0.5 });
 
     // Arc outside bottom of mercury
-    arc(42, 82, 310, 591, 40, "metal", arena);
+    arc(42, 82, 310, 591, 52, "metal", arena);
     // Right horn
-    arc(42, 36, 15, 77, 20, "metal", arena);
+    arc(42, 36, 35, 75, 20, "metal", arena);
     // Left horn
-    arc(42, 36, 105, 165, 20, "metal", arena);
+    arc(42, 36, 105, 140, 20, "metal", arena);
     // Above horn
     arc(42, 20, 20, 162, 20, "invisible", arena);
 
     diagonalRight(62, 28, 15, "metal", arena);
     diagonalLeft(22, 28, 15, "metal", arena);
-
-    diagonalRight(9, 43, 8, "metal", arena);
-    diagonalLeft(76, 43, 8, "metal", arena);
 
     // Mercury
     circle(42.5, 80.5, 24, "invisible", arena);

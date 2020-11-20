@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
+import "../sass/switch.css";
 
 export default function GameOptions(props) {
     const [effectsVolume, setEffectsVolume] = useState(
         props.state.player.effectsVolume * 100
     );
-    console.log(effectsVolume);
     const [musicVolume, setMusicVolume] = useState(
         props.state.player.musicVolume * 100
     );
-    console.log(musicVolume);
     const [thrustTrail, setThrustTrail] = useState(
         props.state.player.thrustTrail
     );
@@ -80,16 +79,16 @@ export default function GameOptions(props) {
     const switchComp = (text, sw, item, set) => {
         return (
             <>
-                <label className="switch-label" htmlFor={sw}>
-                    <span className="switch-text">{text}</span>
+                <span className="switch-text">{text}</span>
+                <label className="switch" htmlFor={sw}>
                     <input
-                        className="switch"
                         id={sw}
                         name={sw}
                         type="checkbox"
                         checked={item}
                         onChange={() => handleChange(item, set)}
                     />
+                    <span className="slider"></span>
                 </label>
             </>
         );
@@ -102,12 +101,20 @@ export default function GameOptions(props) {
                 <label className="sound-item">
                     <span className="no-select title">Effects</span>
                     <input
+                        className="range-volume"
+                        type="range"
+                        min="0"
+                        max="100"
+                        autoComplete="off"
+                        value={effectsVolume}
+                        onChange={(e) => handleNumberInput(e, setEffectsVolume)}
+                    />
+                    <input
                         id="1"
                         type="text"
                         min="0"
                         max="100"
                         autoComplete="off"
-                        name="effectsVolume"
                         value={effectsVolume}
                         onChange={(e) => handleNumberInput(e, setEffectsVolume)}
                     />
@@ -116,12 +123,20 @@ export default function GameOptions(props) {
                 <label className="sound-item">
                     <span className="no-select title">Music</span>
                     <input
+                        className="range-volume"
+                        type="range"
+                        min="0"
+                        max="100"
+                        autoComplete="off"
+                        value={musicVolume}
+                        onChange={(e) => handleNumberInput(e, setMusicVolume)}
+                    />
+                    <input
                         id="2"
                         type="text"
                         min="0"
                         max="100"
                         autoComplete="off"
-                        name="musicVolume"
                         value={musicVolume}
                         onChange={(e) => handleNumberInput(e, setMusicVolume)}
                     />
